@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CodeJam Canvas</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header__menu"><img src="./assets/images/menuImage.svg" alt="image"></div>
+    <span class="header__codejam-name">CodeJam - Canvas</span>
+    <div class="header__settings"><img src="./assets/images/settingsImage.svg" alt="image"></div>
+  </header>
+  <main class="main">
+    <div class="main__tools-container">
+      <div class="tool tool_paint-bucket"><i></i><span>Paint bucket</span></div>
+      <div class="tool tool_choose-color"><i></i><span>Choose color</span></div>
+      <div class="tool tool_move"><i></i><span>Move</span></div>
+      <div class="tool tool_transform"><i></i><span>Transform</span></div>
+    </div>
+    <div class="main__colors-container">
+      <div class="color color_current-color"><i></i><span>Current color</span></div>
+      <div class="color color_prev-color"><i></i><span>Prev color</span></div>
+      <div class="color color_red"><i></i><span>red</span></div>
+      <div class="color color_blue"><i></i><span>blue</span></div>
+    </div>
+    <canvas id="main__canvas" height="512" width="512"></canvas>
+    <div class="main__switcher-container">
+      <button type="button" class="switcher-button switcher-button_4x4">4x4</button>
+      <button type="button" class="switcher-button switcher-button_32x32">32x32</button>
+      <button type="button" class="switcher-button switcher-button_image">image</button>
+    </div>
+  </main>
+  <script src="./js/index.js" type="module" defer></script>
+</body>
+</html>
