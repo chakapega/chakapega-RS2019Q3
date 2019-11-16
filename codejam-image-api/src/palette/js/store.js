@@ -1,5 +1,1 @@
-export default class Store {
-  constructor() {
-    this.isPencilActive = false;
-  }
-};
+export default class Store {};

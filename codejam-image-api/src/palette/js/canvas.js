@@ -1,9 +1,13 @@
 export default class Canvas {
   constructor(store) {
     this.canvas = document.querySelector('#main__canvas');
+
     this.ctx = this.canvas.getContext('2d');
+
     this.isMouseDown = false;
+
     this.store = store;
+    this.store.drawImage = this.drawImage;
   };
 
   ctxBeginPath() {
@@ -42,5 +46,15 @@ export default class Canvas {
         this.ctx.moveTo(event.layerX, event.layerY);
       };
     });
+  };
+
+  drawImage(url) {
+    const image = new Image();
+
+    image.onload = () => {
+      this.ctx.drawImage(image, 0, 0);
+    };
+
+    image.src = url;
   };
 };

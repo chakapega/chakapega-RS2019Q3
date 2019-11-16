@@ -8,9 +8,12 @@ import ImageloaderContainer from './imageLoaderContainer';
 class Main {
   constructor() {
     this.store = new Store();
+
     this.toolPencil = new ToolPencil(this.store);
+
     this.canvas = new Canvas(this.store);
-    this.imageloaderContainer = new ImageloaderContainer();
+    
+    this.imageloaderContainer = new ImageloaderContainer(this.canvas);
   };
 
   start() {
