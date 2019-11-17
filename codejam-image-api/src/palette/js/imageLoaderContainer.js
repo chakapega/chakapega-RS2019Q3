@@ -15,17 +15,16 @@ export default class ImageLoaderContainer {
     this.selectedCity = this.cityInput.value;
   };
 
-  loadImage() {
+  async loadImage() {
     const city = this.selectedCity;
     const accessKey = this.accessKey;
 
     const url = `https://api.unsplash.com/photos/random?query=town,${city}&client_id=${accessKey}`;
 
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        this.store.drawImage(data.urls.small);
-      });
+    const response = await fetch(url);
+    const data = await response.json();
+
+    this.store.drawImage(data.urls.small);
   };
 
   addClickHandlerToLoadButton() {
