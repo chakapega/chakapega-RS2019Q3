@@ -28,31 +28,58 @@ export default class Canvas {
     });
   };
 
-  setCtxLineWidth() {
-    this.ctx.lineWidth = 1 * 2;
+  setCanvasSize() {
+    if (this.canvas.width !== this.store.canvasVirtualFieldSize) {
+      this.canvas.width = this.store.canvasVirtualFieldSize;
+      this.canvas.height = this.store.canvasVirtualFieldSize;
+    };
   };
 
   addMouseMoveHandler() {
     this.canvas.addEventListener('mousemove', event => {
       if (this.isMouseDown && this.store.isPencilActive) {
-        this.ctx.lineTo(event.layerX, event.layerY);
+        const correctionNumber = 512 / this.store.canvasVirtualFieldSize;
+
+        this.setCanvasSize();
+
+        this.ctx.lineTo(event.layerX / correctionNumber, event.layerY / correctionNumber);
         this.ctx.stroke();
 
         this.ctxBeginPath();
-        this.ctx.arc(event.layerX, event.layerY, 1, 0, Math.PI * 2);
-        this.ctx.fill();
-
-        this.ctxBeginPath();
-        this.ctx.moveTo(event.layerX, event.layerY);
+        this.ctx.moveTo(event.layerX / correctionNumber, event.layerY / correctionNumber);
       };
     });
   };
 
   drawImage(url) {
+    this.setCanvasSize();
+
     const image = new Image();
 
     image.onload = () => {
-      this.ctx.drawImage(image, 0, 0);
+      let correctionNumber = 0;
+      let horizontalShift = 0;
+      let verticalShift = 0;
+
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+      if (image.height > image.width) {
+        correctionNumber = this.canvas.height / image.height;
+
+        image.height *= correctionNumber;
+        image.width *= correctionNumber;
+
+        horizontalShift = (this.canvas.width - image.width) / 2;
+      } else if (image.height < image.width) {
+        correctionNumber = this.canvas.width / image.width;
+
+        image.height *= correctionNumber;
+        image.width *= correctionNumber;
+
+        verticalShift = (this.canvas.height - image.height) / 2;
+      };
+
+      this.ctx.drawImage(image, horizontalShift, verticalShift, image.width, image.height);
     };
 
     image.src = url;

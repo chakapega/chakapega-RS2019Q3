@@ -4,10 +4,13 @@ import Store from './store';
 import ToolPencil from './toolPencil';
 import Canvas from './canvas';
 import ImageloaderContainer from './imageLoaderContainer';
+import SwitcherContainer from './switcherContainer';
 
 class App {
   constructor() {
     this.store = new Store();
+
+    this.switcherContainer = new SwitcherContainer(this.store);
 
     this.toolPencil = new ToolPencil(this.store);
 
@@ -22,9 +25,10 @@ class App {
     this.canvas.addMouseDownHandler();
     this.canvas.addMouseUpHandler();
     this.canvas.addMouseMoveHandler();
-    this.canvas.setCtxLineWidth();
 
     this.imageloaderContainer.addClickHandlerToLoadButton();
+
+    this.switcherContainer.addClickHandler();
   };
 };
 
