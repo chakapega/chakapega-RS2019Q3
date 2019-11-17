@@ -5,14 +5,14 @@ import ToolPencil from './toolPencil';
 import Canvas from './canvas';
 import ImageloaderContainer from './imageLoaderContainer';
 
-class Main {
+class App {
   constructor() {
     this.store = new Store();
 
     this.toolPencil = new ToolPencil(this.store);
 
     this.canvas = new Canvas(this.store);
-    
+
     this.imageloaderContainer = new ImageloaderContainer(this.canvas);
   };
 
@@ -28,4 +28,4 @@ class Main {
   };
 };
 
-new Main().start();
+new App().start();
