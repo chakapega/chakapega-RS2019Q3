@@ -10,11 +10,11 @@ class App {
   constructor() {
     this.store = new Store();
 
-    this.switcherContainer = new SwitcherContainer(this.store);
+    this.canvas = new Canvas(this.store);
+
+    this.switcherContainer = new SwitcherContainer(this.store, this.canvas);
 
     this.toolPencil = new ToolPencil(this.store);
-
-    this.canvas = new Canvas(this.store);
 
     this.imageloaderContainer = new ImageloaderContainer(this.canvas);
   };

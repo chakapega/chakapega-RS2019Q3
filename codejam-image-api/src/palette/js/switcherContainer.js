@@ -1,5 +1,5 @@
 export default class SwitcherContainer {
-  constructor(store) {
+  constructor(store, canvas) {
     this.switcherContainer = document.querySelector('.main__switcher-container');
 
     this.button128x128 = document.querySelector('.switcher-button_128x128');
@@ -12,27 +12,41 @@ export default class SwitcherContainer {
     this.activeButton = this.store.canvasVirtualFieldSize;
 
     this.button128x128.classList.add('switcher-button-active');
+
+    this.canvas = canvas;
   };
 
   addClickHandler() {
     this.switcherContainer.addEventListener('click', event => {
       switch (event.target.textContent) {
         case '128x128':
-          this.store.canvasVirtualFieldSize = 128;
+          if (this.activeButton !== 128) {
+            this.store.canvasVirtualFieldSize = 128;
 
-          this.addClass(this.store.canvasVirtualFieldSize);
+            this.addClass(this.store.canvasVirtualFieldSize);
+
+            this.canvas.drawImage(localStorage.getItem('urlLoadImage'));
+          };
 
           break;
         case '256x256':
-          this.store.canvasVirtualFieldSize = 256;
+          if (this.activeButton !== 256) {
+            this.store.canvasVirtualFieldSize = 256;
 
-          this.addClass(this.store.canvasVirtualFieldSize);
+            this.addClass(this.store.canvasVirtualFieldSize);
+
+            this.canvas.drawImage(localStorage.getItem('urlLoadImage'));
+          };
 
           break;
         case '512x512':
-          this.store.canvasVirtualFieldSize = 512;
+          if (this.activeButton !== 512) {
+            this.store.canvasVirtualFieldSize = 512;
 
-          this.addClass(this.store.canvasVirtualFieldSize);
+            this.addClass(this.store.canvasVirtualFieldSize);
+
+            this.canvas.drawImage(localStorage.getItem('urlLoadImage'));
+          };
 
           break;
 
