@@ -35,6 +35,10 @@ export default class Canvas {
     };
   };
 
+  clearCanvas() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  };
+
   addMouseMoveHandler() {
     this.canvas.addEventListener('mousemove', event => {
       if (this.isMouseDown && this.store.isPencilActive) {
@@ -61,7 +65,7 @@ export default class Canvas {
       let horizontalShift = 0;
       let verticalShift = 0;
 
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.clearCanvas();
 
       if (image.height > image.width) {
         correctionNumber = this.canvas.height / image.height;

@@ -141,6 +141,7 @@ body {
     width: 96%;
     height: 22%;
     cursor: pointer;
+    opacity: 0.5;
 
     i {
       width: 20px;
@@ -150,31 +151,11 @@ body {
       margin-left: 10px;
       margin-right: 30px;
       background-size: cover;
+      background-color: #000000;
     }
 
     &:hover {
       background-color: #e4e3dc;
-    }
-  }
-
-  .color_current-color {
-    i {
-      background-color: #C4C4C4;
-    }
-  }
-  .color_prev-color {
-    i {
-      background-color: #41F795;
-    }
-  }
-  .color_red {
-    i {
-      background-color: #F74141;
-    }
-  }
-  .color_blue {
-    i {
-      background-color: #41B6F7;
     }
   }
 }
@@ -210,13 +191,27 @@ body {
   width: 180px;
   height: 220px;
   box-shadow: 0 3px 5px 0 rgba(0,0,0,0.40);
+}
 
-  button {
-    width: 80%;
-    cursor: pointer;
+.switcher-button {
+  width: 90%;
+  height: 20%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 3px 5px 0 rgba(0,0,0,0.40);
+  background-color: #f5f4ec;
+
+  &:hover {
+    background-color: #e4e3dc;
   }
 }
 
 .switcher-button-active {
+  width: calc(90% - 2px);
+  height: calc(20% - 2px);
+  margin-top: 1px;
+  margin-bottom: 1px;
+  font-size: 15px;
   background-color: #e4e3dc;
+  box-shadow: none;
 }

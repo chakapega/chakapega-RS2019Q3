@@ -1,10 +1,10 @@
 import '../css/style.scss';
 
 import Store from './store';
+import SwitcherContainer from './switcherContainer';
 import ToolPencil from './toolPencil';
 import Canvas from './canvas';
 import ImageloaderContainer from './imageLoaderContainer';
-import SwitcherContainer from './switcherContainer';
 
 class App {
   constructor() {
