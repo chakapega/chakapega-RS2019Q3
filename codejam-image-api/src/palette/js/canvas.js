@@ -1,62 +1,69 @@
 export default class Canvas {
   constructor(store) {
-    this.canvas = document.querySelector('#main__canvas');
+    this.canvas = document.querySelector("#main__canvas");
 
-    this.ctx = this.canvas.getContext('2d');
+    this.ctx = this.canvas.getContext("2d");
 
     this.isMouseDown = false;
 
     this.store = store;
     this.store.drawImage = this.drawImage;
-  };
+  }
 
   ctxBeginPath() {
     this.ctx.beginPath();
-  };
+  }
 
   addMouseDownHandler() {
-    this.canvas.addEventListener('mousedown', () => {
+    this.canvas.addEventListener("mousedown", () => {
       this.isMouseDown = true;
     });
-  };
+  }
 
   addMouseUpHandler() {
-    this.canvas.addEventListener('mouseup', () => {
+    this.canvas.addEventListener("mouseup", () => {
       this.isMouseDown = false;
 
       this.ctxBeginPath();
     });
-  };
+  }
 
   setCanvasSize() {
     if (this.canvas.width !== this.store.canvasVirtualFieldSize) {
       this.canvas.width = this.store.canvasVirtualFieldSize;
       this.canvas.height = this.store.canvasVirtualFieldSize;
-    };
-  };
+    }
+  }
 
   clearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-  };
+  }
 
   drawOnCanvas(event) {
     if (this.isMouseDown && this.store.isPencilActive) {
-
       const correctionNumber = 512 / this.store.canvasVirtualFieldSize;
 
       this.setCanvasSize();
 
-      this.ctx.lineTo(event.layerX / correctionNumber, event.layerY / correctionNumber);
+      this.ctx.lineTo(
+        event.layerX / correctionNumber,
+        event.layerY / correctionNumber
+      );
       this.ctx.stroke();
 
       this.ctxBeginPath();
-      this.ctx.moveTo(event.layerX / correctionNumber, event.layerY / correctionNumber);
-    };
+      this.ctx.moveTo(
+        event.layerX / correctionNumber,
+        event.layerY / correctionNumber
+      );
+    }
   }
 
   addMouseMoveHandler() {
-    this.canvas.addEventListener('mousemove', event => this.drawOnCanvas(event));
-  };
+    this.canvas.addEventListener("mousemove", event =>
+      this.drawOnCanvas(event)
+    );
+  }
 
   drawImage(url) {
     this.setCanvasSize();
@@ -84,11 +91,17 @@ export default class Canvas {
         image.width *= correctionNumber;
 
         verticalShift = (this.canvas.height - image.height) / 2;
-      };
+      }
 
-      this.ctx.drawImage(image, horizontalShift, verticalShift, image.width, image.height);
+      this.ctx.drawImage(
+        image,
+        horizontalShift,
+        verticalShift,
+        image.width,
+        image.height
+      );
     };
 
     image.src = url;
-  };
-};
+  }
+}
