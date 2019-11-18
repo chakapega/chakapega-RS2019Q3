@@ -1,10 +1,11 @@
-import "../css/style.scss";
+import "../scss/style.scss";
 
 import Store from "./store";
 import SwitcherContainer from "./switcherContainer";
 import ToolPencil from "./toolPencil";
 import Canvas from "./canvas";
 import ImageloaderContainer from "./imageLoaderContainer";
+import GrayscaleButton from "./grayscaleButton";
 
 class App {
   constructor() {
@@ -17,6 +18,8 @@ class App {
     this.toolPencil = new ToolPencil(this.store);
 
     this.imageloaderContainer = new ImageloaderContainer(this.canvas);
+
+    this.grayscaleButton = new GrayscaleButton(this.canvas);
   }
 
   start() {
@@ -30,8 +33,11 @@ class App {
 
     this.switcherContainer.addClickHandler();
 
-    if (localStorage.getItem("urlLoadImage"))
+    if (localStorage.getItem("urlLoadImage")) {
       this.canvas.drawImage(localStorage.getItem("urlLoadImage"));
+    }
+
+    this.grayscaleButton.addClickHandler();
   }
 }
 

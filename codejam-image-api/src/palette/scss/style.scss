@@ -215,3 +215,44 @@ body {
   background-color: #e4e3dc;
   box-shadow: none;
 }
+
+.main__grayscale-button-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  top: 36%;
+  right: 2%;
+  width: 180px;
+  height: 110px;
+  box-shadow: 0 3px 5px 0 rgba(0,0,0,0.40);
+
+  span {
+    width: 90%;
+    text-align: center;
+  }
+}
+
+.main__grayscale-button {
+  width: 90%;
+  height: 40%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 3px 5px 0 rgba(0,0,0,0.40);
+  background-color: #f5f4ec;
+
+  &:hover {
+    background-color: #e4e3dc;
+  }
+
+  &:active {
+    width: calc(90% - 2px);
+    height: calc(40% - 2px);
+    margin-top: 1px;
+    margin-bottom: 1px;
+    font-size: 15px;
+    background-color: #e4e3dc;
+    box-shadow: none;
+  }
+}
