@@ -17,44 +17,46 @@ export default class SwitcherContainer {
   };
 
   addClickHandler() {
-    this.switcherContainer.addEventListener('click', event => {
-      switch (event.target.textContent) {
-        case '128x128':
-          if (this.activeButton !== 128) {
-            this.store.canvasVirtualFieldSize = 128;
-
-            this.addClass(this.store.canvasVirtualFieldSize);
-
-            this.canvas.drawImage(localStorage.getItem('urlLoadImage'));
-          };
-
-          break;
-        case '256x256':
-          if (this.activeButton !== 256) {
-            this.store.canvasVirtualFieldSize = 256;
-
-            this.addClass(this.store.canvasVirtualFieldSize);
-
-            this.canvas.drawImage(localStorage.getItem('urlLoadImage'));
-          };
-
-          break;
-        case '512x512':
-          if (this.activeButton !== 512) {
-            this.store.canvasVirtualFieldSize = 512;
-
-            this.addClass(this.store.canvasVirtualFieldSize);
-
-            this.canvas.drawImage(localStorage.getItem('urlLoadImage'));
-          };
-
-          break;
-
-        default:
-          break;
-      };
-    });
+    this.switcherContainer.addEventListener('click', event => this.canvasSizeSwitcher(event));
   };
+
+  canvasSizeSwitcher(event) {
+    switch (event.target.textContent) {
+      case '128x128':
+        if (this.activeButton !== 128) {
+          this.store.canvasVirtualFieldSize = 128;
+
+          this.addClass(this.store.canvasVirtualFieldSize);
+
+          this.canvas.drawImage(localStorage.getItem('urlLoadImage'));
+        };
+
+        break;
+      case '256x256':
+        if (this.activeButton !== 256) {
+          this.store.canvasVirtualFieldSize = 256;
+
+          this.addClass(this.store.canvasVirtualFieldSize);
+
+          this.canvas.drawImage(localStorage.getItem('urlLoadImage'));
+        };
+
+        break;
+      case '512x512':
+        if (this.activeButton !== 512) {
+          this.store.canvasVirtualFieldSize = 512;
+
+          this.addClass(this.store.canvasVirtualFieldSize);
+
+          this.canvas.drawImage(localStorage.getItem('urlLoadImage'));
+        };
+
+        break;
+
+      default:
+        break;
+    };
+  }
 
   addClass(canvasVirtualFieldSize) {
     if (canvasVirtualFieldSize !== this.activeButton) {

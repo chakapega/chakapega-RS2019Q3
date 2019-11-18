@@ -39,24 +39,29 @@ export default class Canvas {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   };
 
+  drawOnCanvas(event) {
+    if (this.isMouseDown && this.store.isPencilActive) {
+
+      const correctionNumber = 512 / this.store.canvasVirtualFieldSize;
+
+      this.setCanvasSize();
+
+      this.ctx.lineTo(event.layerX / correctionNumber, event.layerY / correctionNumber);
+      this.ctx.stroke();
+
+      this.ctxBeginPath();
+      this.ctx.moveTo(event.layerX / correctionNumber, event.layerY / correctionNumber);
+    };
+  }
+
   addMouseMoveHandler() {
-    this.canvas.addEventListener('mousemove', event => {
-      if (this.isMouseDown && this.store.isPencilActive) {
-        const correctionNumber = 512 / this.store.canvasVirtualFieldSize;
-
-        this.setCanvasSize();
-
-        this.ctx.lineTo(event.layerX / correctionNumber, event.layerY / correctionNumber);
-        this.ctx.stroke();
-
-        this.ctxBeginPath();
-        this.ctx.moveTo(event.layerX / correctionNumber, event.layerY / correctionNumber);
-      };
-    });
+    this.canvas.addEventListener('mousemove', event => this.drawOnCanvas(event));
   };
 
   drawImage(url) {
     this.setCanvasSize();
+
+    this.clearCanvas();
 
     const image = new Image();
 
@@ -64,8 +69,6 @@ export default class Canvas {
       let correctionNumber = 0;
       let horizontalShift = 0;
       let verticalShift = 0;
-
-      this.clearCanvas();
 
       if (image.height > image.width) {
         correctionNumber = this.canvas.height / image.height;

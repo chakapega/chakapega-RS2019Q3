@@ -14,10 +14,9 @@ export default class ImageLoaderContainer {
   };
 
   async loadImage() {
-    const city = this.selectedCity;
-    const { accessKey } = this;
+    const { selectedCity, accessKey } = this;
 
-    const url = `https://api.unsplash.com/photos/random?query=town,${city}&client_id=${accessKey}`;
+    const url = `https://api.unsplash.com/photos/random?query=town,${selectedCity}&client_id=${accessKey}`;
 
     const response = await fetch(url);
     const data = await response.json();
