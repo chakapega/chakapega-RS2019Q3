@@ -29,6 +29,8 @@ class App {
     this.imageloaderContainer.addClickHandlerToLoadButton();
 
     this.switcherContainer.addClickHandler();
+
+    if (localStorage.getItem('urlLoadImage')) this.canvas.drawImage(localStorage.getItem('urlLoadImage'));
   };
 };
 

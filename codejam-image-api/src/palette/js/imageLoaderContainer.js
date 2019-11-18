@@ -23,6 +23,8 @@ export default class ImageLoaderContainer {
     const data = await response.json();
 
     this.canvas.drawImage(data.urls.small);
+
+    localStorage.setItem('urlLoadImage', data.urls.small);
   };
 
   addClickHandlerToLoadButton() {
