@@ -1,98 +1,57 @@
-/*
-Установка:
-npm install
-
-
-Для разработки:
- 1. ставим в файле .env переменную APP_ENV=dev
- 2. даем команду npm run start
- http://localhost:3000/
- Получаем комфортную среду для отладки (есть карты кода (source maps))
-
-
- Для продакшена:
- 1. ставим в файле .env переменную APP_ENV=prod
- 2. даем команду npm run build
-
-Так же в файле .env  есть глобальные переменные, которые можно использовать для запуска определенного кода в development,
-если нужны еще переменные, то дописываем их в секцию plugins:webpack.DefinePlugin
-Если нужны еще точки входа (кроме index.html и abiut.html), то вписываем их в plugin:
-    new HtmlWebPackPlugin(....)
-
- Для проведения теста:
-    npm run test
-
-
-Для проверки правильности кода:
-    npm run lint
-
-*/
-const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-
-const webpack = require('webpack');
-require('dotenv').config()
+const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
+const webpack = require("webpack");
+require("dotenv").config();
 
 const ENV = process.env.APP_ENV;
-const isDev = ENV === 'dev';
-const isProd = ENV === 'prod';
+const isDev = ENV === "dev";
+const isProd = ENV === "prod";
 
-function setDevTool() {
-  if (isDev) {
-    return 'cheap-module-eval-source-map';
-  } else {
-    return 'none';
-  }
-}
-
-function setDMode() {
-  if (isProd) {
-    return 'production';
-  } else {
-    return 'development';
-  }
-}
+setDevTool = () => (isDev ? "cheap-module-eval-source-map" : "none");
+setDMode = () => (isProd ? "production" : "development");
 
 const config = {
   target: "web", //"node" or "web"
-  entry: './src/palette/js/app.js',
+  entry: "./src/palette/js/app.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js"
   },
   mode: setDMode(),
   devtool: setDevTool(),
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.html$/,
-        use: [{
-          loader: 'html-loader',
-          options: {
-            minimize: false
+        use: [
+          {
+            loader: "html-loader",
+            options: {
+              minimize: false
+            }
           }
-        }]
+        ]
       },
       {
         test: /\.js$/,
-        use: 'babel-loader',
-        exclude: [
-          /node_modules/
-        ]
+        use: "babel-loader",
+        exclude: [/node_modules/]
       },
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          "style-loader",
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true
             }
-          }, {
-            loader: 'sass-loader',
+          },
+          {
+            loader: "sass-loader",
             options: {
               sourceMap: true
             }
@@ -102,15 +61,16 @@ const config = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
+          "style-loader",
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true
             }
-          }, {
-            loader: 'sass-loader',
+          },
+          {
+            loader: "sass-loader",
             options: {
               sourceMap: true
             }
@@ -121,12 +81,13 @@ const config = {
         test: /\.(jpg|png|svg|gif)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
             options: {
-              outputPath: 'images'
-            }},
+              outputPath: "images"
+            }
+          },
           {
-            loader: 'image-webpack-loader',
+            loader: "image-webpack-loader",
             options: {
               mozjpeg: {
                 processive: true,
@@ -138,43 +99,43 @@ const config = {
       },
       {
         test: /\.(woff|woff2|ttf|otf|eot)$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            outputPath: 'fonts'
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              outputPath: "fonts"
+            }
           }
-        }]
+        ]
       }
     ]
   },
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'style.css',
+      filename: "style.css"
     }),
     new HtmlWebPackPlugin({
-      template: './src/index.html',
-      filename: './index.html'
+      template: "./src/index.html",
+      filename: "./index.html"
     }),
-      new webpack.DefinePlugin({
+    new webpack.DefinePlugin({
       API_KEY: JSON.stringify(process.env.API_KEY),
       APP_ENV: JSON.stringify(process.env.APP_ENV)
     })
   ],
 
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, "dist"),
     compress: true,
     port: 3000,
-    stats: 'errors-only',
-    clientLogLevel: 'none'
+    stats: "errors-only",
+    clientLogLevel: "none"
   }
-}
+};
 
 if (isProd) {
-  config.plugins.push(
-    new UglifyJSPlugin(),
-  );
-};
+  config.plugins.push(new UglifyJSPlugin());
+}
 
 module.exports = config;

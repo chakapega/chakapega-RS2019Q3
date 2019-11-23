@@ -1,11 +1,8 @@
 export default class Canvas {
   constructor(store) {
     this.canvas = document.querySelector("#main__canvas");
-
     this.ctx = this.canvas.getContext("2d");
-
     this.isMouseDown = false;
-
     this.store = store;
     this.store.drawImage = this.drawImage;
   }
@@ -23,34 +20,30 @@ export default class Canvas {
   addMouseUpHandler() {
     this.canvas.addEventListener("mouseup", () => {
       this.isMouseDown = false;
-
       this.ctxBeginPath();
     });
   }
 
-  setCanvasSize() {
+  setSize() {
     if (this.canvas.width !== this.store.canvasVirtualFieldSize) {
       this.canvas.width = this.store.canvasVirtualFieldSize;
       this.canvas.height = this.store.canvasVirtualFieldSize;
     }
   }
 
-  clearCanvas() {
+  clear() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
-  drawOnCanvas(event) {
+  draw(event) {
     if (this.isMouseDown && this.store.isPencilActive) {
       const correctionNumber = 512 / this.store.canvasVirtualFieldSize;
-
-      this.setCanvasSize();
-
+      this.setSize();
       this.ctx.lineTo(
         event.layerX / correctionNumber,
         event.layerY / correctionNumber
       );
       this.ctx.stroke();
-
       this.ctxBeginPath();
       this.ctx.moveTo(
         event.layerX / correctionNumber,
@@ -60,18 +53,14 @@ export default class Canvas {
   }
 
   addMouseMoveHandler() {
-    this.canvas.addEventListener("mousemove", event =>
-      this.drawOnCanvas(event)
-    );
+    this.canvas.addEventListener("mousemove", event => this.draw(event));
   }
 
   drawImage(url) {
-    this.setCanvasSize();
-
-    this.clearCanvas();
-
     const image = new Image();
     image.crossOrigin = "Anonymous";
+    this.setSize();
+    this.clear();
 
     image.onload = () => {
       let correctionNumber = 0;
@@ -80,20 +69,15 @@ export default class Canvas {
 
       if (image.height > image.width) {
         correctionNumber = this.canvas.height / image.height;
-
         image.height *= correctionNumber;
         image.width *= correctionNumber;
-
         horizontalShift = (this.canvas.width - image.width) / 2;
       } else if (image.height < image.width) {
         correctionNumber = this.canvas.width / image.width;
-
         image.height *= correctionNumber;
         image.width *= correctionNumber;
-
         verticalShift = (this.canvas.height - image.height) / 2;
       }
-
       this.ctx.drawImage(
         image,
         horizontalShift,
@@ -102,7 +86,6 @@ export default class Canvas {
         image.height
       );
     };
-
     image.src = url;
   }
 
@@ -113,7 +96,6 @@ export default class Canvas {
       this.canvas.width,
       this.canvas.height
     );
-
     const { data } = imageData;
 
     for (let i = 0; i < data.length; i += 4) {
@@ -122,7 +104,6 @@ export default class Canvas {
       data[i + 1] = avg;
       data[i + 2] = avg;
     }
-
     this.ctx.putImageData(imageData, 0, 0);
   }
 }
