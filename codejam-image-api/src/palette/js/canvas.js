@@ -25,9 +25,9 @@ export default class Canvas {
   }
 
   setSize() {
-    if (this.canvas.width !== this.store.canvasVirtualFieldSize) {
-      this.canvas.width = this.store.canvasVirtualFieldSize;
-      this.canvas.height = this.store.canvasVirtualFieldSize;
+    if (this.canvas.width !== +this.store.canvasVirtualFieldSize) {
+      this.canvas.width = +this.store.canvasVirtualFieldSize;
+      this.canvas.height = +this.store.canvasVirtualFieldSize;
     }
   }
 
