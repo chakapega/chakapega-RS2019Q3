@@ -9,7 +9,34 @@
 </head>
 
 <body>
-
+  <div class="blackout-container">
+    <div class="control-container">
+      <button class="button_refresh-background-image" type="button">
+        <i class="icon_refresh-background-image"></i>
+      </button>
+      <button class="button_language-select" type="button">
+        <span class="text_language-select">EN</span>
+        <i class="icon_language-select"></i>
+      </button>
+      <ul class="list_language-select">
+        <li>EN</li>
+        <li>RU</li>
+        <li>BE</li>
+      </ul>
+      <div class="temperature-buttons-container">
+        <button data-unit="fahrenheit" class="temperature-button temperature-button_fahrenheit"
+          type="button">°F</button>
+        <button data-unit="celsius" class="temperature-button temperature-button_celsius temperature-button_active"
+          type="button">°С</button>
+      </div>
+    </div>
+    <div class="search-city-container">
+      <form class="search-city-form">
+        <input placeholder="Search city" type="text" name="city" id="search-city-input">
+        <button class="search-city-button" type="submit">SEARCH</button>
+      </form>
+    </div>
+  </div>
 </body>
 
 </html>
