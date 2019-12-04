@@ -24,17 +24,56 @@
         <li>BE</li>
       </ul>
       <div class="temperature-buttons-container">
-        <button data-unit="fahrenheit" class="temperature-button temperature-button_fahrenheit"
-          type="button">°F</button>
-        <button data-unit="celsius" class="temperature-button temperature-button_celsius temperature-button_active"
-          type="button">°С</button>
+        <button class="temperature-button temperature-button_fahrenheit" type="button"
+          data-unit="fahrenheit">°F</button>
+        <button class="temperature-button temperature-button_celsius temperature-button_active" type="button"
+          data-unit="celsius">°С</button>
       </div>
     </div>
     <div class="search-city-container">
       <form class="search-city-form">
-        <input placeholder="Search city" type="text" name="city" id="search-city-input">
+        <input id="search-city-input" placeholder="Search city" type="text" name="city">
         <button class="search-city-button" type="submit">SEARCH</button>
       </form>
+    </div>
+    <div class="weather-output-container">
+      <span class="location-name">Minsk, Belarus</span>
+      <div class="date-container">
+        <span class="date">Mon 28 October</span>
+        <span class="time">17:23</span>
+      </div>
+      <div class="current-weather-data-container">
+        <span class="current-weather-temperature">10°</span>
+        <div class="description-current-weather-container">
+          <i class="icon_current-weather-status"></i>
+          <img class="current-weather-data_status-image" src="./palette/images/weatherIcon.svg"
+            alt="weather-status-image">
+          <span class="current-weather-data current-weather-data_status">OVERCAST</span>
+          <span class="current-weather-data current-weather-data_feel">FEELS LIKE: 7°</span>
+          <span class="current-weather-data current-weather-data_wind">WIND: 2 m/s</span>
+          <span class="current-weather-data current-weather-data_humidity">HUMIDITY: 83%</span>
+        </div>
+      </div>
+      <div class="three-day-weather-container">
+        <div class="future-weather-container first-day-weather-container">
+          <span class="future-weather_weekday-name first-day-weather_weekday-name">TUESDAY</span>
+          <span class="future-weather_temperature first-day-weather_temperature">7°</span>
+          <img class="future-weather_image-status first-day-weather_image-status" src="./palette/images/weatherIcon.svg"
+            alt="weather-status-image">
+        </div>
+        <div class="future-weather-container second-day-weather-container">
+          <span class="future-weather_weekday-name second-day-weather_weekday-name">WEDNESDAY</span>
+          <span class="future-weather_temperature second-day-weather_temperature">6°</span>
+          <img class="future-weather_image-status second-day-weather_image-status"
+            src="./palette/images/weatherIcon.svg" alt="weather-status-image">
+        </div>
+        <div class="future-weather-container third-day-weather-container">
+          <span class="future-weather_weekday-name third-day-weather_weekday-name">THURSDAY</span>
+          <span class="future-weather_temperature third-day-weather_temperature">3°</span>
+          <img class="future-weather_image-status third-day-weather_image-status" src="./palette/images/weatherIcon.svg"
+            alt="weather-status-image">
+        </div>
+      </div>
     </div>
   </div>
 </body>
