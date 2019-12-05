@@ -1,8 +1,18 @@
 export default class ButtonLanguageSelect {
   constructor() {
+    this.observers = [];
     this.buttonLanguageSelect = document.querySelector('.button_language-select');
     this.listLanguageSelect = document.querySelector('.list_language-select');
     this.textLanguageSelect = document.querySelector('.text_language-select');
+    this.changeLanguage(localStorage.getItem('selectedLanguage') || 'EN');
+  }
+
+  subscribe(fn) {
+    this.observers.push(fn);
+  }
+
+  broadcast(data) {
+    this.observers.forEach(subscriber => subscriber(data));
   }
 
   addClickHandlerToButtonLanguageSelect() {
@@ -21,9 +31,9 @@ export default class ButtonLanguageSelect {
 
   addClickHandlerToListLanguageSelect() {
     this.listLanguageSelect.addEventListener('click', event => {
-      const selectedLanguage = event.target.textContent;
+      this.selectedLanguage = event.target.textContent;
 
-      this.changeLanguage(selectedLanguage);
+      this.changeLanguage(this.selectedLanguage);
       this.closeListLanguageSelect();
     });
   }
@@ -31,6 +41,8 @@ export default class ButtonLanguageSelect {
   changeLanguage(selectedLanguage) {
     if (this.textLanguageSelect.textContent !== selectedLanguage) {
       this.textLanguageSelect.textContent = selectedLanguage;
+      localStorage.setItem('selectedLanguage', selectedLanguage);
+      this.broadcast();
     }
   }
 }

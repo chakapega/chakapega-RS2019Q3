@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Fancy weather</title>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
 </head>
 
 <body>
@@ -15,7 +17,7 @@
         <i class="icon_refresh-background-image"></i>
       </button>
       <button class="button_language-select" type="button">
-        <span class="text_language-select">EN</span>
+        <span class="text_language-select"></span>
         <i class="icon_language-select"></i>
       </button>
       <ul class="list_language-select">
@@ -73,6 +75,13 @@
           <img class="future-weather_image-status third-day-weather_image-status" src="./palette/images/weatherIcon.svg"
             alt="weather-status-image">
         </div>
+      </div>
+    </div>
+    <div class="map-container">
+      <div id="map"></div>
+      <div class="coordinates-container">
+        <span class="coordinate coordinate_latitude">Latitude: 53°54'</span>
+        <span class="coordinate coordinate_longitude">Longitude: 27°34'</span>
       </div>
     </div>
   </div>
