@@ -15,8 +15,8 @@ export default class GetCurrentPosition {
   getCurrentPosition() {
     const options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 };
     const success = pos => {
-      this.store.currentPosition.latitude = pos.coords.latitude;
-      this.store.currentPosition.longitude = pos.coords.longitude;
+      this.store.currentPosition.latitude = pos.coords.latitude.toString();
+      this.store.currentPosition.longitude = pos.coords.longitude.toString();
 
       this.broadcast();
     };

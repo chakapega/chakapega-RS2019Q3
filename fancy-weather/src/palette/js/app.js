@@ -23,9 +23,14 @@ class App {
     this.getCurrentPosition.subscribe(() => {
       this.getWeather.getWeatherForecast();
       this.mapContainer.showMap();
+      this.mapContainer.showCurrentCoordinates();
     });
     this.getWeather.subscribe(() => this.weatherContainer.showWeather());
-    this.buttonLanguageSelect.subscribe(() => this.getWeather.getWeatherForecast());
+    this.buttonLanguageSelect.subscribe(() => {
+      this.getWeather.getWeatherForecast();
+      this.mapContainer.showCurrentCoordinates();
+    });
+    this.temperatureButtonsContainer.subscribe(() => this.weatherContainer.showWeather());
     this.getCurrentPosition.getCurrentPosition();
     this.buttonLanguageSelect.addClickHandlerToButtonLanguageSelect();
     this.buttonLanguageSelect.addClickHandlerToListLanguageSelect();
