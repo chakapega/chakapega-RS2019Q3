@@ -1,5 +1,6 @@
 export default class GetCurrentPosition {
-  constructor() {
+  constructor(store) {
+    this.store = store;
     this.observers = [];
   }
 
@@ -12,14 +13,11 @@ export default class GetCurrentPosition {
   }
 
   getCurrentPosition() {
-    const options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0,
-    };
+    const options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 };
     const success = pos => {
-      localStorage.setItem('latitude', pos.coords.latitude);
-      localStorage.setItem('longitude', pos.coords.longitude);
+      this.store.currentPosition.latitude = pos.coords.latitude;
+      this.store.currentPosition.longitude = pos.coords.longitude;
+
       this.broadcast();
     };
 

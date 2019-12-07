@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Fancy weather</title>
-  <script src='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css' rel='stylesheet' />
 </head>
 
@@ -38,22 +37,21 @@
         <button class="search-city-button" type="submit">SEARCH</button>
       </form>
     </div>
-    <div class="weather-output-container">
-      <span class="location-name">Minsk, Belarus</span>
+    <div class="weather-container">
+      <span class="location-name"></span>
       <div class="date-container">
         <span class="date">Mon 28 October</span>
         <span class="time">17:23</span>
       </div>
-      <div class="current-weather-data-container">
-        <span class="current-weather-temperature">10°</span>
+      <div class="current-weather-container">
+        <span class="current-weather-temperature"></span>
         <div class="description-current-weather-container">
-          <i class="icon_current-weather-status"></i>
-          <img class="current-weather-data_status-image" src="./palette/images/weatherIcon.svg"
+          <img class="current-weather_status-image" src="./palette/images/weatherIcon.svg"
             alt="weather-status-image">
-          <span class="current-weather-data current-weather-data_status">OVERCAST</span>
-          <span class="current-weather-data current-weather-data_feel">FEELS LIKE: 7°</span>
-          <span class="current-weather-data current-weather-data_wind">WIND: 2 m/s</span>
-          <span class="current-weather-data current-weather-data_humidity">HUMIDITY: 83%</span>
+          <span class="current-weather current-weather_status"></span>
+          <span class="current-weather current-weather_feel"></span>
+          <span class="current-weather current-weather_wind"></span>
+          <span class="current-weather current-weather_humidity"></span>
         </div>
       </div>
       <div class="three-day-weather-container">
@@ -80,8 +78,8 @@
     <div class="map-container">
       <div id="map"></div>
       <div class="coordinates-container">
-        <span class="coordinate coordinate_latitude">Latitude: 53°54'</span>
-        <span class="coordinate coordinate_longitude">Longitude: 27°34'</span>
+        <span class="coordinate coordinate_latitude"></span>
+        <span class="coordinate coordinate_longitude"></span>
       </div>
     </div>
   </div>

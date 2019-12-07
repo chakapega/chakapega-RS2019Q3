@@ -182,10 +182,11 @@ body {
   }
 }
 
-.weather-output-container {
+.weather-container {
   position: absolute;
   left: 7%;
   bottom: 15%;
+  width: 650px;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -215,7 +216,7 @@ body {
       margin-left: 20px;
     }
   }
-  .current-weather-data-container {
+  .current-weather-container {
     display: flex;
     align-items: center;
 
@@ -229,13 +230,13 @@ body {
       flex-direction: column;
       margin-left: 50px;
 
-      .current-weather-data_status-image {
+      .current-weather_status-image {
         width: 160px;
         height: 100px;
         margin-bottom: 20px;
         object-fit: contain;
       }
-      .current-weather-data {
+      .current-weather {
         font-weight: bold;
         font-size: 22px;
         line-height: 37px;
@@ -282,8 +283,8 @@ body {
   bottom: 15%;
 
   #map {
-    width: 600px;
-    height: 400px;
+    width: 500px;
+    height: 340px;
     border-radius: 5px;
     overflow: hidden;
   }

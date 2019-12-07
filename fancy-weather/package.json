@@ -15,6 +15,7 @@
   "author": "chakapega",
   "license": "ISC",
   "devDependencies": {
+    "@types/mapbox-gl": "^1.5.2",
     "babel-core": "6.26.3",
     "babel-eslint": "8",
     "babel-loader": "7",
@@ -43,5 +44,8 @@
     "webpack": "4.41.2",
     "webpack-cli": "3.3.9",
     "webpack-dev-server": "3.8.2"
+  },
+  "dependencies": {
+    "mapbox-gl": "^1.6.0"
   }
 }
