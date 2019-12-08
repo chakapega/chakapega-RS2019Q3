@@ -1,37 +1,38 @@
 import '../scss/style.scss';
 
 import Store from './store/store';
-import GetCurrentPosition from './geolocation/getCurrentPosition';
+import GetLocationInformation from './geolocation/getLocationInformation';
 import MapContainer from './geolocation/mapContainer';
-import WeatherContainer from './weather/weatherContainer';
-import GetWeather from './geolocation/getWeather';
+import ShowWeather from './weather/showWeather';
+import GetWeather from './weather/getWeather';
 import ButtonLanguageSelect from './control-container/buttonLanguageSelect';
 import TemperatureButtonsContainer from './control-container/temperatureButtonsContainer';
 
 class App {
   constructor() {
     this.store = new Store();
-    this.getCurrentPosition = new GetCurrentPosition(this.store);
+    this.getLocationInformation = new GetLocationInformation(this.store);
     this.mapContainer = new MapContainer(this.store);
-    this.weatherContainer = new WeatherContainer(this.store);
     this.getWeather = new GetWeather(this.store);
+    this.showWeather = new ShowWeather(this.store);
     this.buttonLanguageSelect = new ButtonLanguageSelect();
     this.temperatureButtonsContainer = new TemperatureButtonsContainer();
   }
 
   start() {
-    this.getCurrentPosition.subscribe(() => {
+    this.getLocationInformation.subscribe(() => {
       this.getWeather.getWeatherForecast();
       this.mapContainer.showMap();
       this.mapContainer.showCurrentCoordinates();
     });
-    this.getWeather.subscribe(() => this.weatherContainer.showWeather());
+    this.getWeather.subscribe(() => this.showWeather.showWeather());
     this.buttonLanguageSelect.subscribe(() => {
+      this.getLocationInformation.getLocationInformation();
       this.getWeather.getWeatherForecast();
       this.mapContainer.showCurrentCoordinates();
     });
-    this.temperatureButtonsContainer.subscribe(() => this.weatherContainer.showWeather());
-    this.getCurrentPosition.getCurrentPosition();
+    this.temperatureButtonsContainer.subscribe(() => this.showWeather.showWeather());
+    this.getLocationInformation.getCurrentPosition();
     this.buttonLanguageSelect.addClickHandlerToButtonLanguageSelect();
     this.buttonLanguageSelect.addClickHandlerToListLanguageSelect();
     this.temperatureButtonsContainer.addClickHandler();

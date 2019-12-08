@@ -1,4 +1,4 @@
-export default class WeatherContainer {
+export default class ShowWeather {
   constructor(store) {
     this.store = store;
     this.locationName = document.querySelector('.location-name');
@@ -12,7 +12,7 @@ export default class WeatherContainer {
   showWeather() {
     const weatherPropertiesText = this.defineTextWeatherProperties();
 
-    this.locationName.textContent = this.store.weatherForecast.timezone;
+    this.locationName.textContent = this.store.locationInformation.name;
     this.currentWeatherTemperature.textContent = weatherPropertiesText.temperature;
     this.currentWeatherStatus.textContent = this.store.weatherForecast.currently.summary;
     this.currentWeatherFeel.textContent = weatherPropertiesText.feel;
@@ -29,8 +29,14 @@ export default class WeatherContainer {
         weatherPropertiesText.feel = this.store.weatherForecast.currently.apparentTemperature.toFixed();
         break;
       case 'fahrenheit':
-        weatherPropertiesText.temperature = `${(this.store.weatherForecast.currently.temperature * (9 / 5) + 32).toFixed()}°`;
-        weatherPropertiesText.feel = (this.store.weatherForecast.currently.apparentTemperature * (9 / 5) + 32).toFixed();
+        weatherPropertiesText.temperature = `${(
+          this.store.weatherForecast.currently.temperature * (9 / 5) +
+          32
+        ).toFixed()}°`;
+        weatherPropertiesText.feel = (
+          this.store.weatherForecast.currently.apparentTemperature * (9 / 5) +
+          32
+        ).toFixed();
         break;
 
       default:

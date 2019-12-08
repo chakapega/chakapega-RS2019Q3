@@ -13,6 +13,10 @@ export default class GetWeather {
   }
 
   async getWeatherForecast() {
+    const {apiDarkskyUrl} = this.store;
+    const {proxyUrl} = this.store;
+    const {apiDarkskyKey} = this.store;
+    const { longitude, latitude } = this.store.currentPosition;
     let language;
 
     switch (localStorage.getItem('selectedLanguage')) {
@@ -29,11 +33,9 @@ export default class GetWeather {
       default:
         break;
     }
-    const { longitude, latitude } = this.store.currentPosition;
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const targetUrl = `https://api.darksky.net/forecast/11e8ea62cae2009dabda1b337346ca8d/${latitude},${longitude}?units=si&lang=${language}`;
 
-    const response = await fetch(proxyUrl + targetUrl);
+    const finalUrl = `${proxyUrl}${apiDarkskyUrl}${apiDarkskyKey}${latitude},${longitude}?units=si&lang=${language}`;
+    const response = await fetch(finalUrl);
     this.store.weatherForecast = await response.json();
 
     this.broadcast();
