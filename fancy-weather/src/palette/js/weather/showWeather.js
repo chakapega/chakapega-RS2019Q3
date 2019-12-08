@@ -17,9 +17,10 @@ export default class ShowWeather {
   }
 
   showWeather() {
+    const locationName = this.defineLocationName();
     const weatherPropertiesText = this.defineTextWeatherProperties();
 
-    this.locationName.textContent = this.store.locationInformation.name;
+    this.locationName.textContent = locationName;
     this.currentWeatherTemperature.textContent = weatherPropertiesText.temperature;
     this.currentWeatherStatusIcon.classList.add(`weather-icon_${this.store.weatherForecast.currently.icon}`);
     this.currentWeatherStatus.textContent = this.store.weatherForecast.currently.summary;
@@ -115,5 +116,15 @@ export default class ShowWeather {
     }
 
     return weatherPropertiesText;
+  }
+
+  defineLocationName() {
+    const city =
+      this.store.locationInformation.components.city ||
+      this.store.locationInformation.components.county ||
+      this.store.locationInformation.components.state;
+    const { country } = this.store.locationInformation.components;
+
+    return `${city}, ${country}`;
   }
 }

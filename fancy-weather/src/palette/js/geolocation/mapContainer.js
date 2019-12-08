@@ -32,19 +32,21 @@ export default class MapContainer {
   defineTextCoordinateProperties() {
     const { longitude, latitude } = this.store.currentPosition;
     const coordinateTexts = {};
+    const finalLongitude = `${longitude.split('.')[0]}°${longitude.split('.')[1][0] + longitude.split('.')[1][1]}'`;
+    const finalLatitude = `${latitude.split('.')[0]}°${latitude.split('.')[1][0] + latitude.split('.')[1][1]}'`;
 
     switch (localStorage.getItem('selectedLanguage')) {
       case 'EN':
-        coordinateTexts.longitude = `Longitude: ${longitude[0] + longitude[1]}°${longitude[3] + longitude[4]}'`;
-        coordinateTexts.latitude = `Latitude: ${latitude[0] + latitude[1]}°${latitude[3] + latitude[4]}'`;
+        coordinateTexts.longitude = `Longitude: ${finalLongitude}'`;
+        coordinateTexts.latitude = `Latitude: ${finalLatitude}'`;
         break;
       case 'BE':
-        coordinateTexts.longitude = `Даўгата: ${longitude[0] + longitude[1]}°${longitude[3] + longitude[4]}'`;
-        coordinateTexts.latitude = `Шырата: ${latitude[0] + latitude[1]}°${latitude[3] + latitude[4]}'`;
+        coordinateTexts.longitude = `Даўгата: ${finalLongitude}'`;
+        coordinateTexts.latitude = `Шырата: ${finalLatitude}'`;
         break;
       case 'RU':
-        coordinateTexts.longitude = `Долгота: ${longitude[0] + longitude[1]}°${longitude[3] + longitude[4]}'`;
-        coordinateTexts.latitude = `Широта: ${latitude[0] + latitude[1]}°${latitude[3] + latitude[4]}'`;
+        coordinateTexts.longitude = `Долгота: ${finalLongitude}'`;
+        coordinateTexts.latitude = `Широта: ${finalLatitude}'`;
         break;
 
       default:

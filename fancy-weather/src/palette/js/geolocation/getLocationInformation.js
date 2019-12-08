@@ -67,7 +67,7 @@ export default class GetLocationInformation {
         return response.json();
       })
       .then(data => {
-        this.store.locationInformation.name = data.results[0].formatted;
+        [this.store.locationInformation] = data.results;
 
         if (city) {
           this.store.currentPosition.latitude = data.results[0].geometry.lat.toString();

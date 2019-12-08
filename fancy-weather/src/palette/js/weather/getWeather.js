@@ -37,6 +37,7 @@ export default class GetWeather {
     const finalUrl = `${proxyUrl}${apiDarkskyUrl}${apiDarkskyKey}${latitude},${longitude}?units=si&lang=${language}`;
     const response = await fetch(finalUrl);
     this.store.weatherForecast = await response.json();
+    // console.log(this.store.weatherForecast);
 
     this.broadcast();
   }
