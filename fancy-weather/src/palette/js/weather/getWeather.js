@@ -13,9 +13,9 @@ export default class GetWeather {
   }
 
   async getWeatherForecast() {
-    const {apiDarkskyUrl} = this.store;
-    const {proxyUrl} = this.store;
-    const {apiDarkskyKey} = this.store;
+    const { apiDarkskyUrl } = this.store;
+    const { proxyUrl } = this.store;
+    const { apiDarkskyKey } = this.store;
     const { longitude, latitude } = this.store.currentPosition;
     let language;
 

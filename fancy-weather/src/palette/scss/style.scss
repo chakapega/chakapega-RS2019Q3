@@ -230,11 +230,11 @@ body {
       flex-direction: column;
       margin-left: 50px;
 
-      .current-weather_status-image {
+      .current-weather_status-icon {
         width: 160px;
-        height: 100px;
+        height: 160px;
         margin-bottom: 20px;
-        object-fit: contain;
+        background-size: cover;
       }
       .current-weather {
         font-weight: bold;
@@ -267,10 +267,10 @@ body {
         line-height: 90px;
         color: #ffffff;
       }
-      .future-weather_image-status {
-        width: 67px;
-        height: 44px;
-        object-fit: contain;
+      .future-weather_icon-status {
+        width: 64px;
+        height: 64px;
+        background-size: cover;
         margin-left: 10px;
       }
     }
@@ -301,5 +301,38 @@ body {
       text-transform: capitalize;
       color: #ffffff;
     }
+  }
+}
+
+.weather-icon {
+  &_clear-day {
+    background-image: url(../images/clear-day.svg);
+  }
+  &_clear-night {
+    background-image: url(../images/clear-night.svg);
+  }
+  &_cloudy {
+    background-image: url(../images/cloudy.svg);
+  }
+  &_fog {
+    background-image: url(../images/fog.svg);
+  }
+  &_partly-cloudy-day {
+    background-image: url(../images/partly-cloudy-day.svg);
+  }
+  &_partly-cloudy-night {
+    background-image: url(../images/partly-cloudy-night.svg);
+  }
+  &_rain {
+    background-image: url(../images/rain.svg);
+  }
+  &_sleet {
+    background-image: url(../images/sleet.svg);
+  }
+  &_snow {
+    background-image: url(../images/snow.svg);
+  }
+  &_wind {
+    background-image: url(../images/wind.svg);
   }
 }
