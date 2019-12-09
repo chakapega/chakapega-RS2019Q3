@@ -21,8 +21,6 @@ export default class GetCurrentDate {
       this.store.currentDate.time,
     ] = Date().split(' ');
 
-    console.log(this.store);
-
     this.broadcast();
   }
 }

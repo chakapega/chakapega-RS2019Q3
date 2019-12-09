@@ -13,17 +13,18 @@ export default class ShowDateInformation {
       firstDayWeatherWeekdayName,
       secondDayWeatherWeekdayName,
       thirdDayWeatherWeekdayName,
+      month,
     } = this.defineDatesValues();
     const { number } = this.store.currentDate;
 
-    this.currentDate.textContent = `${currentDate} ${number}`;
+    this.currentDate.textContent = `${currentDate} ${parseInt(number, 10)} ${month}`;
     this.firstDayWeatherWeekdayName.textContent = firstDayWeatherWeekdayName;
     this.secondDayWeatherWeekdayName.textContent = secondDayWeatherWeekdayName;
     this.thirdDayWeatherWeekdayName.textContent = thirdDayWeatherWeekdayName;
   }
 
   defineDatesValues() {
-    const { dayOfTheWeek } = this.store.currentDate;
+    const { dayOfTheWeek, month } = this.store.currentDate;
     const selectedLanguage = localStorage.getItem('selectedLanguage');
     const datesValues = {};
 
@@ -197,6 +198,191 @@ export default class ShowDateInformation {
         }
         break;
 
+      default:
+        break;
+    }
+
+    switch (month) {
+      case 'Jan':
+        switch (selectedLanguage) {
+          case 'EN':
+            datesValues.month = 'January';
+            break;
+          case 'BE':
+            datesValues.month = 'Студзень';
+            break;
+          case 'RU':
+            datesValues.month = 'Январь';
+            break;
+          default:
+            break;
+        }
+        break;
+      case 'Feb':
+        switch (selectedLanguage) {
+          case 'EN':
+            datesValues.month = 'February';
+            break;
+          case 'BE':
+            datesValues.month = 'Люты';
+            break;
+          case 'RU':
+            datesValues.month = 'Февраль';
+            break;
+          default:
+            break;
+        }
+        break;
+      case 'Mar':
+        switch (selectedLanguage) {
+          case 'EN':
+            datesValues.month = 'March';
+            break;
+          case 'BE':
+            datesValues.month = 'Сакавiк';
+            break;
+          case 'RU':
+            datesValues.month = 'Март';
+            break;
+          default:
+            break;
+        }
+        break;
+      case 'Apr':
+        switch (selectedLanguage) {
+          case 'EN':
+            datesValues.month = 'April';
+            break;
+          case 'BE':
+            datesValues.month = 'Красавiк';
+            break;
+          case 'RU':
+            datesValues.month = 'Апрель';
+            break;
+          default:
+            break;
+        }
+        break;
+      case 'May':
+        switch (selectedLanguage) {
+          case 'EN':
+            datesValues.month = 'May';
+            break;
+          case 'BE':
+            datesValues.month = 'Май';
+            break;
+          case 'RU':
+            datesValues.month = 'Май';
+            break;
+          default:
+            break;
+        }
+        break;
+      case 'Jun':
+        switch (selectedLanguage) {
+          case 'EN':
+            datesValues.month = 'June';
+            break;
+          case 'BE':
+            datesValues.month = 'Червень';
+            break;
+          case 'RU':
+            datesValues.month = 'Июнь';
+            break;
+          default:
+            break;
+        }
+        break;
+      case 'Jul':
+        switch (selectedLanguage) {
+          case 'EN':
+            datesValues.month = 'July';
+            break;
+          case 'BE':
+            datesValues.month = 'Лiпень';
+            break;
+          case 'RU':
+            datesValues.month = 'Июль';
+            break;
+          default:
+            break;
+        }
+        break;
+      case 'Aug':
+        switch (selectedLanguage) {
+          case 'EN':
+            datesValues.month = 'August';
+            break;
+          case 'BE':
+            datesValues.month = 'Жнiвень';
+            break;
+          case 'RU':
+            datesValues.month = 'Август';
+            break;
+          default:
+            break;
+        }
+        break;
+      case 'Sep':
+        switch (selectedLanguage) {
+          case 'EN':
+            datesValues.month = 'September';
+            break;
+          case 'BE':
+            datesValues.month = 'Верасень';
+            break;
+          case 'RU':
+            datesValues.month = 'Сентябрь';
+            break;
+          default:
+            break;
+        }
+        break;
+      case 'Oct':
+        switch (selectedLanguage) {
+          case 'EN':
+            datesValues.month = 'October';
+            break;
+          case 'BE':
+            datesValues.month = 'Кастрычнiк';
+            break;
+          case 'RU':
+            datesValues.month = 'Октябрь';
+            break;
+          default:
+            break;
+        }
+        break;
+      case 'Nov':
+        switch (selectedLanguage) {
+          case 'EN':
+            datesValues.month = 'November';
+            break;
+          case 'BE':
+            datesValues.month = 'Лiстапад';
+            break;
+          case 'RU':
+            datesValues.month = 'Ноябрь';
+            break;
+          default:
+            break;
+        }
+        break;
+      case 'Dec':
+        switch (selectedLanguage) {
+          case 'EN':
+            datesValues.month = 'December';
+            break;
+          case 'BE':
+            datesValues.month = 'Снежань';
+            break;
+          case 'RU':
+            datesValues.month = 'Декабрь';
+            break;
+          default:
+            break;
+        }
+        break;
       default:
         break;
     }
