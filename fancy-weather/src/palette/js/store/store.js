@@ -7,6 +7,7 @@ export default class Store {
     this.apiDarkskyUrl = 'https://api.darksky.net/forecast/';
     this.apiDarkskyKey = '11e8ea62cae2009dabda1b337346ca8d/';
     this.proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    this.currentDate = {};
     this.currentPosition = {};
     this.locationInformation = {};
     this.weatherForecast= {};

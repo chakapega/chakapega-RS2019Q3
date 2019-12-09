@@ -96,19 +96,19 @@ export default class ShowWeather {
 
     switch (localStorage.getItem('selectedLanguage')) {
       case 'EN':
-        weatherPropertiesText.feel = `FEELS LIKE: ${weatherPropertiesText.feel}°`;
-        weatherPropertiesText.wind = `WIND: ${this.store.weatherForecast.currently.windSpeed}m/s`;
-        weatherPropertiesText.humidity = `HUMIDITY: ${this.store.weatherForecast.currently.humidity * 100}%`;
+        weatherPropertiesText.feel = `Feels like ${weatherPropertiesText.feel}°`;
+        weatherPropertiesText.wind = `Wind ${this.store.weatherForecast.currently.windSpeed}m/s`;
+        weatherPropertiesText.humidity = `Humidity ${this.store.weatherForecast.currently.humidity * 100}%`;
         break;
       case 'BE':
-        weatherPropertiesText.feel = `Адчуваецца як: ${weatherPropertiesText.feel}°`;
+        weatherPropertiesText.feel = `Адчуваецца як ${weatherPropertiesText.feel}°`;
         weatherPropertiesText.wind = `Вецер: ${this.store.weatherForecast.currently.windSpeed}м/с`;
-        weatherPropertiesText.humidity = `Вільготнасць: ${this.store.weatherForecast.currently.humidity * 100}%`;
+        weatherPropertiesText.humidity = `Вільготнасць ${this.store.weatherForecast.currently.humidity * 100}%`;
         break;
       case 'RU':
-        weatherPropertiesText.feel = `Чувствуется как: ${weatherPropertiesText.feel}°`;
-        weatherPropertiesText.wind = `Ветер: ${this.store.weatherForecast.currently.windSpeed}м/с`;
-        weatherPropertiesText.humidity = `Влажность: ${this.store.weatherForecast.currently.humidity * 100}%`;
+        weatherPropertiesText.feel = `Чувствуется как ${weatherPropertiesText.feel}°`;
+        weatherPropertiesText.wind = `Ветер ${this.store.weatherForecast.currently.windSpeed}м/с`;
+        weatherPropertiesText.humidity = `Влажность ${this.store.weatherForecast.currently.humidity * 100}%`;
         break;
 
       default:
