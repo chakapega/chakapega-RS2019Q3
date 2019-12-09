@@ -13,7 +13,7 @@ export default class MapContainer {
 
     /* eslint-disable no-new */
     new mapboxgl.Map({
-      container: 'map',
+      container: 'map-container',
       center: [longitude, latitude],
       minZoom: zoom,
       pitch: 55,

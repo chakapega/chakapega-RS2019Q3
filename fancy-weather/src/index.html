@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <div class="blackout-container">
+  <div class="tools-container">
     <div class="control-container">
       <button class="button_refresh-background-image" type="button">
         <i class="icon_refresh-background-image"></i>
@@ -26,53 +26,51 @@
         <button class="temperature-button temperature-button_celsius" type="button" data-unit="celsius">°С</button>
       </div>
     </div>
-    <div class="search-city-container">
-      <form class="search-city-form">
-        <input id="search-city-input" placeholder="Search city" type="text" name="city">
-        <button class="search-city-button" type="submit">SEARCH</button>
-      </form>
-    </div>
-    <div class="weather-container">
-      <span class="location-name"></span>
+    <form class="search-city-form">
+      <input id="search-city-input" placeholder="Search city" type="text" name="city">
+      <button class="search-city-button" type="submit">SEARCH</button>
+    </form>
+  </div>
+
+  <div class="main-container">
+    <div class="current-weather-container">
+      <span class="current-weather-temperature">-7°</span>
+      <span class="location-name">Minsk, Belarus</span>
       <div class="date-container">
         <span class="date">Mon 28 October</span>
         <span class="time">17:23</span>
       </div>
-      <div class="current-weather-container">
-        <span class="current-weather-temperature"></span>
-        <div class="description-current-weather-container">
-          <i class="current-weather_status-icon"></i>
-          <span class="current-weather current-weather_status"></span>
-          <span class="current-weather current-weather_feel"></span>
-          <span class="current-weather current-weather_wind"></span>
-          <span class="current-weather current-weather_humidity"></span>
-        </div>
-      </div>
-      <div class="three-day-weather-container">
-        <div class="future-weather-container first-day-weather-container">
-          <span class="future-weather_weekday-name first-day-weather_weekday-name">TUESDAY</span>
-          <span class="future-weather_temperature first-day-weather_temperature"></span>
-          <i class="future-weather_icon-status first-day-weather_icon-status"></i>
-        </div>
-        <div class="future-weather-container second-day-weather-container">
-          <span class="future-weather_weekday-name second-day-weather_weekday-name">WEDNESDAY</span>
-          <span class="future-weather_temperature second-day-weather_temperature"></span>
-          <i class="future-weather_icon-status second-day-weather_icon-status"></i>
-        </div>
-        <div class="future-weather-container third-day-weather-container">
-          <span class="future-weather_weekday-name third-day-weather_weekday-name">THURSDAY</span>
-          <span class="future-weather_temperature third-day-weather_temperature"></span>
-          <i class="future-weather_icon-status third-day-weather_icon-status"></i>
-        </div>
-      </div>
     </div>
-    <div class="map-container">
-      <div id="map"></div>
+    <div class="description-current-weather-container">
+      <i class="current-weather_status-icon weather-icon_cloudy"></i>
+      <span class="current-weather current-weather_status">Cloudy</span>
+      <span class="current-weather current-weather_feel">Apparent temperature -12°</span>
+      <span class="current-weather current-weather_wind">Windspeed 10 m/s</span>
+      <span class="current-weather current-weather_humidity">Humidity 68%</span>
       <div class="coordinates-container">
-        <span class="coordinate coordinate_latitude"></span>
-        <span class="coordinate coordinate_longitude"></span>
+        <span class="coordinate coordinate_latitude">Latitude 53° 43′</span>
+        <span class="coordinate coordinate_longitude">Longitude 27° 34′</span>
       </div>
     </div>
+    <div class="three-day-weather-container">
+      <div class="future-weather-container first-day-weather-container">
+        <i class="future-weather_icon-status first-day-weather_icon-status"></i>
+        <span class="future-weather_temperature first-day-weather_temperature"></span>
+        <span class="future-weather_weekday-name first-day-weather_weekday-name">TUESDAY</span>
+      </div>
+      <div class="future-weather-container second-day-weather-container">
+        <i class="future-weather_icon-status second-day-weather_icon-status"></i>
+        <span class="future-weather_temperature second-day-weather_temperature"></span>
+        <span class="future-weather_weekday-name second-day-weather_weekday-name">WEDNESDAY</span>
+      </div>
+      <div class="future-weather-container third-day-weather-container">
+        <i class="future-weather_icon-status third-day-weather_icon-status"></i>
+        <span class="future-weather_temperature third-day-weather_temperature"></span>
+        <span class="future-weather_weekday-name third-day-weather_weekday-name">THURSDAY</span>
+      </div>
+    </div>
+    <div id="map-container"></div>
+    <img class="background-weather-image" src="./palette/images/bg2.svg" alt="image">
   </div>
 </body>
 
