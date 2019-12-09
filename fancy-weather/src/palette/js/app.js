@@ -5,7 +5,7 @@ import GetLocationInformation from './geolocation/getLocationInformation';
 import MapContainer from './geolocation/mapContainer';
 import ShowWeather from './weather/showWeather';
 import GetWeather from './weather/getWeather';
-import ButtonLanguageSelect from './control-container/buttonLanguageSelect';
+import LanguageButtonsContainer from './control-container/languageButtonsContainer';
 import TemperatureButtonsContainer from './control-container/temperatureButtonsContainer';
 
 class App {
@@ -15,7 +15,7 @@ class App {
     this.mapContainer = new MapContainer(this.store);
     this.getWeather = new GetWeather(this.store);
     this.showWeather = new ShowWeather(this.store);
-    this.buttonLanguageSelect = new ButtonLanguageSelect();
+    this.languageButtonsContainer = new LanguageButtonsContainer();
     this.temperatureButtonsContainer = new TemperatureButtonsContainer();
   }
 
@@ -26,15 +26,14 @@ class App {
       this.mapContainer.showCurrentCoordinates();
     });
     this.getWeather.subscribe(() => this.showWeather.showWeather());
-    this.buttonLanguageSelect.subscribe(() => {
+    this.languageButtonsContainer.subscribe(() => {
       this.getLocationInformation.getLocationInformation();
       this.getWeather.getWeatherForecast();
       this.mapContainer.showCurrentCoordinates();
     });
     this.temperatureButtonsContainer.subscribe(() => this.showWeather.showWeather());
     this.getLocationInformation.getCurrentPosition();
-    this.buttonLanguageSelect.addClickHandlerToButtonLanguageSelect();
-    this.buttonLanguageSelect.addClickHandlerToListLanguageSelect();
+    this.languageButtonsContainer.addClickHandler();
     this.temperatureButtonsContainer.addClickHandler();
   }
 }

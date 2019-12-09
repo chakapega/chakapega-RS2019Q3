@@ -26,7 +26,7 @@ body {
   left: 10%;
   display: flex;
   justify-content: space-between;
-  width: 220px;
+  width: 320px;
   height: 44px;
 
   .button_refresh-background-image {
@@ -47,72 +47,36 @@ body {
       background-size: cover;
     }
   }
-  .button_language-select {
+  .language-buttons-container {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background: rgba(174, 181, 185, 0.6);
     border-radius: 5px;
-    width: 71px;
-    height: 44px;
-    border: none;
-    cursor: pointer;
-
-    .text_language-select {
-      font-weight: bold;
-      letter-spacing: 1px;
-      font-size: 14px;
-      color: #ffffff;
-    }
-    .icon_language-select {
-      display: block;
-      width: 10px;
-      height: 6px;
-      background-image: url(../images/arrowIcon.svg);
-      background-size: cover;
-    }
-  }
-  .list_language-select {
-    position: absolute;
-    top: 37px;
-    left: 53px;
-    display: flex;
-    flex-direction: column;
-    width: 71px;
-    height: 0;
-    border-radius: 5px;
-    padding: 0;
-    list-style: none;
     overflow: hidden;
-    opacity: 0;
-    transition: all 0.3s linear;
 
-    li {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
+    .language-button {
+      width: 54px;
       height: 44px;
+      border: none;
+      padding: 0;
       font-weight: bold;
-      letter-spacing: 1px;
       font-size: 14px;
       color: #ffffff;
+      letter-spacing: 1px;
       background: rgba(76, 82, 85, 0.4);
       cursor: pointer;
+      outline: none;
+      transition: all 0.3s linear;
 
       &:hover {
         background: rgba(174, 181, 185, 0.6);
       }
-    }
-    &_active {
-      height: 132px;
-      opacity: 1;
+      &_active {
+        background: rgba(174, 181, 185, 0.6);
+      }
     }
   }
   .temperature-buttons-container {
     display: flex;
     width: 88px;
-    height: 44px;
     border-radius: 5px;
     overflow: hidden;
 
@@ -127,6 +91,7 @@ body {
       letter-spacing: 1px;
       background: rgba(76, 82, 85, 0.4);
       cursor: pointer;
+      outline: none;
       transition: all 0.3s linear;
 
       &:hover {
