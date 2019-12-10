@@ -10,6 +10,7 @@ import ShowWeather from './weather/showWeather';
 import GetWeather from './weather/getWeather';
 import LanguageButtonsContainer from './control-container/languageButtonsContainer';
 import TemperatureButtonsContainer from './control-container/temperatureButtonsContainer';
+import SearchCityForm from './geolocation/searchCityForm';
 
 class App {
   constructor() {
@@ -21,6 +22,7 @@ class App {
     this.showDateInformation = new ShowDateInformation(this.store);
     this.getWeather = new GetWeather(this.store);
     this.showWeather = new ShowWeather(this.store);
+    this.searchCityForm = new SearchCityForm(this.store);
     this.languageButtonsContainer = new LanguageButtonsContainer();
     this.temperatureButtonsContainer = new TemperatureButtonsContainer();
   }
@@ -37,18 +39,22 @@ class App {
       this.mapContainer.showCurrentCoordinates();
     });
     this.languageButtonsContainer.subscribe(() => {
-      this.showDateInformation.showDateInformation();
-      this.getLocationInformation.getLocationInformation();
-      this.showLocationInformation.showLocationInformation();
+      this.getLocationInformation.getLocationInformation(this.store.city);
       this.getWeather.getWeatherForecast();
+      this.showDateInformation.showDateInformation();
+      this.showLocationInformation.showLocationInformation();
       this.mapContainer.showCurrentCoordinates();
+    });
+    this.searchCityForm.subscribe(city => {
+      this.getLocationInformation.getLocationInformation(city);
     });
     this.temperatureButtonsContainer.subscribe(() => this.showWeather.showWeather());
 
     this.getCurrentDate.getCurrentDate();
-    // this.getLocationInformation.getCurrentPosition();
-    // this.languageButtonsContainer.addClickHandler();
-    // this.temperatureButtonsContainer.addClickHandler();
+    this.getLocationInformation.getCurrentPosition();
+    this.languageButtonsContainer.addClickHandler();
+    this.temperatureButtonsContainer.addClickHandler();
+    this.searchCityForm.addSubmitHandler();
   }
 }
 

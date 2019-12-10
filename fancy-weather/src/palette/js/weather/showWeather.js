@@ -95,17 +95,21 @@ export default class ShowWeather {
       case 'EN':
         weatherPropertiesText.feel = `Feels like ${weatherPropertiesText.feel}°`;
         weatherPropertiesText.wind = `Wind ${this.store.weatherForecast.currently.windSpeed}m/s`;
-        weatherPropertiesText.humidity = `Humidity ${this.store.weatherForecast.currently.humidity * 100}%`;
+        weatherPropertiesText.humidity = `Humidity ${(this.store.weatherForecast.currently.humidity * 100).toFixed()}%`;
         break;
       case 'BE':
         weatherPropertiesText.feel = `Адчуваецца як ${weatherPropertiesText.feel}°`;
         weatherPropertiesText.wind = `Вецер: ${this.store.weatherForecast.currently.windSpeed}м/с`;
-        weatherPropertiesText.humidity = `Вільготнасць ${this.store.weatherForecast.currently.humidity * 100}%`;
+        weatherPropertiesText.humidity = `Вільготнасць ${(
+          this.store.weatherForecast.currently.humidity * 100
+        ).toFixed()}%`;
         break;
       case 'RU':
         weatherPropertiesText.feel = `Чувствуется как ${weatherPropertiesText.feel}°`;
         weatherPropertiesText.wind = `Ветер ${this.store.weatherForecast.currently.windSpeed}м/с`;
-        weatherPropertiesText.humidity = `Влажность ${this.store.weatherForecast.currently.humidity * 100}%`;
+        weatherPropertiesText.humidity = `Влажность ${(
+          this.store.weatherForecast.currently.humidity * 100
+        ).toFixed()}%`;
         break;
 
       default:
