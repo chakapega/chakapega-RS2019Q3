@@ -156,7 +156,6 @@ body {
       width: 100%;
       font-weight: bold;
       font-size: 44px;
-      line-height: 54px;
       color: #ffffff;
       text-align: center;
       margin-bottom: 15px;
@@ -245,14 +244,12 @@ body {
       .future-weather_temperature {
         font-weight: 500;
         font-size: 70px;
-        line-height: 90px;
         color: #ffffff;
       }
       .future-weather_icon-status {
         width: 70px;
         height: 70px;
         background-size: cover;
-        margin-left: 10px;
       }
     }
     .first-day-weather-container {
