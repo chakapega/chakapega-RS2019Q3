@@ -1,6 +1,7 @@
 import '../scss/main.scss';
 
 import Layout from './layout/layout';
+import Loader from './loader/loader';
 import Store from './store/store';
 import GetCurrentDate from './date/getCurrentDate';
 import GetLocationInformation from './geolocation/getLocationInformation';
@@ -17,7 +18,7 @@ class App {
   constructor() {
     this.layout = new Layout();
     this.layout.showLayout();
-
+    this.loader = new Loader();
     this.store = new Store();
     this.getCurrentDate = new GetCurrentDate(this.store);
     this.getLocationInformation = new GetLocationInformation(this.store);
@@ -33,6 +34,7 @@ class App {
 
   start() {
     this.getLocationInformation.subscribe(() => {
+      this.loader.showLoader();
       this.getWeather.getWeatherForecast();
     });
     this.getWeather.subscribe(() => {
@@ -41,13 +43,16 @@ class App {
       this.showWeather.showWeather();
       this.mapContainer.showMap();
       this.mapContainer.showCurrentCoordinates();
+      this.loader.hideLoader();
     });
     this.languageButtonsContainer.subscribe(() => {
+      this.loader.showLoader();
       this.getLocationInformation.getLocationInformation(this.store.city);
       this.getWeather.getWeatherForecast();
       this.showDateInformation.showDateInformation();
       this.showLocationInformation.showLocationInformation();
       this.mapContainer.showCurrentCoordinates();
+      this.loader.hideLoader();
     });
     this.searchCityForm.subscribe(city => {
       this.getLocationInformation.getLocationInformation(city);

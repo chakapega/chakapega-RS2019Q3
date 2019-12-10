@@ -71,6 +71,22 @@ export default class Layout {
         </div>
         <div id="map-container"></div>
       </div>
+      <div class="loader loader_hidden">
+      <div class="lds-spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
     `;
   }
 }
