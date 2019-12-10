@@ -29,12 +29,17 @@
       .current-weather_status-icon {
         width: 150px;
         height: 150px;
-        margin-left: 15%;
+        margin-left: 10%;
       }
-      .current-weather {
-        font-size: 20px;
-        line-height: 35px;
-        margin-left: 15%;
+      .current-weather-data-container {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10%;
+
+        .current-weather {
+          font-size: 19px;
+          line-height: 35px;
+        }
       }
       .coordinates-container {
         bottom: 3%;
@@ -53,6 +58,98 @@
           height: 64px;
         }
       }
+    }
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .tools-container {
+    flex-direction: column;
+    justify-content: space-around;
+    height: 120px;
+  }
+
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+
+    .current-weather-container {
+      position: relative;
+      width: 100%;
+      height: 500px;
+
+      .current-weather-temperature {
+        font-size: 210px;
+      }
+      .location-name {
+        font-size: 35px;
+      }
+      .current-date-container {
+        .current-date {
+          font-size: 20px;
+        }
+        .current-time {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .description-current-weather-container {
+      position: relative;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 100%;
+      height: 300px;
+      border-left: none;
+
+      .current-weather_status-icon {
+        width: 160px;
+        height: 160px;
+        margin-top: 35px;
+        margin-bottom: 0;
+        margin-left: 0;
+      }
+      .current-weather-data-container {
+        display: flex;
+        flex-direction: column;
+        margin-left: 0;
+        margin-top: 35px;
+
+        .current-weather {
+          font-size: 20px;
+          margin-left: 0;
+        }
+      }
+    }
+
+    .three-day-weather-container {
+      position: relative;
+      display: flex;
+      width: 100%;
+      height: 300px;
+
+      .future-weather-container {
+        .future-weather_weekday-name {
+          font-size: 20px;
+        }
+        .future-weather_temperature {
+          font-size: 60px;
+        }
+        .future-weather_icon-status {
+          width: 64px;
+          height: 64px;
+        }
+      }
+    }
+    #map-container {
+      position: relative;
+      width: 100%;
+      height: 320px;
+    }
+    .background-weather-image {
+      width: 100%;
+      height: 500px;
     }
   }
 }

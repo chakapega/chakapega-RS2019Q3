@@ -198,12 +198,17 @@ body {
       margin-left: 20%;
       background-size: cover;
     }
-    .current-weather {
-      font-weight: 500;
-      font-size: 22px;
-      line-height: 37px;
-      color: #ffffff;
+    .current-weather-data-container {
+      display: flex;
+      flex-direction: column;
       margin-left: 20%;
+
+      .current-weather {
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 37px;
+        color: #ffffff;
+      }
     }
     .coordinates-container {
       position: absolute;
