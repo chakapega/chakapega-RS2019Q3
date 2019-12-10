@@ -2,6 +2,7 @@ export default class ShowDateInformation {
   constructor(store) {
     this.store = store;
     this.currentDate = document.querySelector('.current-date');
+    this.currentTime = document.querySelector('.current-time');
     this.firstDayWeatherWeekdayName = document.querySelector('.first-day-weather_weekday-name');
     this.secondDayWeatherWeekdayName = document.querySelector('.second-day-weather_weekday-name');
     this.thirdDayWeatherWeekdayName = document.querySelector('.third-day-weather_weekday-name');
@@ -15,9 +16,10 @@ export default class ShowDateInformation {
       thirdDayWeatherWeekdayName,
       month,
     } = this.defineDatesValues();
-    const { number } = this.store.currentDate;
+    const { number, time } = this.store.currentDate;
 
     this.currentDate.textContent = `${currentDate} ${parseInt(number, 10)} ${month}`;
+    this.currentTime.textContent = time.slice(0, 5);
     this.firstDayWeatherWeekdayName.textContent = firstDayWeatherWeekdayName;
     this.secondDayWeatherWeekdayName.textContent = secondDayWeatherWeekdayName;
     this.thirdDayWeatherWeekdayName.textContent = thirdDayWeatherWeekdayName;

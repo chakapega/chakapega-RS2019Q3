@@ -1,7 +1,6 @@
 export default class ShowWeather {
   constructor(store) {
     this.store = store;
-    this.locationName = document.querySelector('.location-name');
     this.currentWeatherTemperature = document.querySelector('.current-weather-temperature');
     this.currentWeatherStatus = document.querySelector('.current-weather_status');
     this.currentWeatherStatusIcon = document.querySelector('.current-weather_status-icon');
@@ -17,10 +16,8 @@ export default class ShowWeather {
   }
 
   showWeather() {
-    const locationName = this.defineLocationName();
     const weatherPropertiesText = this.defineTextWeatherProperties();
 
-    this.locationName.textContent = locationName;
     this.currentWeatherTemperature.textContent = weatherPropertiesText.temperature;
     this.currentWeatherStatusIcon.classList.add(`weather-icon_${this.store.weatherForecast.currently.icon}`);
     this.currentWeatherStatus.textContent = this.store.weatherForecast.currently.summary;
@@ -116,15 +113,5 @@ export default class ShowWeather {
     }
 
     return weatherPropertiesText;
-  }
-
-  defineLocationName() {
-    const city =
-      this.store.locationInformation.components.city ||
-      this.store.locationInformation.components.county ||
-      this.store.locationInformation.components.state;
-    const { country } = this.store.locationInformation.components;
-
-    return `${city}, ${country}`;
   }
 }
