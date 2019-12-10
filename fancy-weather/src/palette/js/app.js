@@ -50,11 +50,11 @@ class App {
     });
     this.temperatureButtonsContainer.subscribe(() => this.showWeather.showWeather());
 
-    this.getCurrentDate.getCurrentDate();
-    this.getLocationInformation.getCurrentPosition();
-    this.languageButtonsContainer.addClickHandler();
-    this.temperatureButtonsContainer.addClickHandler();
-    this.searchCityForm.addSubmitHandler();
+    // this.getCurrentDate.getCurrentDate();
+    // this.getLocationInformation.getCurrentPosition();
+    // this.languageButtonsContainer.addClickHandler();
+    // this.temperatureButtonsContainer.addClickHandler();
+    // this.searchCityForm.addSubmitHandler();
   }
 }
 

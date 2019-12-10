@@ -233,13 +233,12 @@
         margin-left: 0;
       }
       .current-weather-data-container {
-        display: flex;
-        flex-direction: column;
+        max-width: 50%;
         margin-left: 0;
         margin-top: 35px;
 
         .current-weather {
-          font-size: 17px;
+          font-size: 16px;
           margin-left: 0;
         }
       }
@@ -258,7 +257,7 @@
 
       .future-weather-container {
         .future-weather_weekday-name {
-          font-size: 17px;
+          font-size: 16px;
         }
         .future-weather_temperature {
           font-size: 48px;
