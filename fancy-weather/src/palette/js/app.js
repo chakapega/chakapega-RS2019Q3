@@ -1,5 +1,6 @@
 import '../scss/main.scss';
 
+import Layout from './layout/layout';
 import Store from './store/store';
 import GetCurrentDate from './date/getCurrentDate';
 import GetLocationInformation from './geolocation/getLocationInformation';
@@ -14,6 +15,9 @@ import SearchCityForm from './geolocation/searchCityForm';
 
 class App {
   constructor() {
+    this.layout = new Layout();
+    this.layout.showLayout();
+
     this.store = new Store();
     this.getCurrentDate = new GetCurrentDate(this.store);
     this.getLocationInformation = new GetLocationInformation(this.store);
@@ -50,11 +54,11 @@ class App {
     });
     this.temperatureButtonsContainer.subscribe(() => this.showWeather.showWeather());
 
-    // this.getCurrentDate.getCurrentDate();
-    // this.getLocationInformation.getCurrentPosition();
-    // this.languageButtonsContainer.addClickHandler();
-    // this.temperatureButtonsContainer.addClickHandler();
-    // this.searchCityForm.addSubmitHandler();
+    this.getCurrentDate.getCurrentDate();
+    this.getLocationInformation.getCurrentPosition();
+    this.languageButtonsContainer.addClickHandler();
+    this.temperatureButtonsContainer.addClickHandler();
+    this.searchCityForm.addSubmitHandler();
   }
 }
 
