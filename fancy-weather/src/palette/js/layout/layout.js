@@ -9,6 +9,7 @@ export default class Layout {
 
   createLayout() {
     return `
+    <div class="content-container content-container_blur-on">
       <div class="tools-container">
         <div class="control-container">
           <button class="button_refresh-background-image" type="button">
@@ -26,8 +27,8 @@ export default class Layout {
           </div>
         </div>
         <form class="search-city-form">
-          <input id="search-city-input" placeholder="Search city" type="text" name="city">
-          <button class="search-city-button" type="submit">SEARCH</button>
+          <input id="search-city-input" type="text" name="city">
+          <button class="search-city-button" type="submit"></button>
         </form>
       </div>
       <div class="main-container">
@@ -71,7 +72,8 @@ export default class Layout {
         </div>
         <div id="map-container"></div>
       </div>
-      <div class="loader loader_hidden">
+    </div>
+    <div class="loader">
       <div class="lds-spinner">
         <div></div>
         <div></div>

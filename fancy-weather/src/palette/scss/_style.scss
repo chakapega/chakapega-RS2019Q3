@@ -327,7 +327,6 @@ body {
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.95);
   z-index: 6;
   transition: all 0.23s linear;
   opacity: 1;
@@ -413,5 +412,17 @@ body {
   &_hidden {
     opacity: 0;
     z-index: -1;
+  }
+}
+
+.content-container {
+  width: 100%;
+  height: 100%;
+
+  &_blur-on {
+    filter: blur(11px);
+  }
+  &_blur-off {
+    filter: none;
   }
 }

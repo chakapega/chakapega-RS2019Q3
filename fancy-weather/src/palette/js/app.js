@@ -27,14 +27,13 @@ class App {
     this.showDateInformation = new ShowDateInformation(this.store);
     this.getWeather = new GetWeather(this.store);
     this.showWeather = new ShowWeather(this.store);
-    this.searchCityForm = new SearchCityForm(this.store);
     this.languageButtonsContainer = new LanguageButtonsContainer();
     this.temperatureButtonsContainer = new TemperatureButtonsContainer();
+    this.searchCityForm = new SearchCityForm(this.store);
   }
 
   start() {
     this.getLocationInformation.subscribe(() => {
-      this.loader.showLoader();
       this.getWeather.getWeatherForecast();
     });
     this.getWeather.subscribe(() => {
@@ -47,6 +46,7 @@ class App {
     });
     this.languageButtonsContainer.subscribe(() => {
       this.loader.showLoader();
+      this.searchCityForm.changeLanguage();
       this.getLocationInformation.getLocationInformation(this.store.city);
       this.getWeather.getWeatherForecast();
       this.showDateInformation.showDateInformation();
@@ -55,6 +55,7 @@ class App {
       this.loader.hideLoader();
     });
     this.searchCityForm.subscribe(city => {
+      this.loader.showLoader();
       this.getLocationInformation.getLocationInformation(city);
     });
     this.temperatureButtonsContainer.subscribe(() => this.showWeather.showWeather());
