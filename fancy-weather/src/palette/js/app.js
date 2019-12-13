@@ -5,6 +5,7 @@ import Loader from './loader/loader';
 import Store from './store/store';
 import GetCurrentDate from './date/getCurrentDate';
 import GetLocationInformation from './geolocation/getLocationInformation';
+import BackgroundImage from './backgroundImage/backgroundImage';
 import ShowLocationInformation from './geolocation/showLocationInformation';
 import MapContainer from './geolocation/mapContainer';
 import ShowDateInformation from './date/showDateInformation';
@@ -30,11 +31,13 @@ class App {
     this.languageButtonsContainer = new LanguageButtonsContainer();
     this.temperatureButtonsContainer = new TemperatureButtonsContainer();
     this.searchCityForm = new SearchCityForm(this.store);
+    this.backgroundImage = new BackgroundImage(this.store);
   }
 
   start() {
     this.getLocationInformation.subscribe(() => {
       this.getWeather.getWeatherForecast();
+      this.backgroundImage.getUrl();
     });
     this.getWeather.subscribe(() => {
       this.showDateInformation.showDateInformation();

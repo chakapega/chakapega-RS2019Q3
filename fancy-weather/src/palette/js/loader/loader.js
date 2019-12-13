@@ -5,14 +5,14 @@ export default class Loader {
   }
 
   showLoader() {
-    this.contentContainer.classList.remove('content-container_blur-off');
+    this.contentContainer.classList.add('content-container_blur');
     this.loader.classList.remove('loader_hidden');
   }
 
   hideLoader() {
     setTimeout(() => {
-      this.contentContainer.classList.add('content-container_blur-off');
+      this.contentContainer.classList.remove('content-container_blur');
       this.loader.classList.add('loader_hidden');
-    }, 500);
+    }, 1000);
   }
 }

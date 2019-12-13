@@ -9,7 +9,7 @@ export default class Layout {
 
   createLayout() {
     return `
-    <div class="content-container content-container_blur-on">
+    <div class="content-container content-container_blur">
       <div class="tools-container">
         <div class="control-container">
           <button class="button_refresh-background-image" type="button">

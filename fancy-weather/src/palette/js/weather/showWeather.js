@@ -38,7 +38,7 @@ export default class ShowWeather {
     switch (localStorage.getItem('selectedTemperatureUnit')) {
       case 'celsius':
         weatherPropertiesText.temperature = `${this.store.weatherForecast.currently.temperature.toFixed()}°`;
-        weatherPropertiesText.feel = this.store.weatherForecast.currently.apparentTemperature.toFixed();
+        weatherPropertiesText.feel = `${this.store.weatherForecast.currently.apparentTemperature.toFixed()}°`;
         weatherPropertiesText.firstDayTemperature = `${(
           (this.store.weatherForecast.daily.data[0].temperatureMax +
             this.store.weatherForecast.daily.data[0].temperatureMin) /
@@ -60,10 +60,10 @@ export default class ShowWeather {
           this.store.weatherForecast.currently.temperature * (9 / 5) +
           32
         ).toFixed()}°`;
-        weatherPropertiesText.feel = (
+        weatherPropertiesText.feel = `${(
           this.store.weatherForecast.currently.apparentTemperature * (9 / 5) +
           32
-        ).toFixed();
+        ).toFixed()}°`;
         weatherPropertiesText.firstDayTemperature = `${(
           ((this.store.weatherForecast.daily.data[0].temperatureMax +
             this.store.weatherForecast.daily.data[0].temperatureMin) /
@@ -91,21 +91,27 @@ export default class ShowWeather {
         break;
     }
 
+    if (weatherPropertiesText.temperature === '-0°') weatherPropertiesText.temperature = '0°';
+    if (weatherPropertiesText.firstDayTemperature === '-0°') weatherPropertiesText.firstDayTemperature = '0°';
+    if (weatherPropertiesText.secondDayTemperature === '-0°') weatherPropertiesText.secondDayTemperature = '0°';
+    if (weatherPropertiesText.thirdDayTemperature === '-0°') weatherPropertiesText.thirdDayTemperature = '0°';
+    if (weatherPropertiesText.feel === '-0°') weatherPropertiesText.feel = '0°';
+
     switch (localStorage.getItem('selectedLanguage')) {
       case 'EN':
-        weatherPropertiesText.feel = `Feels like ${weatherPropertiesText.feel}°`;
+        weatherPropertiesText.feel = `Feels like ${weatherPropertiesText.feel}`;
         weatherPropertiesText.wind = `Wind ${this.store.weatherForecast.currently.windSpeed}m/s`;
         weatherPropertiesText.humidity = `Humidity ${(this.store.weatherForecast.currently.humidity * 100).toFixed()}%`;
         break;
       case 'BE':
-        weatherPropertiesText.feel = `Адчуваецца як ${weatherPropertiesText.feel}°`;
-        weatherPropertiesText.wind = `Вецер: ${this.store.weatherForecast.currently.windSpeed}м/с`;
+        weatherPropertiesText.feel = `Адчуваецца як ${weatherPropertiesText.feel}`;
+        weatherPropertiesText.wind = `Вецер ${this.store.weatherForecast.currently.windSpeed}м/с`;
         weatherPropertiesText.humidity = `Вільготнасць ${(
           this.store.weatherForecast.currently.humidity * 100
         ).toFixed()}%`;
         break;
       case 'RU':
-        weatherPropertiesText.feel = `Чувствуется как ${weatherPropertiesText.feel}°`;
+        weatherPropertiesText.feel = `Чувствуется как ${weatherPropertiesText.feel}`;
         weatherPropertiesText.wind = `Ветер ${this.store.weatherForecast.currently.windSpeed}м/с`;
         weatherPropertiesText.humidity = `Влажность ${(
           this.store.weatherForecast.currently.humidity * 100

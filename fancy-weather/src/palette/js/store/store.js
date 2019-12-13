@@ -7,9 +7,12 @@ export default class Store {
     this.apiDarkskyUrl = 'https://api.darksky.net/forecast/';
     this.apiDarkskyKey = '11e8ea62cae2009dabda1b337346ca8d/';
     this.proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    this.apiFlickrUrl =
+      'https://www.flickr.com/services/rest/?method=flickr.photos.search&nojsoncallback=1&format=json&api_key=';
+    this.apiFlickrKey = '55ceacde1751d29fb1d2e44ba8663949';
     this.currentDate = {};
     this.currentPosition = {};
     this.locationInformation = {};
-    this.weatherForecast= {};
+    this.weatherForecast = {};
   }
 }

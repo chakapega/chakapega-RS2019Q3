@@ -43,7 +43,7 @@ export default class ShowDateInformation {
             datesValues.currentDate = 'Панядзелак';
             datesValues.firstDayWeatherWeekdayName = 'Аўторак';
             datesValues.secondDayWeatherWeekdayName = 'Серада';
-            datesValues.thirdDayWeatherWeekdayName = 'Чацьвер';
+            datesValues.thirdDayWeatherWeekdayName = 'Чацвер';
             break;
           case 'RU':
             datesValues.currentDate = 'Понедельник';
@@ -66,7 +66,7 @@ export default class ShowDateInformation {
           case 'BE':
             datesValues.currentDate = 'Аўторак';
             datesValues.firstDayWeatherWeekdayName = 'Серада';
-            datesValues.secondDayWeatherWeekdayName = 'Чацьвер';
+            datesValues.secondDayWeatherWeekdayName = 'Чацвер';
             datesValues.thirdDayWeatherWeekdayName = 'Пятніца';
             break;
           case 'RU':
@@ -89,7 +89,7 @@ export default class ShowDateInformation {
             break;
           case 'BE':
             datesValues.currentDate = 'Серада';
-            datesValues.firstDayWeatherWeekdayName = 'Чацьвер';
+            datesValues.firstDayWeatherWeekdayName = 'Чацвер';
             datesValues.secondDayWeatherWeekdayName = 'Пятніца';
             datesValues.thirdDayWeatherWeekdayName = 'Субота';
             break;
@@ -112,7 +112,7 @@ export default class ShowDateInformation {
             datesValues.thirdDayWeatherWeekdayName = 'Sunday';
             break;
           case 'BE':
-            datesValues.currentDate = 'Чацьвер';
+            datesValues.currentDate = 'Чацвер';
             datesValues.firstDayWeatherWeekdayName = 'Пятніца';
             datesValues.secondDayWeatherWeekdayName = 'Субота';
             datesValues.thirdDayWeatherWeekdayName = 'Нядзеля';
