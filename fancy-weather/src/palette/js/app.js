@@ -14,6 +14,7 @@ import GetWeather from './weather/getWeather';
 import LanguageButtonsContainer from './control-container/languageButtonsContainer';
 import TemperatureButtonsContainer from './control-container/temperatureButtonsContainer';
 import SearchCityForm from './geolocation/searchCityForm';
+import ButtonRefreshBackgroundImage from './control-container/buttonRefreshBackgroundImage';
 
 class App {
   constructor() {
@@ -32,6 +33,7 @@ class App {
     this.temperatureButtonsContainer = new TemperatureButtonsContainer();
     this.searchCityForm = new SearchCityForm(this.store);
     this.backgroundImage = new BackgroundImage(this.store);
+    this.buttonRefreshBackgroundImage = new ButtonRefreshBackgroundImage();
   }
 
   start() {
@@ -63,11 +65,17 @@ class App {
       this.getLocationInformation.getLocationInformation(city);
     });
     this.temperatureButtonsContainer.subscribe(() => this.showWeather.showWeather());
+    this.buttonRefreshBackgroundImage.subscribe(() => {
+      this.loader.showLoader();
+      this.backgroundImage.getUrl();
+      this.loader.hideLoader();
+    });
 
     this.getLocationInformation.getCurrentPosition();
     this.languageButtonsContainer.addClickHandler();
     this.temperatureButtonsContainer.addClickHandler();
     this.searchCityForm.addSubmitHandler();
+    this.buttonRefreshBackgroundImage.addClickHandler();
   }
 }
 
