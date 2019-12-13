@@ -1,5 +1,7 @@
-export const getRandomInteger = () => {
+const getRandomInteger = () => {
   const random = Math.random() * 99;
 
   return Math.floor(random);
 };
+
+export default getRandomInteger;

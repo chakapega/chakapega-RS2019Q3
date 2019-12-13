@@ -19,7 +19,7 @@ export default class ShowDateInformation {
     const { number, time } = this.store.currentDate;
 
     this.currentDate.textContent = `${currentDate} ${parseInt(number, 10)} ${month}`;
-    this.currentTime.textContent = time.slice(0, 5);
+    this.currentTime.textContent = time;
     this.firstDayWeatherWeekdayName.textContent = firstDayWeatherWeekdayName;
     this.secondDayWeatherWeekdayName.textContent = secondDayWeatherWeekdayName;
     this.thirdDayWeatherWeekdayName.textContent = thirdDayWeatherWeekdayName;

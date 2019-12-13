@@ -68,6 +68,7 @@ export default class GetLocationInformation {
       })
       .then(data => {
         [this.store.locationInformation] = data.results;
+        this.store.locationInformation.timezone = data.results[0].annotations.timezone.name;
 
         if (city) {
           this.store.currentPosition.latitude = data.results[0].geometry.lat.toString();

@@ -1,4 +1,4 @@
-import { getRandomInteger } from '../helpers/helpers';
+import getRandomInteger from '../helpers/helpers';
 
 export default class BackgroundImage {
   constructor(store) {
