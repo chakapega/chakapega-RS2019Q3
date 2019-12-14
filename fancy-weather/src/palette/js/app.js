@@ -13,8 +13,9 @@ import ShowWeather from './weather/showWeather';
 import GetWeather from './weather/getWeather';
 import LanguageButtonsContainer from './control-container/languageButtonsContainer';
 import TemperatureButtonsContainer from './control-container/temperatureButtonsContainer';
-import SearchCityForm from './geolocation/searchCityForm';
+import SearchCityForm from './search/searchCityForm';
 import ButtonRefreshBackgroundImage from './control-container/buttonRefreshBackgroundImage';
+import ButtonVoiceSearchCity from './search/buttonVoiceSearchCity';
 
 class App {
   constructor() {
@@ -34,6 +35,7 @@ class App {
     this.searchCityForm = new SearchCityForm(this.store);
     this.backgroundImage = new BackgroundImage(this.store);
     this.buttonRefreshBackgroundImage = new ButtonRefreshBackgroundImage();
+    if (window.webkitSpeechRecognition) this.buttonVoiceSearchCity = new ButtonVoiceSearchCity(this.store);
   }
 
   start() {
@@ -70,12 +72,18 @@ class App {
       this.backgroundImage.getUrl();
       this.loader.hideLoader();
     });
-
+    if (window.webkitSpeechRecognition) {
+      this.buttonVoiceSearchCity.subscribe(city => {
+        this.loader.showLoader();
+        this.getLocationInformation.getLocationInformation(city);
+      });
+    }
     this.getLocationInformation.getCurrentPosition();
     this.languageButtonsContainer.addClickHandler();
     this.temperatureButtonsContainer.addClickHandler();
     this.searchCityForm.addSubmitHandler();
     this.buttonRefreshBackgroundImage.addClickHandler();
+    if (window.webkitSpeechRecognition) this.buttonVoiceSearchCity.addClickHandler();
   }
 }
 

@@ -32,6 +32,8 @@ export default class Layout {
     const temperatureButtonCelsius = document.createElement('button');
     const searchCityForm = document.createElement('form');
     const searchCityInput = document.createElement('input');
+    const buttonVoiceSearchCity = document.createElement('button');
+    const iconVoiceSearchCity = document.createElement('i');
     const searchCityButton = document.createElement('button');
 
     toolsContainer.classList.add('tools-container');
@@ -62,6 +64,9 @@ export default class Layout {
     searchCityInput.id = 'search-city-input';
     searchCityInput.type = 'text';
     searchCityInput.name = 'city';
+    buttonVoiceSearchCity.classList.add('button_voice-search-city');
+    buttonVoiceSearchCity.type = 'button';
+    iconVoiceSearchCity.classList.add('icon_voice-search-city');
     searchCityButton.classList.add('search-city-button');
     searchCityButton.type = 'submit';
 
@@ -77,6 +82,8 @@ export default class Layout {
     temperatureButtonsContainer.appendChild(temperatureButtonCelsius);
     toolsContainer.appendChild(searchCityForm);
     searchCityForm.appendChild(searchCityInput);
+    searchCityForm.appendChild(buttonVoiceSearchCity);
+    buttonVoiceSearchCity.appendChild(iconVoiceSearchCity);
     searchCityForm.appendChild(searchCityButton);
 
     return toolsContainer;

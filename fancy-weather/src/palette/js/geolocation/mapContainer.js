@@ -11,7 +11,7 @@ export default class MapContainer {
     const zoom = this.store.locationInformation.city ? 10 : 15;
     const { longitude, latitude } = this.store.currentPosition;
 
-    /* eslint-disable no-new */
+    /* eslint-disable */
     new mapboxgl.Map({
       container: 'map-container',
       center: [longitude, latitude],
@@ -20,6 +20,7 @@ export default class MapContainer {
       style: 'mapbox://styles/mapbox/streets-v10',
       accessToken: 'pk.eyJ1IjoiY2hha2FwZWdhIiwiYSI6ImNrM3Qwa2hyazBidGozaG80bWE3enM1MDgifQ.B1712DNd1OF3xiNb7BLJig',
     });
+    /* eslint-enable */
   }
 
   showCurrentCoordinates() {

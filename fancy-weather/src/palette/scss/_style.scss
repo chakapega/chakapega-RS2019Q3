@@ -1,6 +1,7 @@
 html {
   width: 100%;
   height: 100%;
+  min-height: 768px;
 }
 
 body {
@@ -100,7 +101,7 @@ body {
     margin-left: 5%;
 
     #search-city-input {
-      width: 300px;
+      width: 65%;
       height: 100%;
       background-color: #454545;
       border: none;
@@ -114,8 +115,26 @@ body {
         color: rgba(255, 255, 255, 0.3);
       }
     }
+    .button_voice-search-city {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 10%;
+      border: none;
+      background-color: #454545;
+      cursor: pointer;
+      outline: none;
+
+      .icon_voice-search-city {
+        width: 14px;
+        height: 19px;
+        background-image: url(../images/voiceSearchIcon.svg);
+        background-size: cover;
+      }
+    }
     .search-city-button {
-      width: 100px;
+      width: 25%;
       height: 100%;
       background-color: #656565;
       border: none;
