@@ -12,7 +12,7 @@
 
     "rules": {
       "class-methods-use-this": [
-        "error", { "exceptMethods": ["removeClass", "createLayout"] }
+        "error", { "exceptMethods": ["removeClass", "createLayout", "createToolsContainer", "createMainContainer", "createLoader"] }
       ],
       "max-len": ["error", { "code": 120 }]
   }

@@ -16,14 +16,19 @@ export default class BackgroundImage {
       })
       .then(photos => {
         const { farm, server, id, secret } = photos.photos.photo[getRandomInteger()];
-        const backgroundImageUrl = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_c.jpg`;
+        const backgroundImageUrl = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_b.jpg`;
 
         this.show(backgroundImageUrl);
       });
   }
 
   show(backgroundImageUrl) {
-    const backgroundImage = document.createElement('img');
+    let backgroundImage = document.querySelector('.background-weather-image');
+
+    if (!backgroundImage) {
+      backgroundImage = document.createElement('img');
+    }
+
     backgroundImage.classList.add('background-weather-image');
     backgroundImage.src = backgroundImageUrl;
 
