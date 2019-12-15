@@ -67,7 +67,6 @@ export default class GetLocationInformation {
         return response.json();
       })
       .then(data => {
-        console.log(data);
         [this.store.locationInformation] = data.results;
         this.store.locationInformation.timezone = data.results[0].annotations.timezone.name;
 
