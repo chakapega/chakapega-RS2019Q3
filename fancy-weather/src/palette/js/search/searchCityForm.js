@@ -20,8 +20,14 @@ export default class SearchCityForm {
     this.searchCityForm.addEventListener('submit', event => {
       event.preventDefault();
 
-      this.store.city = event.target.city.value;
-      this.broadcast(event.target.city.value);
+      const city = event.target.city.value;
+      this.store.city = city;
+
+      if (city.length < 2) {
+        this.broadcast('error');
+      } else {
+        this.broadcast(city);
+      }
     });
   }
 

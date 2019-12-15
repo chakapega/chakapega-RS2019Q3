@@ -16,6 +16,7 @@ import TemperatureButtonsContainer from './control-container/temperatureButtonsC
 import SearchCityForm from './search/searchCityForm';
 import ButtonRefreshBackgroundImage from './control-container/buttonRefreshBackgroundImage';
 import ButtonVoiceSearchCity from './search/buttonVoiceSearchCity';
+import ModalContainer from './modal/modalContainer';
 
 class App {
   constructor() {
@@ -35,14 +36,20 @@ class App {
     this.searchCityForm = new SearchCityForm(this.store);
     this.backgroundImage = new BackgroundImage(this.store);
     this.buttonRefreshBackgroundImage = new ButtonRefreshBackgroundImage();
+    this.modalContainer = new ModalContainer();
     if (window.webkitSpeechRecognition) this.buttonVoiceSearchCity = new ButtonVoiceSearchCity(this.store);
   }
 
   start() {
-    this.getLocationInformation.subscribe(() => {
-      this.getCurrentDate.getCurrentDate();
-      this.getWeather.getWeatherForecast();
-      this.backgroundImage.getUrl();
+    this.getLocationInformation.subscribe(statusMessage => {
+      if (statusMessage === 'ok') {
+        this.getCurrentDate.getCurrentDate();
+        this.getWeather.getWeatherForecast();
+        this.backgroundImage.getUrl();
+      } else if (statusMessage === 'error') {
+        this.modalContainer.show();
+        this.loader.hideLoader();
+      }
     });
     this.getWeather.subscribe(() => {
       this.showLocationInformation.showLocationInformation();
@@ -63,8 +70,12 @@ class App {
       this.loader.hideLoader();
     });
     this.searchCityForm.subscribe(city => {
-      this.loader.showLoader();
-      this.getLocationInformation.getLocationInformation(city);
+      if (city !== 'error') {
+        this.loader.showLoader();
+        this.getLocationInformation.getLocationInformation(city);
+      } else {
+        this.modalContainer.show();
+      }
     });
     this.temperatureButtonsContainer.subscribe(() => this.showWeather.showWeather());
     this.buttonRefreshBackgroundImage.subscribe(() => {
@@ -73,9 +84,13 @@ class App {
       this.loader.hideLoader();
     });
     if (window.webkitSpeechRecognition) {
-      this.buttonVoiceSearchCity.subscribe(city => {
-        this.loader.showLoader();
-        this.getLocationInformation.getLocationInformation(city);
+      this.buttonVoiceSearchCity.subscribe(result => {
+        if (result !== 'error') {
+          this.loader.showLoader();
+          this.getLocationInformation.getLocationInformation(result);
+        } else {
+          this.modalContainer.show();
+        }
       });
     }
     this.getLocationInformation.getCurrentPosition();
@@ -83,6 +98,7 @@ class App {
     this.temperatureButtonsContainer.addClickHandler();
     this.searchCityForm.addSubmitHandler();
     this.buttonRefreshBackgroundImage.addClickHandler();
+    this.modalContainer.addClickHandler();
     if (window.webkitSpeechRecognition) this.buttonVoiceSearchCity.addClickHandler();
   }
 }

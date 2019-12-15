@@ -5,7 +5,8 @@ export default class Layout {
 
   showLayout() {
     this.body.appendChild(this.createContentContainer());
-    this.body.appendChild(this.createLoader());
+    this.body.appendChild(this.createLoaderContainer());
+    this.body.appendChild(this.createModalContainer());
   }
 
   createContentContainer() {
@@ -188,8 +189,8 @@ export default class Layout {
     return mainContainer;
   }
 
-  createLoader() {
-    const loader = document.createElement('div');
+  createLoaderContainer() {
+    const loaderContainer = document.createElement('div');
     const ldsSpinner = document.createElement('div');
     const arrayOfNamelessDivs = [];
 
@@ -197,15 +198,34 @@ export default class Layout {
       arrayOfNamelessDivs.push(document.createElement('div'));
     }
 
-    loader.classList.add('loader');
+    loaderContainer.classList.add('loader-container');
     ldsSpinner.classList.add('lds-spinner');
 
-    loader.appendChild(ldsSpinner);
+    loaderContainer.appendChild(ldsSpinner);
 
     arrayOfNamelessDivs.forEach(div => {
       ldsSpinner.appendChild(div);
     });
 
-    return loader;
+    return loaderContainer;
+  }
+
+  createModalContainer() {
+    const modalContainer = document.createElement('div');
+    const modal = document.createElement('div');
+    const modalCloseIcon = document.createElement('i');
+    const modalText = document.createElement('span');
+
+    modalContainer.classList.add('modal-container', 'modal-container_hidden');
+    modal.classList.add('modal');
+    modalCloseIcon.classList.add('modal_close-icon');
+    modalText.classList.add('modal_text');
+    modalText.textContent = 'Location not found';
+
+    modalContainer.appendChild(modal);
+    modal.appendChild(modalCloseIcon);
+    modal.appendChild(modalText);
+
+    return modalContainer;
   }
 }

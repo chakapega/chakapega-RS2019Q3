@@ -30,14 +30,22 @@ export default class ButtonVoiceSearchCity {
 
   record() {
     const selectedLanguage = localStorage.getItem('selectedLanguage');
+    let result;
 
     this.recognition.lang = selectedLanguage;
     this.recognition.start();
-    this.recognition.onresult = event => {
-      this.searchCityInput.value = event.results[0][0].transcript;
 
-      this.broadcast(event.results[0][0].transcript);
+    this.recognition.onresult = event => {
+      result = event.results[0][0].transcript;
+      this.searchCityInput.value = result;
+
+      this.broadcast(result);
       this.iconVoiceSearchCity.classList.remove('icon_voice-search-city_active');
+    };
+
+    this.recognition.onend = () => {
+      this.iconVoiceSearchCity.classList.remove('icon_voice-search-city_active');
+      if (!result) this.broadcast('error');
     };
   }
 }
