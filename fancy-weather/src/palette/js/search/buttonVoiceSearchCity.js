@@ -4,6 +4,7 @@ export default class ButtonVoiceSearchCity {
     this.observers = [];
     this.buttonVoiceSearchCity = document.querySelector('.button_voice-search-city');
     this.searchCityInput = document.querySelector('#search-city-input');
+    this.iconVoiceSearchCity = document.querySelector('.icon_voice-search-city');
     /* eslint-disable */
     this.recognition = new window.webkitSpeechRecognition();
     /* eslint-enable */
@@ -22,6 +23,7 @@ export default class ButtonVoiceSearchCity {
     this.buttonVoiceSearchCity.addEventListener('click', event => {
       event.preventDefault();
 
+      this.iconVoiceSearchCity.classList.add('icon_voice-search-city_active');
       this.record();
     });
   }
@@ -35,6 +37,7 @@ export default class ButtonVoiceSearchCity {
       this.searchCityInput.value = event.results[0][0].transcript;
 
       this.broadcast(event.results[0][0].transcript);
+      this.iconVoiceSearchCity.classList.remove('icon_voice-search-city_active');
     };
   }
 }

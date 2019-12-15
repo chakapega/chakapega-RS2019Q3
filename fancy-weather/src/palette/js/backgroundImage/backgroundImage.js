@@ -1,4 +1,4 @@
-import getRandomInteger from '../helpers/helpers';
+import { getRandomInteger, defineImageSize } from '../helpers/helpers';
 
 export default class BackgroundImage {
   constructor(store) {
@@ -6,20 +6,16 @@ export default class BackgroundImage {
     this.mainContainer = document.querySelector('.main-container');
   }
 
-  getUrl() {
+  async getUrl() {
     const { apiFlickrUrl, apiFlickrKey } = this.store;
     const finalUrl = `${apiFlickrUrl}${apiFlickrKey}&tags=weather`;
+    const imageSize = defineImageSize();
+    const response = await fetch(finalUrl);
+    const photos = await response.json();
+    const { farm, server, id, secret } = photos.photos.photo[getRandomInteger()];
+    const backgroundImageUrl = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_${imageSize}.jpg`;
 
-    fetch(finalUrl)
-      .then(response => {
-        return response.json();
-      })
-      .then(photos => {
-        const { farm, server, id, secret } = photos.photos.photo[getRandomInteger()];
-        const backgroundImageUrl = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_b.jpg`;
-
-        this.show(backgroundImageUrl);
-      });
+    this.show(backgroundImageUrl);
   }
 
   show(backgroundImageUrl) {
