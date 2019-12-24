@@ -30,6 +30,15 @@ export const SEARCH_CITY_FORM_TEXT = [
   { en: 'Search city', be: 'Пошук горада', ru: 'Поиск города' },
   { en: 'SEARCH', be: 'ПОШУК', ru: 'ПОИСК' },
 ];
+export const locationNotFound = {
+  en: 'Location not found.',
+  be: 'Месцазнаходжанне не знойдзена.',
+  ru: 'Местоположение не найдено.',
+};
+export const coordinateNames = [
+  { en: 'Longitude', be: 'Даўгата', ru: 'Долгота' },
+  { en: 'Latitude', be: 'Шырата', ru: 'Широта' },
+];
 export const apiIpinfoUrl = 'https://ipinfo.io/json?token=';
 export const apiIpinfoKey = '5654748bdd39be';
 export const apiOpencagedataUrl = 'https://api.opencagedata.com/geocode/v1/json?key=';
@@ -40,10 +49,8 @@ export const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 export const apiFlickrUrl =
   'https://www.flickr.com/services/rest/?method=flickr.photos.search&nojsoncallback=1&format=json&api_key=';
 export const apiFlickrKey = '55ceacde1751d29fb1d2e44ba8663949';
+export const apiMapboxStyle = 'mapbox://styles/mapbox/streets-v10';
+export const apiMapboxKey =
+  'pk.eyJ1IjoiY2hha2FwZWdhIiwiYSI6ImNrM3Qwa2hyazBidGozaG80bWE3enM1MDgifQ.B1712DNd1OF3xiNb7BLJig';
 export const statusOk = 'ok';
 export const statusError = 'error';
-export const locationNotFound = {
-  en: 'Location not found.',
-  be: 'Месцазнаходжанне не знойдзена.',
-  ru: 'Местоположение не найдено.',
-};

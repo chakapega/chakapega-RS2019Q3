@@ -17,26 +17,26 @@ export default class TemperatureButtonsContainer {
 
   addClickHandler() {
     this.temperatureButtonsContainer.addEventListener('click', event => {
-      const selectedUnit = event.target.getAttribute('data-unit');
+      const selectedTemperatureUnit = event.target.getAttribute('data-unit');
 
-      this.changeTemperatureUnits(selectedUnit);
+      this.changeTemperatureUnits(selectedTemperatureUnit);
     });
   }
 
-  changeTemperatureUnits(selectedUnit) {
-    if (this.activeTemperatureUnit !== selectedUnit) {
-      switch (selectedUnit) {
+  changeTemperatureUnits(selectedTemperatureUnit) {
+    if (this.activeTemperatureUnit !== selectedTemperatureUnit) {
+      switch (selectedTemperatureUnit) {
         case 'fahrenheit':
           this.temperatureButtonCelsius.classList.remove('temperature-button_active');
           this.temperatureButtonFahrenheit.classList.add('temperature-button_active');
-          this.activeTemperatureUnit = selectedUnit;
-          localStorage.setItem('selectedTemperatureUnit', selectedUnit);
+          this.activeTemperatureUnit = selectedTemperatureUnit;
+          localStorage.setItem('selectedTemperatureUnit', selectedTemperatureUnit);
           break;
         case 'celsius':
           this.temperatureButtonFahrenheit.classList.remove('temperature-button_active');
           this.temperatureButtonCelsius.classList.add('temperature-button_active');
-          this.activeTemperatureUnit = selectedUnit;
-          localStorage.setItem('selectedTemperatureUnit', selectedUnit);
+          this.activeTemperatureUnit = selectedTemperatureUnit;
+          localStorage.setItem('selectedTemperatureUnit', selectedTemperatureUnit);
           break;
 
         default:

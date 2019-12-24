@@ -49,7 +49,7 @@ class App {
         this.backgroundImage.getUrl();
       } else if (statusMessage === statusError) {
         this.modalContainer.show();
-        this.loader.hideLoader();
+        this.loader.hide();
       }
     });
     this.getWeather.subscribe(() => {
@@ -58,21 +58,21 @@ class App {
       this.showWeather.showWeather();
       this.mapContainer.showMap();
       this.mapContainer.showCurrentCoordinates();
-      this.loader.hideLoader();
+      this.loader.hide();
     });
     this.languageButtonsContainer.subscribe(() => {
-      this.loader.showLoader();
+      this.loader.show();
       this.searchCityForm.changeLanguage();
       this.getLocationInformation.getLocationInformation(this.store.city);
       this.getWeather.getWeatherForecast();
       this.showLocationInformation.showLocationInformation();
       this.showDateInformation.showDateInformation();
       this.mapContainer.showCurrentCoordinates();
-      this.loader.hideLoader();
+      this.loader.hide();
     });
     this.searchCityForm.subscribe(city => {
       if (city !== statusError) {
-        this.loader.showLoader();
+        this.loader.show();
         this.getLocationInformation.getLocationInformation(city);
       } else {
         this.modalContainer.show();
@@ -80,14 +80,14 @@ class App {
     });
     this.temperatureButtonsContainer.subscribe(() => this.showWeather.showWeather());
     this.buttonRefreshBackgroundImage.subscribe(() => {
-      this.loader.showLoader();
+      this.loader.show();
       this.backgroundImage.getUrl();
-      this.loader.hideLoader();
+      this.loader.hide();
     });
     if (window.webkitSpeechRecognition) {
       this.buttonVoiceSearchCity.subscribe(result => {
         if (result !== statusError) {
-          this.loader.showLoader();
+          this.loader.show();
           this.getLocationInformation.getLocationInformation(result);
         } else {
           this.modalContainer.show();
