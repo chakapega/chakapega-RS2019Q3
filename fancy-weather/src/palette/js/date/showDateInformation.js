@@ -1,4 +1,4 @@
-import { DAYS_OF_THE_WEEK, MONTHS_OF_THE_YEAR } from '../store/store';
+import { DAYS_OF_THE_WEEK, MONTHS_OF_THE_YEAR } from '../helpers/constants';
 
 export default class ShowDateInformation {
   constructor(store) {

@@ -5,7 +5,7 @@ export default class LanguageButtonsContainer {
     this.languageButtonEn = document.querySelector('.language-button_en');
     this.languageButtonBe = document.querySelector('.language-button_be');
     this.languageButtonRu = document.querySelector('.language-button_ru');
-    this.changeLanguage(localStorage.getItem('selectedLanguage') || 'en');
+    this.changeLanguage(localStorage.getItem('selectedLanguage').toLowerCase() || 'en');
   }
 
   subscribe(fn) {

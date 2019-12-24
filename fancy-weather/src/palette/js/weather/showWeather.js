@@ -1,4 +1,4 @@
-import { TEXT_WEATHER_PROPERTIES } from '../store/store';
+import { TEXT_WEATHER_PROPERTIES } from '../helpers/constants';
 
 export default class ShowWeather {
   constructor(store) {

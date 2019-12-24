@@ -5,7 +5,7 @@ import {
   apiOpencagedataKey,
   statusOk,
   statusError,
-} from '../store/store';
+} from '../helpers/constants';
 
 export default class GetLocationInformation {
   constructor(store) {

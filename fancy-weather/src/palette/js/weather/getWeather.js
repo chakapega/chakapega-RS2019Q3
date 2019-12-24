@@ -1,4 +1,4 @@
-import { apiDarkskyUrl, apiDarkskyKey, proxyUrl } from '../store/store';
+import { apiDarkskyUrl, apiDarkskyKey, proxyUrl } from '../helpers/constants';
 
 export default class GetWeather {
   constructor(store) {

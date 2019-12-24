@@ -1,4 +1,4 @@
-import { apiFlickrUrl, apiFlickrKey } from '../store/store';
+import { apiFlickrUrl, apiFlickrKey } from '../helpers/constants';
 import { getRandomInteger, defineImageSize } from '../helpers/helpers';
 
 export default class BackgroundImage {

@@ -2,7 +2,7 @@ import '../scss/main.scss';
 
 import Layout from './layout/layout';
 import Loader from './loader/loader';
-import { Store, statusOk, statusError } from './store/store';
+import Store from './store/store';
 import GetLocationInformation from './geolocation/getLocationInformation';
 import GetCurrentDate from './date/getCurrentDate';
 import BackgroundImage from './backgroundImage/backgroundImage';
@@ -17,6 +17,7 @@ import SearchCityForm from './search/searchCityForm';
 import ButtonRefreshBackgroundImage from './control-container/buttonRefreshBackgroundImage';
 import ButtonVoiceSearchCity from './search/buttonVoiceSearchCity';
 import ModalContainer from './modal/modalContainer';
+import { statusOk, statusError } from './helpers/constants';
 
 class App {
   constructor() {

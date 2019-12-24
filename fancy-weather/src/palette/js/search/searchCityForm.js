@@ -1,4 +1,4 @@
-import { SEARCH_CITY_FORM_TEXT, statusError } from '../store/store';
+import { SEARCH_CITY_FORM_TEXT, statusError } from '../helpers/constants';
 
 export default class SearchCityForm {
   constructor(store) {

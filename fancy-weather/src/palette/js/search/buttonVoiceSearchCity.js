@@ -1,4 +1,4 @@
-import { statusError } from '../store/store';
+import { statusError } from '../helpers/constants';
 
 export default class ButtonVoiceSearchCity {
   constructor(store) {
