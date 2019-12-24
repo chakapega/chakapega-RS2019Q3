@@ -1,4 +1,4 @@
-import { SEARCH_CITY_FORM_TEXT } from '../store/store';
+import { SEARCH_CITY_FORM_TEXT, statusError } from '../store/store';
 
 export default class SearchCityForm {
   constructor(store) {
@@ -26,7 +26,7 @@ export default class SearchCityForm {
       this.store.city = city;
 
       if (city.length < 2) {
-        this.broadcast('error');
+        this.broadcast(statusError);
       } else {
         this.broadcast(city);
       }

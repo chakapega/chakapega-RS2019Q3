@@ -19,72 +19,59 @@ export default class ShowWeather {
 
   showWeather() {
     const weatherPropertiesText = this.defineTextWeatherProperties();
+    const { weatherForecast } = this.store;
 
     this.currentWeatherTemperature.textContent = weatherPropertiesText.temperature;
-    this.currentWeatherStatusIcon.classList.add(`weather-icon_${this.store.weatherForecast.currently.icon}`);
-    this.currentWeatherStatus.textContent = this.store.weatherForecast.currently.summary;
+    this.currentWeatherStatusIcon.classList.add(`weather-icon_${weatherForecast.currently.icon}`);
+    this.currentWeatherStatus.textContent = weatherForecast.currently.summary;
     this.currentWeatherFeel.textContent = weatherPropertiesText.feel;
     this.currentWeatherWind.textContent = weatherPropertiesText.wind;
     this.currentWeatherHumidity.textContent = weatherPropertiesText.humidity;
     this.firstDayWeatherTemperature.textContent = weatherPropertiesText.firstDayTemperature;
     this.secondDayWeatherTemperature.textContent = weatherPropertiesText.secondDayTemperature;
     this.thirdDayWeatherTemperature.textContent = weatherPropertiesText.thirdDayTemperature;
-    this.firstDayWeatherIconStatus.classList.add(`weather-icon_${this.store.weatherForecast.daily.data[0].icon}`);
-    this.secondDayWeatherIconStatus.classList.add(`weather-icon_${this.store.weatherForecast.daily.data[1].icon}`);
-    this.thirdDayWeatherIconStatus.classList.add(`weather-icon_${this.store.weatherForecast.daily.data[2].icon}`);
+    this.firstDayWeatherIconStatus.classList.add(`weather-icon_${weatherForecast.daily.data[0].icon}`);
+    this.secondDayWeatherIconStatus.classList.add(`weather-icon_${weatherForecast.daily.data[1].icon}`);
+    this.thirdDayWeatherIconStatus.classList.add(`weather-icon_${weatherForecast.daily.data[2].icon}`);
   }
 
   defineTextWeatherProperties() {
     const weatherPropertiesText = {};
+    const { weatherForecast } = this.store;
     const language = localStorage.getItem('selectedLanguage');
 
     switch (localStorage.getItem('selectedTemperatureUnit')) {
       case 'celsius':
-        weatherPropertiesText.temperature = `${this.store.weatherForecast.currently.temperature.toFixed()}°`;
-        weatherPropertiesText.feel = `${this.store.weatherForecast.currently.apparentTemperature.toFixed()}°`;
+        weatherPropertiesText.temperature = `${weatherForecast.currently.temperature.toFixed()}°`;
+        weatherPropertiesText.feel = `${weatherForecast.currently.apparentTemperature.toFixed()}°`;
         weatherPropertiesText.firstDayTemperature = `${(
-          (this.store.weatherForecast.daily.data[0].temperatureMax +
-            this.store.weatherForecast.daily.data[0].temperatureMin) /
+          (weatherForecast.daily.data[0].temperatureMax + weatherForecast.daily.data[0].temperatureMin) /
           2
         ).toFixed()}°`;
         weatherPropertiesText.secondDayTemperature = `${(
-          (this.store.weatherForecast.daily.data[1].temperatureMax +
-            this.store.weatherForecast.daily.data[1].temperatureMin) /
+          (weatherForecast.daily.data[1].temperatureMax + weatherForecast.daily.data[1].temperatureMin) /
           2
         ).toFixed()}°`;
         weatherPropertiesText.thirdDayTemperature = `${(
-          (this.store.weatherForecast.daily.data[2].temperatureMax +
-            this.store.weatherForecast.daily.data[2].temperatureMin) /
+          (weatherForecast.daily.data[2].temperatureMax + weatherForecast.daily.data[2].temperatureMin) /
           2
         ).toFixed()}°`;
         break;
       case 'fahrenheit':
-        weatherPropertiesText.temperature = `${(
-          this.store.weatherForecast.currently.temperature * (9 / 5) +
-          32
-        ).toFixed()}°`;
-        weatherPropertiesText.feel = `${(
-          this.store.weatherForecast.currently.apparentTemperature * (9 / 5) +
-          32
-        ).toFixed()}°`;
+        weatherPropertiesText.temperature = `${(weatherForecast.currently.temperature * (9 / 5) + 32).toFixed()}°`;
+        weatherPropertiesText.feel = `${(weatherForecast.currently.apparentTemperature * (9 / 5) + 32).toFixed()}°`;
         weatherPropertiesText.firstDayTemperature = `${(
-          ((this.store.weatherForecast.daily.data[0].temperatureMax +
-            this.store.weatherForecast.daily.data[0].temperatureMin) /
-            2) *
+          ((weatherForecast.daily.data[0].temperatureMax + weatherForecast.daily.data[0].temperatureMin) / 2) *
             (9 / 5) +
           32
         ).toFixed()}°`;
         weatherPropertiesText.secondDayTemperature = `${(
-          ((this.store.weatherForecast.daily.data[1].temperatureMax +
-            this.store.weatherForecast.daily.data[1].temperatureMin) /
-            2) *
+          ((weatherForecast.daily.data[1].temperatureMax + weatherForecast.daily.data[1].temperatureMin) / 2) *
             (9 / 5) +
           32
         ).toFixed()}°`;
         weatherPropertiesText.thirdDayTemperature = `${(
-          ((this.store.weatherForecast.daily.data[2].temperatureMax +
-            this.store.weatherForecast.daily.data[2].temperatureMin) /
-            2) *
+          ((weatherForecast.daily.data[2].temperatureMax + weatherForecast.daily.data[2].temperatureMin) / 2) *
             (9 / 5) +
           32
         ).toFixed()}°`;
@@ -101,10 +88,9 @@ export default class ShowWeather {
     if (weatherPropertiesText.feel === '-0°') weatherPropertiesText.feel = '0°';
 
     weatherPropertiesText.feel = `${TEXT_WEATHER_PROPERTIES[0][language]} ${weatherPropertiesText.feel}`;
-    weatherPropertiesText.wind =
-      `${TEXT_WEATHER_PROPERTIES[1][language]} ${this.store.weatherForecast.currently.windSpeed}m/s`;
+    weatherPropertiesText.wind = `${TEXT_WEATHER_PROPERTIES[1][language]} ${weatherForecast.currently.windSpeed}m/s`;
     weatherPropertiesText.humidity = `${TEXT_WEATHER_PROPERTIES[2][language]} ${(
-      this.store.weatherForecast.currently.humidity * 100
+      weatherForecast.currently.humidity * 100
     ).toFixed()}%`;
 
     return weatherPropertiesText;

@@ -2,7 +2,7 @@ import '../scss/main.scss';
 
 import Layout from './layout/layout';
 import Loader from './loader/loader';
-import { Store } from './store/store';
+import { Store, statusOk, statusError } from './store/store';
 import GetLocationInformation from './geolocation/getLocationInformation';
 import GetCurrentDate from './date/getCurrentDate';
 import BackgroundImage from './backgroundImage/backgroundImage';
@@ -42,11 +42,11 @@ class App {
 
   start() {
     this.getLocationInformation.subscribe(statusMessage => {
-      if (statusMessage === 'ok') {
+      if (statusMessage === statusOk) {
         this.getCurrentDate.getCurrentDate();
         this.getWeather.getWeatherForecast();
         this.backgroundImage.getUrl();
-      } else if (statusMessage === 'error') {
+      } else if (statusMessage === statusError) {
         this.modalContainer.show();
         this.loader.hideLoader();
       }
@@ -70,7 +70,7 @@ class App {
       this.loader.hideLoader();
     });
     this.searchCityForm.subscribe(city => {
-      if (city !== 'error') {
+      if (city !== statusError) {
         this.loader.showLoader();
         this.getLocationInformation.getLocationInformation(city);
       } else {
@@ -85,7 +85,7 @@ class App {
     });
     if (window.webkitSpeechRecognition) {
       this.buttonVoiceSearchCity.subscribe(result => {
-        if (result !== 'error') {
+        if (result !== statusError) {
           this.loader.showLoader();
           this.getLocationInformation.getLocationInformation(result);
         } else {

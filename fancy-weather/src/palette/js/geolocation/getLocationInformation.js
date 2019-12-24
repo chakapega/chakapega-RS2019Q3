@@ -1,4 +1,11 @@
-import { apiIpinfoUrl, apiIpinfoKey, apiOpencagedataUrl, apiOpencagedataKey } from '../store/store';
+import {
+  apiIpinfoUrl,
+  apiIpinfoKey,
+  apiOpencagedataUrl,
+  apiOpencagedataKey,
+  statusOk,
+  statusError,
+} from '../store/store';
 
 export default class GetLocationInformation {
   constructor(store) {
@@ -63,10 +70,10 @@ export default class GetLocationInformation {
           this.store.locationInformation.city = null;
         }
 
-        this.broadcast('ok');
+        this.broadcast(statusOk);
       })
       .catch(() => {
-        this.broadcast('error');
+        this.broadcast(statusError);
       });
   }
 }

@@ -1,3 +1,5 @@
+import { statusError } from '../store/store';
+
 export default class ButtonVoiceSearchCity {
   constructor(store) {
     this.store = store;
@@ -45,7 +47,7 @@ export default class ButtonVoiceSearchCity {
 
     this.recognition.onend = () => {
       this.iconVoiceSearchCity.classList.remove('icon_voice-search-city_active');
-      if (!result) this.broadcast('error');
+      if (!result) this.broadcast(statusError);
     };
   }
 }

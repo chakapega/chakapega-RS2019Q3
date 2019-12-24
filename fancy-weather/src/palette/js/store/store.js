@@ -40,6 +40,8 @@ export const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 export const apiFlickrUrl =
   'https://www.flickr.com/services/rest/?method=flickr.photos.search&nojsoncallback=1&format=json&api_key=';
 export const apiFlickrKey = '55ceacde1751d29fb1d2e44ba8663949';
+export const statusOk = 'ok';
+export const statusError = 'error';
 
 export class Store {
   constructor() {
