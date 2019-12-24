@@ -220,7 +220,6 @@ export default class Layout {
     modal.classList.add('modal');
     modalCloseIcon.classList.add('modal_close-icon');
     modalText.classList.add('modal_text');
-    modalText.textContent = 'Location not found';
 
     modalContainer.appendChild(modal);
     modal.appendChild(modalCloseIcon);

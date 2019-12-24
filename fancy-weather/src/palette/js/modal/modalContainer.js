@@ -1,6 +1,9 @@
+import { locationNotFound } from '../helpers/constants';
+
 export default class ModalContainer {
   constructor() {
     this.modalContainer = document.querySelector('.modal-container');
+    this.modalText = document.querySelector('.modal_text');
   }
 
   addClickHandler() {
@@ -12,6 +15,7 @@ export default class ModalContainer {
   }
 
   show() {
+    this.modalText.textContent = locationNotFound[localStorage.getItem('selectedLanguage')];
     this.modalContainer.classList.remove('modal-container_hidden');
   }
 

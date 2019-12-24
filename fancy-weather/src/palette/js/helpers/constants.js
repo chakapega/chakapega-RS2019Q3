@@ -42,3 +42,8 @@ export const apiFlickrUrl =
 export const apiFlickrKey = '55ceacde1751d29fb1d2e44ba8663949';
 export const statusOk = 'ok';
 export const statusError = 'error';
+export const locationNotFound = {
+  en: 'Location not found.',
+  be: 'Месцазнаходжанне не знойдзена.',
+  ru: 'Местоположение не найдено.',
+};
