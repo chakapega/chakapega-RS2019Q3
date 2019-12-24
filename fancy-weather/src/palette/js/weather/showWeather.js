@@ -1,3 +1,5 @@
+import { TEXT_WEATHER_PROPERTIES } from '../store/store';
+
 export default class ShowWeather {
   constructor(store) {
     this.store = store;
@@ -34,6 +36,7 @@ export default class ShowWeather {
 
   defineTextWeatherProperties() {
     const weatherPropertiesText = {};
+    const language = localStorage.getItem('selectedLanguage');
 
     switch (localStorage.getItem('selectedTemperatureUnit')) {
       case 'celsius':
@@ -97,30 +100,12 @@ export default class ShowWeather {
     if (weatherPropertiesText.thirdDayTemperature === '-0°') weatherPropertiesText.thirdDayTemperature = '0°';
     if (weatherPropertiesText.feel === '-0°') weatherPropertiesText.feel = '0°';
 
-    switch (localStorage.getItem('selectedLanguage')) {
-      case 'EN':
-        weatherPropertiesText.feel = `Feels like ${weatherPropertiesText.feel}`;
-        weatherPropertiesText.wind = `Wind ${this.store.weatherForecast.currently.windSpeed}m/s`;
-        weatherPropertiesText.humidity = `Humidity ${(this.store.weatherForecast.currently.humidity * 100).toFixed()}%`;
-        break;
-      case 'BE':
-        weatherPropertiesText.feel = `Адчуваецца як ${weatherPropertiesText.feel}`;
-        weatherPropertiesText.wind = `Вецер ${this.store.weatherForecast.currently.windSpeed}м/с`;
-        weatherPropertiesText.humidity = `Вільготнасць ${(
-          this.store.weatherForecast.currently.humidity * 100
-        ).toFixed()}%`;
-        break;
-      case 'RU':
-        weatherPropertiesText.feel = `Чувствуется как ${weatherPropertiesText.feel}`;
-        weatherPropertiesText.wind = `Ветер ${this.store.weatherForecast.currently.windSpeed}м/с`;
-        weatherPropertiesText.humidity = `Влажность ${(
-          this.store.weatherForecast.currently.humidity * 100
-        ).toFixed()}%`;
-        break;
-
-      default:
-        break;
-    }
+    weatherPropertiesText.feel = `${TEXT_WEATHER_PROPERTIES[0][language]} ${weatherPropertiesText.feel}`;
+    weatherPropertiesText.wind =
+      `${TEXT_WEATHER_PROPERTIES[1][language]} ${this.store.weatherForecast.currently.windSpeed}m/s`;
+    weatherPropertiesText.humidity = `${TEXT_WEATHER_PROPERTIES[2][language]} ${(
+      this.store.weatherForecast.currently.humidity * 100
+    ).toFixed()}%`;
 
     return weatherPropertiesText;
   }

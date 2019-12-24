@@ -1,3 +1,5 @@
+import { apiIpinfoUrl, apiIpinfoKey, apiOpencagedataUrl, apiOpencagedataKey } from '../store/store';
+
 export default class GetLocationInformation {
   constructor(store) {
     this.store = store;
@@ -14,7 +16,6 @@ export default class GetLocationInformation {
 
   getCurrentPosition() {
     const options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 };
-    const { apiIpinfoUrl, apiIpinfoKey } = this.store;
 
     const success = pos => {
       this.store.currentPosition.latitude = pos.coords.latitude.toString();
@@ -41,24 +42,8 @@ export default class GetLocationInformation {
   }
 
   getLocationInformation(city) {
-    const { apiOpencagedataUrl, apiOpencagedataKey } = this.store;
     const searchTarget = city || `${this.store.currentPosition.latitude},${this.store.currentPosition.longitude}`;
-    let language;
-
-    switch (localStorage.getItem('selectedLanguage')) {
-      case 'EN':
-        language = 'en';
-        break;
-      case 'RU':
-        language = 'ru';
-        break;
-      case 'BE':
-        language = 'be';
-        break;
-
-      default:
-        break;
-    }
+    const language = localStorage.getItem('selectedLanguage');
 
     const finalUrl = `${apiOpencagedataUrl}${apiOpencagedataKey}&language=${language}&q=${searchTarget}`;
 

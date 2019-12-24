@@ -2,7 +2,7 @@ import '../scss/main.scss';
 
 import Layout from './layout/layout';
 import Loader from './loader/loader';
-import Store from './store/store';
+import { Store } from './store/store';
 import GetLocationInformation from './geolocation/getLocationInformation';
 import GetCurrentDate from './date/getCurrentDate';
 import BackgroundImage from './backgroundImage/backgroundImage';

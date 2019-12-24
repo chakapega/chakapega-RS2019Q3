@@ -1,3 +1,5 @@
+import { SEARCH_CITY_FORM_TEXT } from '../store/store';
+
 export default class SearchCityForm {
   constructor(store) {
     this.store = store;
@@ -32,21 +34,9 @@ export default class SearchCityForm {
   }
 
   changeLanguage() {
-    switch (localStorage.getItem('selectedLanguage')) {
-      case 'EN':
-        this.searchCityInput.placeholder = 'Search city';
-        this.searchCityButton.textContent = 'SEARCH';
-        break;
-      case 'BE':
-        this.searchCityInput.placeholder = 'Пошук горада';
-        this.searchCityButton.textContent = 'ПОШУК';
-        break;
-      case 'RU':
-        this.searchCityInput.placeholder = 'Поиск города';
-        this.searchCityButton.textContent = 'ПОИСК';
-        break;
-      default:
-        break;
-    }
+    const language = localStorage.getItem('selectedLanguage');
+
+    this.searchCityInput.placeholder = SEARCH_CITY_FORM_TEXT[0][language];
+    this.searchCityButton.textContent = SEARCH_CITY_FORM_TEXT[1][language];
   }
 }

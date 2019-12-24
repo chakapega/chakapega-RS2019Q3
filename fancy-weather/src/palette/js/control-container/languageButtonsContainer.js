@@ -5,7 +5,7 @@ export default class LanguageButtonsContainer {
     this.languageButtonEn = document.querySelector('.language-button_en');
     this.languageButtonBe = document.querySelector('.language-button_be');
     this.languageButtonRu = document.querySelector('.language-button_ru');
-    this.changeLanguage(localStorage.getItem('selectedLanguage') || 'EN');
+    this.changeLanguage(localStorage.getItem('selectedLanguage') || 'en');
   }
 
   subscribe(fn) {
@@ -17,7 +17,9 @@ export default class LanguageButtonsContainer {
   }
 
   addClickHandler() {
-    this.languageButtonsContainer.addEventListener('click', event => this.changeLanguage(event.target.textContent));
+    this.languageButtonsContainer.addEventListener('click', event =>
+      this.changeLanguage(event.target.textContent.toLowerCase()),
+    );
   }
 
   changeLanguage(selectedLanguage) {
@@ -25,7 +27,7 @@ export default class LanguageButtonsContainer {
 
     if (this.activeLanguage !== selectedLanguage) {
       switch (selectedLanguage) {
-        case 'EN':
+        case 'en':
           if (languageButtonActive) {
             languageButtonActive.classList.remove('language-button_active');
           }
@@ -33,7 +35,7 @@ export default class LanguageButtonsContainer {
           this.languageButtonEn.classList.add('language-button_active');
           this.languageButtonActive = this.languageButtonEn;
           break;
-        case 'BE':
+        case 'be':
           if (languageButtonActive) {
             languageButtonActive.classList.remove('language-button_active');
           }
@@ -41,7 +43,7 @@ export default class LanguageButtonsContainer {
           this.languageButtonBe.classList.add('language-button_active');
           this.languageButtonActive = this.languageButtonBe;
           break;
-        case 'RU':
+        case 'ru':
           if (languageButtonActive) {
             languageButtonActive.classList.remove('language-button_active');
           }

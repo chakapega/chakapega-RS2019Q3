@@ -1,3 +1,4 @@
+import { apiFlickrUrl, apiFlickrKey } from '../store/store';
 import { getRandomInteger, defineImageSize } from '../helpers/helpers';
 
 export default class BackgroundImage {
@@ -7,9 +8,9 @@ export default class BackgroundImage {
   }
 
   async getUrl() {
-    const { apiFlickrUrl, apiFlickrKey } = this.store;
     const finalUrl = `${apiFlickrUrl}${apiFlickrKey}&tags=weather`;
     const imageSize = defineImageSize();
+
     const response = await fetch(finalUrl);
     const photos = await response.json();
     const { farm, server, id, secret } = photos.photos.photo[getRandomInteger()];
