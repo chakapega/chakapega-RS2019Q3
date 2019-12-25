@@ -4,12 +4,12 @@ export default class Loader {
     this.loaderContainer = document.querySelector('.loader-container');
   }
 
-  showLoader() {
+  show() {
     this.contentContainer.classList.add('content-container_blur');
     this.loaderContainer.classList.remove('loader-container_hidden');
   }
 
-  hideLoader() {
+  hide() {
     setTimeout(() => {
       this.contentContainer.classList.remove('content-container_blur');
       this.loaderContainer.classList.add('loader-container_hidden');

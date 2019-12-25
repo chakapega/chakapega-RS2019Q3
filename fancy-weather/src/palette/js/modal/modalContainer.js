@@ -9,7 +9,7 @@ export default class ModalContainer {
   addClickHandler() {
     this.modalContainer.addEventListener('click', event => {
       if (event.target.className === 'modal-container' || event.target.className === 'modal_close-icon') {
-        this.close();
+        this.hide();
       }
     });
   }
@@ -19,7 +19,7 @@ export default class ModalContainer {
     this.modalContainer.classList.remove('modal-container_hidden');
   }
 
-  close() {
+  hide() {
     this.modalContainer.classList.add('modal-container_hidden');
   }
 }
