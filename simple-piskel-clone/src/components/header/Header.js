@@ -4,7 +4,7 @@ import './Header.css';
 const Header = () => (
   <header className="header">
     <a className="header-link" href="/">
-      Simle Piskel Clone
+      Simple Piskel Clone
     </a>
   </header>
 );

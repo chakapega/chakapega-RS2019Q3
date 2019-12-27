@@ -1,0 +1,8 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: calc(100% - 45px);
+  background-color: #3e4242;
+}
