@@ -1,0 +1,45 @@
+.pen-size-selector {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 120px;
+  height: 30px;
+
+  .pen-size-button {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    border: none;
+    background-color: #a0b6b4;
+    border: 2px solid #222726;
+
+    &::after {
+      content: '';
+      display: block;
+      background-color: #1a1f1e;
+    }
+    &_active {
+      border: 2px solid #def5f4;
+    }
+  }
+  .pen-size-button_first::after {
+    width: 6px;
+    height: 6px;
+    margin-left: 1px;
+  }
+  .pen-size-button_second::after {
+    width: 8px;
+    height: 8px;
+  }
+  .pen-size-button_third::after {
+    width: 10px;
+    height: 10px;
+    margin-left: -1px;
+  }
+  .pen-size-button_fourth::after {
+    width: 12px;
+    height: 12px;
+    margin-left: -2px;
+  }
+}

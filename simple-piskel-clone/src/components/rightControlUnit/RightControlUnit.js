@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './RightControlUnit.css';
+import './RightControlUnit.scss';
 
 const RightControlUnit = () => {
   return <div className='main__right-control-unit' />;

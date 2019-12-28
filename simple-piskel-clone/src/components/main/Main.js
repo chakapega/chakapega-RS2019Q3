@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './Main.css';
+import './Main.scss';
 
 import Canvas from '../canvas/Canvas';
 import LeftControlUnit from '../leftControlUnit/LeftControlUnit';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './Canvas.css';
+import './Canvas.scss';
 
 export default class Canvas extends Component {
   componentDidMount() {
