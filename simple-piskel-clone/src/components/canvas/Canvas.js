@@ -13,8 +13,9 @@ export default class Canvas extends Component {
     this.oldY = null;
   }
 
+  /* eslint-disable */
   getLineCoordinates = (x, y, prevX, prevY) => {
-    const correctionNumber = this.correctionNumber;
+    const { correctionNumber } = this;
     const coordinates = [];
     const dx = Math.abs(x - prevX);
     const dy = Math.abs(y - prevY);
@@ -45,8 +46,8 @@ export default class Canvas extends Component {
 
   draw = event => {
     if (event.buttons === 1) {
-      let x = Math.round(event.nativeEvent.layerX / this.correctionNumber);
-      let y = Math.round(event.nativeEvent.layerY / this.correctionNumber);
+      const x = Math.round(event.nativeEvent.layerX / this.correctionNumber);
+      const y = Math.round(event.nativeEvent.layerY / this.correctionNumber);
 
       if (this.oldX !== null) {
         this.getLineCoordinates(x, y, this.oldX, this.oldY).forEach(
@@ -61,16 +62,13 @@ export default class Canvas extends Component {
       this.oldX = x;
       this.oldY = y;
     } else if (event.buttons !== 1) {
-      this.oldX = this.oldY = null;
+      this.oldX = null;
+      this.oldY = null;
     }
   };
+  /* eslint-enable */
 
   render() {
-    return (
-      <canvas
-        id="canvas"
-        onMouseMove={this.draw}
-      ></canvas>
-    );
+    return <canvas id='canvas' onMouseMove={this.draw} />;
   }
 }

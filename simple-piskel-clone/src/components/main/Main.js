@@ -8,7 +8,7 @@ import RightControlUnit from '../rightControlUnit/RightControlUnit';
 
 const Main = () => {
   return (
-    <main className="main">
+    <main className='main'>
       <LeftControlUnit />
       <Canvas />
       <RightControlUnit />
