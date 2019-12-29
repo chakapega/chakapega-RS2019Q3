@@ -1,0 +1,1 @@
+export const CHANGE_TOOL_SIZE = 'CHANGE_TOOL_SIZE';

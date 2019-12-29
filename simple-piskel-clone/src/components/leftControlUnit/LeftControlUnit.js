@@ -1,13 +1,13 @@
 import React from 'react';
 
-import './LeftControlUnit.scss';
+import { WrappedPenSizeSelector } from './PenSizeSelector';
 
-import PenSizeSelector from './PenSizeSelector';
+import './LeftControlUnit.scss';
 
 const LeftControlUnit = () => {
   return (
     <div className='main__left-control-unit'>
-      <PenSizeSelector />
+      <WrappedPenSizeSelector />
     </div>
   );
 };

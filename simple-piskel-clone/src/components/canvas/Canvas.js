@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import './Canvas.scss';
 
-export default class Canvas extends Component {
+class Canvas extends Component {
+  constructor() {
+    super();
+
+    this.toolSize = '1';
+  }
+
   componentDidMount() {
     this.canvas = document.querySelector('#canvas');
     this.ctx = this.canvas.getContext('2d');
@@ -11,6 +19,11 @@ export default class Canvas extends Component {
     this.correctionNumber = 512 / 32;
     this.oldX = null;
     this.oldY = null;
+  }
+
+  componentDidUpdate() {
+    const { toolSize } = this.props;
+    this.toolSize = toolSize;
   }
 
   /* eslint-disable */
@@ -45,18 +58,17 @@ export default class Canvas extends Component {
   };
 
   draw = event => {
+    const { toolSize } = this;
     if (event.buttons === 1) {
       const x = Math.round(event.nativeEvent.layerX / this.correctionNumber);
       const y = Math.round(event.nativeEvent.layerY / this.correctionNumber);
 
       if (this.oldX !== null) {
-        this.getLineCoordinates(x, y, this.oldX, this.oldY).forEach(
-          ({ x, y }) => {
-            this.ctx.beginPath();
-            this.ctx.rect(Math.round(x), Math.round(y), 1, 1);
-            this.ctx.fill();
-          }
-        );
+        this.getLineCoordinates(x, y, this.oldX, this.oldY).forEach(({ x, y }) => {
+          this.ctx.beginPath();
+          this.ctx.rect(Math.round(x), Math.round(y), +toolSize, +toolSize);
+          this.ctx.fill();
+        });
       }
 
       this.oldX = x;
@@ -72,3 +84,13 @@ export default class Canvas extends Component {
     return <canvas id='canvas' onMouseMove={this.draw} />;
   }
 }
+
+Canvas.propTypes = {
+  toolSize: PropTypes.string.isRequired
+};
+
+const mapStateToProps = state => ({
+  toolSize: state.tool.toolSize
+});
+
+export const WrappedCanvas = connect(mapStateToProps)(Canvas);
