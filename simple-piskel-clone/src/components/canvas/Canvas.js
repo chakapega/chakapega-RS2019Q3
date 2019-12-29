@@ -93,4 +93,6 @@ const mapStateToProps = state => ({
   toolSize: state.tool.toolSize
 });
 
-export const WrappedCanvas = connect(mapStateToProps)(Canvas);
+const WrappedCanvas = connect(mapStateToProps)(Canvas);
+
+export default WrappedCanvas;

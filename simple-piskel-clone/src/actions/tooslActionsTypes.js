@@ -1,1 +1,2 @@
 export const CHANGE_TOOL_SIZE = 'CHANGE_TOOL_SIZE';
+export const CHANGE_TOOL = 'CHANGE_TOOL';

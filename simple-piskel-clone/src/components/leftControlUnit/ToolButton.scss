@@ -1,0 +1,34 @@
+.tool {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  cursor: pointer;
+  border: 2px solid #779191;
+  background-color: transparent;
+  transition: all 0.25s linear;
+  outline: none;
+
+  &-icon {
+    width: 34px;
+    height: 34px;
+    background-size: cover;
+  }
+  &-icon_pen {
+    background-image: url(../../images/pen.svg);
+  }
+  &-icon_eraser {
+    background-image: url(../../images/eraser.svg);
+  }
+  &-icon_color-picker {
+    background-image: url(../../images/color-picker.svg);
+  }
+  &-icon_paint-bucket {
+    background-image: url(../../images/paint-bucket.svg);
+  }
+  &_active {
+    border: 2px solid #ffffff;
+  }
+}

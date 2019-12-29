@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { changeToolSize } from '../../actions/tool';
+import { changeToolSize } from '../../actions/toolsActions';
 
 import './PenSizeSelector.scss';
 
@@ -10,11 +10,11 @@ class PenSizeSelector extends Component {
   constructor() {
     super();
 
-    this.activeButton = '1';
+    this.activeSize = '1';
   }
 
   componentDidMount() {
-    document.querySelector(`.pen-size-button_${this.activeButton}`).classList.add('pen-size-button_active');
+    document.querySelector(`.pen-size-button_${this.activeSize}`).classList.add('pen-size-button_active');
   }
 
   changeSize = event => {
@@ -24,7 +24,7 @@ class PenSizeSelector extends Component {
     document.querySelector('.pen-size-button_active').classList.remove('pen-size-button_active');
     document.querySelector(`.pen-size-button_${selectedSize}`).classList.add('pen-size-button_active');
 
-    this.activeButton = selectedSize;
+    this.activeSize = selectedSize;
 
     changeToolSizeAction(selectedSize);
   };
@@ -53,4 +53,6 @@ const mapDispatchToProps = dispatch => ({
   changeToolSizeAction: toolSize => dispatch(changeToolSize(toolSize))
 });
 
-export const WrappedPenSizeSelector = connect(mapStateToProps, mapDispatchToProps)(PenSizeSelector);
+const WrappedPenSizeSelector = connect(mapStateToProps, mapDispatchToProps)(PenSizeSelector);
+
+export default WrappedPenSizeSelector;

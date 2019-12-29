@@ -11,9 +11,10 @@
     height: 24px;
     cursor: pointer;
     border: none;
-    background-color: #a0b6b4;
-    border: 2px solid #222726;
+    background-color: #3e4242;
+    border: 2px solid #779191;
     outline: none;
+    transition: all 0.25s linear;
 
     &::after {
       content: '';

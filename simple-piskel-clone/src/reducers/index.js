@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import changeToolSizeReducer from './changeToolSizeReducer';
+import toolsReducer from './toolsReducer';
 
 const rootReducer = combineReducers({
-  tool: changeToolSizeReducer
+  tool: toolsReducer
 });
 
 export default rootReducer;
