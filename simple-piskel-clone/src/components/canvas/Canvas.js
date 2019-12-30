@@ -9,6 +9,7 @@ class Canvas extends Component {
     super();
 
     this.toolSize = '1';
+    this.selectedTool = 'pen';
   }
 
   componentDidMount() {
@@ -22,8 +23,9 @@ class Canvas extends Component {
   }
 
   componentDidUpdate() {
-    const { toolSize } = this.props;
+    const { toolSize, selectedTool } = this.props;
     this.toolSize = toolSize;
+    this.selectedTool = selectedTool;
   }
 
   /* eslint-disable */
@@ -58,8 +60,8 @@ class Canvas extends Component {
   };
 
   draw = event => {
-    const { toolSize } = this;
-    if (event.buttons === 1) {
+    const { toolSize, selectedTool } = this;
+    if (event.buttons === 1 && selectedTool === 'pen') {
       const x = Math.round(event.nativeEvent.layerX / this.correctionNumber);
       const y = Math.round(event.nativeEvent.layerY / this.correctionNumber);
 
@@ -86,11 +88,13 @@ class Canvas extends Component {
 }
 
 Canvas.propTypes = {
-  toolSize: PropTypes.string.isRequired
+  toolSize: PropTypes.string.isRequired,
+  selectedTool: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
-  toolSize: state.tool.toolSize
+  toolSize: state.tool.toolSize,
+  selectedTool: state.tool.selectedTool
 });
 
 const WrappedCanvas = connect(mapStateToProps)(Canvas);

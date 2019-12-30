@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { toolPen, toolEraser, toolColorPicker, toolPaintBucket } from '../../constants/constants';
 import ToolButton from './ToolButton';
 import { changeTool } from '../../actions/toolsActions';
 
@@ -11,22 +12,22 @@ class ToolsContainer extends Component {
   constructor() {
     super();
 
-    this.activeTool = 'pen';
+    this.selectedTool = 'pen';
   }
 
   componentDidMount() {
-    document.querySelector(`.tool_${this.activeTool}`).classList.add('tool_active');
+    document.querySelector(`.tool_${this.selectedTool}`).classList.add('tool_active');
   }
 
   changeTool = event => {
     const { changeToolAction } = this.props;
     const selectedTool = event.currentTarget.getAttribute('title');
 
-    if (selectedTool !== this.activeTool) {
+    if (selectedTool !== this.selectedTool) {
       document.querySelector('.tool_active').classList.remove('tool_active');
       document.querySelector(`.tool_${selectedTool}`).classList.add('tool_active');
 
-      this.activeTool = selectedTool;
+      this.selectedTool = selectedTool;
 
       changeToolAction(selectedTool);
     }
@@ -35,10 +36,10 @@ class ToolsContainer extends Component {
   render() {
     return (
       <div className='tools-container'>
-        <ToolButton toolName='pen' changeTool={this.changeTool} />
-        <ToolButton toolName='eraser' changeTool={this.changeTool} />
-        <ToolButton toolName='color-picker' changeTool={this.changeTool} />
-        <ToolButton toolName='paint-bucket' changeTool={this.changeTool} />
+        <ToolButton toolName={toolPen} changeTool={this.changeTool} />
+        <ToolButton toolName={toolEraser} changeTool={this.changeTool} />
+        <ToolButton toolName={toolColorPicker} changeTool={this.changeTool} />
+        <ToolButton toolName={toolPaintBucket} changeTool={this.changeTool} />
       </div>
     );
   }
