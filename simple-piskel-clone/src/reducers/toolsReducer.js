@@ -1,19 +1,29 @@
 import { CHANGE_TOOL_SIZE, CHANGE_TOOL } from '../actions/tooslActionsTypes';
+import {
+  toolSizeOne,
+  toolSizeTwo,
+  toolSizeThree,
+  toolSizeFour,
+  toolPen,
+  toolEraser,
+  toolColorPicker,
+  toolPaintBucket
+} from '../constants/constants';
 
 const initialState = {
-  toolSize: '1',
-  selectedTool: 'pen'
+  toolSize: toolSizeOne,
+  activeTool: toolPen
 };
 
-const changeToolSizeReducer = (state = initialState, action) => {
+const toolsReducer = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_TOOL_SIZE:
       return { ...state, toolSize: action.payload };
     case CHANGE_TOOL:
-      return { ...state, selectedTool: action.payload };
+      return { ...state, activeTool: action.payload };
     default:
       return state;
   }
 };
 
-export default changeToolSizeReducer;
+export default toolsReducer;

@@ -7,7 +7,7 @@ export const changeToolSize = toolSize => {
   };
 };
 
-export const changeTool = selectedTool => {
+export const changeToolAction = selectedTool => {
   return {
     type: CHANGE_TOOL,
     payload: selectedTool

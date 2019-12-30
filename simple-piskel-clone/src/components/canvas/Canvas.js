@@ -2,14 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import {
+  toolSizeOne,
+  toolSizeTwo,
+  toolSizeThree,
+  toolSizeFour,
+  toolPen,
+  toolEraser,
+  toolColorPicker,
+  toolPaintBucket
+} from '../../constants/constants';
+
 import './Canvas.scss';
 
 class Canvas extends Component {
   constructor() {
     super();
 
-    this.toolSize = '1';
-    this.selectedTool = 'pen';
+    this.state = {
+      toolSize: toolSizeOne,
+      activeTool: toolPen
+    };
   }
 
   componentDidMount() {
@@ -22,10 +35,13 @@ class Canvas extends Component {
     this.oldY = null;
   }
 
-  componentDidUpdate() {
-    const { toolSize, selectedTool } = this.props;
-    this.toolSize = toolSize;
-    this.selectedTool = selectedTool;
+  componentDidUpdate(prevProps) {
+    if (this.props.toolSize !== prevProps.toolSize || this.props.activeTool !== prevProps.activeTool) {
+      this.setState({
+        toolSize: this.props.toolSize,
+        activeTool: this.props.activeTool
+      });
+    }
   }
 
   /* eslint-disable */
@@ -60,8 +76,8 @@ class Canvas extends Component {
   };
 
   draw = event => {
-    const { toolSize, selectedTool } = this;
-    if (event.buttons === 1 && selectedTool === 'pen') {
+    const { toolSize, activeTool } = this.state;
+    if (event.buttons === 1 && activeTool === toolPen) {
       const x = Math.round(event.nativeEvent.layerX / this.correctionNumber);
       const y = Math.round(event.nativeEvent.layerY / this.correctionNumber);
 
@@ -80,21 +96,57 @@ class Canvas extends Component {
       this.oldY = null;
     }
   };
+
+  erase = event => {
+    const { toolSize, activeTool } = this.state;
+    if (event.buttons === 1 && activeTool === toolEraser) {
+      const x = Math.round(event.nativeEvent.layerX / this.correctionNumber);
+      const y = Math.round(event.nativeEvent.layerY / this.correctionNumber);
+
+      if (this.oldX !== null) {
+        this.getLineCoordinates(x, y, this.oldX, this.oldY).forEach(({ x, y }) => {
+          this.ctx.beginPath();
+          this.ctx.clearRect(Math.round(x), Math.round(y), +toolSize, +toolSize);
+          this.ctx.fill();
+        });
+      }
+
+      this.oldX = x;
+      this.oldY = y;
+    } else if (event.buttons !== 1) {
+      this.oldX = null;
+      this.oldY = null;
+    }
+  };
   /* eslint-enable */
 
   render() {
-    return <canvas id='canvas' onMouseMove={this.draw} />;
+    const { activeTool } = this.state;
+    let handler;
+
+    switch (activeTool) {
+      case toolPen:
+        handler = this.draw;
+        break;
+      case toolEraser:
+        handler = this.erase;
+        break;
+      default:
+        break;
+    }
+
+    return <canvas id='canvas' onMouseMove={handler} />;
   }
 }
 
 Canvas.propTypes = {
   toolSize: PropTypes.string.isRequired,
-  selectedTool: PropTypes.string.isRequired
+  activeTool: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
   toolSize: state.tool.toolSize,
-  selectedTool: state.tool.selectedTool
+  activeTool: state.tool.activeTool
 });
 
 const WrappedCanvas = connect(mapStateToProps)(Canvas);
