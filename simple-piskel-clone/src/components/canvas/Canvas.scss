@@ -4,3 +4,15 @@
   border: 3px solid #63807d;
   image-rendering: pixelated;
 }
+.active-tool_pen {
+  cursor: url('../../images/cursor-pen.png'), auto;
+}
+.active-tool_eraser {
+  cursor: url('../../images/cursor-eraser.png'), auto;
+}
+.active-tool_color-picker {
+  cursor: url('../../images/cursor-color-picker.png'), auto;
+}
+.active-tool_paint-bucket {
+  cursor: url('../../images/cursor-paint-bucket.png'), auto;
+}

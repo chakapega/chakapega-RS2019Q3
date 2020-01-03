@@ -9,7 +9,7 @@ import './Canvas.scss';
 class Canvas extends Component {
   componentDidMount() {
     const { activeCanvasSize } = this.props;
-    
+
     this.canvas = document.querySelector('#canvas');
     this.ctx = this.canvas.getContext('2d');
     this.canvas.width = +activeCanvasSize;
@@ -133,7 +133,7 @@ class Canvas extends Component {
         break;
     }
 
-    return <canvas id='canvas' onMouseMove={handler} />;
+    return <canvas id='canvas' className={`active-tool_${activeTool}`} onMouseMove={handler} />;
   }
 }
 
