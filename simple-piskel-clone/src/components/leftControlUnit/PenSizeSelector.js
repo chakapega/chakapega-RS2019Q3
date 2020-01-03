@@ -8,25 +8,18 @@ import { changeToolSize } from '../../store/leftControlUnit/actions';
 import './PenSizeSelector.scss';
 
 class PenSizeSelector extends Component {
-  constructor() {
-    super();
-
-    this.toolSize = toolSizeOne;
-  }
-
   componentDidMount() {
-    document.querySelector(`.pen-size-button_${this.toolSize}`).classList.add('pen-size-button_active');
+    const { toolSize } = this.props;
+    document.querySelector(`.pen-size-button_${toolSize}`).classList.add('pen-size-button_active');
   }
 
   changeSize = event => {
-    const { changeToolSizeAction } = this.props;
+    const { toolSize, changeToolSizeAction } = this.props;
     const selectedSize = event.target.getAttribute('aria-label');
 
-    if (selectedSize !== this.toolSize) {
+    if (selectedSize !== toolSize) {
       document.querySelector('.pen-size-button_active').classList.remove('pen-size-button_active');
       document.querySelector(`.pen-size-button_${selectedSize}`).classList.add('pen-size-button_active');
-
-      this.toolSize = selectedSize;
 
       changeToolSizeAction(selectedSize);
     }
@@ -65,11 +58,12 @@ class PenSizeSelector extends Component {
 }
 
 PenSizeSelector.propTypes = {
+  toolSize: PropTypes.string.isRequired,
   changeToolSizeAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  toolSize: state.toolSize
+  toolSize: state.tool.toolSize
 });
 
 const mapDispatchToProps = dispatch => ({
