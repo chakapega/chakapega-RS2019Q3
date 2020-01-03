@@ -9,3 +9,5 @@ export const toolPaintBucket = 'paint-bucket';
 export const canvasSizeThirtyTwo = '32';
 export const canvasSizeSixtyFour = '64';
 export const canvasSizeOneHundredAndTwentyEight = '128';
+export const blackCanvasColor = '#000000';
+export const whiteCanvasColor = '#ffffff';

@@ -70,7 +70,7 @@ class Canvas extends Component {
   };
 
   draw = event => {
-    const { activeToolSize, activeTool } = this.props;
+    const { activeToolSize, activeTool, activeFirstCanvasColor } = this.props;
     const correctionNumber = this.getCorrectionNumber();
 
     if (event.buttons === 1 && activeTool === toolPen) {
@@ -81,6 +81,7 @@ class Canvas extends Component {
         this.getLineCoordinates(x, y, this.oldX, this.oldY).forEach(({ x, y }) => {
           this.ctx.beginPath();
           this.ctx.rect(Math.round(x), Math.round(y), +activeToolSize, +activeToolSize);
+          this.ctx.fillStyle = activeFirstCanvasColor;
           this.ctx.fill();
         });
       }
@@ -140,13 +141,15 @@ class Canvas extends Component {
 Canvas.propTypes = {
   activeToolSize: PropTypes.string.isRequired,
   activeTool: PropTypes.string.isRequired,
-  activeCanvasSize: PropTypes.string.isRequired
+  activeCanvasSize: PropTypes.string.isRequired,
+  activeFirstCanvasColor: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
   activeToolSize: state.tool.activeToolSize,
   activeTool: state.tool.activeTool,
-  activeCanvasSize: state.tool.activeCanvasSize
+  activeCanvasSize: state.tool.activeCanvasSize,
+  activeFirstCanvasColor: state.tool.activeFirstCanvasColor
 });
 
 export default connect(mapStateToProps)(Canvas);
