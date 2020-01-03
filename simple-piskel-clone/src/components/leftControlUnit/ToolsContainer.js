@@ -16,13 +16,13 @@ class ToolsContainer extends Component {
 
   changeTool = event => {
     const selectedTool = event.currentTarget.getAttribute('title');
-    const { activeTool, changeTool } = this.props;
+    const { activeTool, changeToolAction } = this.props;
 
     if (selectedTool !== activeTool) {
       document.querySelector('.tool_active').classList.remove('tool_active');
       document.querySelector(`.tool_${selectedTool}`).classList.add('tool_active');
 
-      changeTool(selectedTool);
+      changeToolAction(selectedTool);
     }
   };
 
@@ -39,8 +39,8 @@ class ToolsContainer extends Component {
 }
 
 ToolsContainer.propTypes = {
-  changeTool: PropTypes.func.isRequired,
-  activeTool: PropTypes.string.isRequired
+  activeTool: PropTypes.string.isRequired,
+  changeToolAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -48,7 +48,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeTool: selectedTool => dispatch(changeTool(selectedTool))
+  changeToolAction: selectedTool => dispatch(changeTool(selectedTool))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToolsContainer);

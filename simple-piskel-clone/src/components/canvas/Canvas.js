@@ -8,18 +8,39 @@ import './Canvas.scss';
 
 class Canvas extends Component {
   componentDidMount() {
+    const { activeCanvasSize } = this.props;
+    
     this.canvas = document.querySelector('#canvas');
     this.ctx = this.canvas.getContext('2d');
-    this.canvas.width = 32;
-    this.canvas.height = 32;
-    this.correctionNumber = 512 / 32;
+    this.canvas.width = +activeCanvasSize;
+    this.canvas.height = +activeCanvasSize;
     this.oldX = null;
     this.oldY = null;
   }
 
+  componentDidUpdate() {
+    const { activeCanvasSize } = this.props;
+    if (this.canvas.width !== +activeCanvasSize) {
+      this.setCanvasSize();
+    }
+  }
+
+  getCorrectionNumber = () => {
+    const { activeCanvasSize } = this.props;
+
+    return 512 / +activeCanvasSize;
+  };
+
+  setCanvasSize = () => {
+    const { activeCanvasSize } = this.props;
+
+    this.canvas.width = +activeCanvasSize;
+    this.canvas.height = +activeCanvasSize;
+  };
+
   /* eslint-disable */
   getLineCoordinates = (x, y, prevX, prevY) => {
-    const { correctionNumber } = this;
+    const correctionNumber = this.getCorrectionNumber();
     const coordinates = [];
     const dx = Math.abs(x - prevX);
     const dy = Math.abs(y - prevY);
@@ -50,9 +71,11 @@ class Canvas extends Component {
 
   draw = event => {
     const { activeToolSize, activeTool } = this.props;
+    const correctionNumber = this.getCorrectionNumber();
+
     if (event.buttons === 1 && activeTool === toolPen) {
-      const x = Math.round(event.nativeEvent.layerX / this.correctionNumber);
-      const y = Math.round(event.nativeEvent.layerY / this.correctionNumber);
+      const x = Math.round(event.nativeEvent.layerX / correctionNumber);
+      const y = Math.round(event.nativeEvent.layerY / correctionNumber);
 
       if (this.oldX !== null) {
         this.getLineCoordinates(x, y, this.oldX, this.oldY).forEach(({ x, y }) => {
@@ -72,9 +95,11 @@ class Canvas extends Component {
 
   erase = event => {
     const { activeToolSize, activeTool } = this.props;
+    const correctionNumber = this.getCorrectionNumber();
+
     if (event.buttons === 1 && activeTool === toolEraser) {
-      const x = Math.round(event.nativeEvent.layerX / this.correctionNumber);
-      const y = Math.round(event.nativeEvent.layerY / this.correctionNumber);
+      const x = Math.round(event.nativeEvent.layerX / correctionNumber);
+      const y = Math.round(event.nativeEvent.layerY / correctionNumber);
 
       if (this.oldX !== null) {
         this.getLineCoordinates(x, y, this.oldX, this.oldY).forEach(({ x, y }) => {
@@ -114,12 +139,14 @@ class Canvas extends Component {
 
 Canvas.propTypes = {
   activeToolSize: PropTypes.string.isRequired,
-  activeTool: PropTypes.string.isRequired
+  activeTool: PropTypes.string.isRequired,
+  activeCanvasSize: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
   activeToolSize: state.tool.activeToolSize,
-  activeTool: state.tool.activeTool
+  activeTool: state.tool.activeTool,
+  activeCanvasSize: state.tool.activeCanvasSize
 });
 
 export default connect(mapStateToProps)(Canvas);

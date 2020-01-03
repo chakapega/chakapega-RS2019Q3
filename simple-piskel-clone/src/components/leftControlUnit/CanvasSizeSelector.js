@@ -18,14 +18,14 @@ class CanvasSizeSelector extends Component {
   }
 
   changeSize = event => {
-    const { activeCanvasSize, changeCanvasSize } = this.props;
+    const { activeCanvasSize, changeCanvasSizeAction } = this.props;
     const selectedCanvasSize = event.target.getAttribute('aria-label');
 
     if (selectedCanvasSize !== activeCanvasSize) {
       document.querySelector('.canvas-size-button_active').classList.remove('canvas-size-button_active');
       document.querySelector(`.canvas-size-button_${selectedCanvasSize}`).classList.add('canvas-size-button_active');
 
-      changeCanvasSize(selectedCanvasSize);
+      changeCanvasSizeAction(selectedCanvasSize);
     }
   };
 
@@ -63,7 +63,7 @@ class CanvasSizeSelector extends Component {
 
 CanvasSizeSelector.propTypes = {
   activeCanvasSize: PropTypes.string.isRequired,
-  changeCanvasSize: PropTypes.func.isRequired
+  changeCanvasSizeAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -71,7 +71,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeCanvasSize: selectedCanvasSize => dispatch(changeCanvasSize(selectedCanvasSize))
+  changeCanvasSizeAction: selectedCanvasSize => dispatch(changeCanvasSize(selectedCanvasSize))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CanvasSizeSelector);
