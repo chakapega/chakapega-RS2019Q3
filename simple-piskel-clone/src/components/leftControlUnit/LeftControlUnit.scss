@@ -1,4 +1,6 @@
 .main__left-control-unit {
+  display: flex;
+  flex-direction: column;
   height: 94%;
   width: 320px;
   border-right: 3px solid #63807d;

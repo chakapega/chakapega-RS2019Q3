@@ -1,10 +1,12 @@
 .pen-size-selector {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   width: 120px;
   height: 30px;
+  margin-bottom: 15px;
+  margin-left: 10px;
 
   .pen-size-button {
     width: 24px;
