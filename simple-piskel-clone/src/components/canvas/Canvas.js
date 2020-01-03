@@ -49,7 +49,7 @@ class Canvas extends Component {
   };
 
   draw = event => {
-    const { toolSize, activeTool } = this.props;
+    const { activeToolSize, activeTool } = this.props;
     if (event.buttons === 1 && activeTool === toolPen) {
       const x = Math.round(event.nativeEvent.layerX / this.correctionNumber);
       const y = Math.round(event.nativeEvent.layerY / this.correctionNumber);
@@ -57,7 +57,7 @@ class Canvas extends Component {
       if (this.oldX !== null) {
         this.getLineCoordinates(x, y, this.oldX, this.oldY).forEach(({ x, y }) => {
           this.ctx.beginPath();
-          this.ctx.rect(Math.round(x), Math.round(y), +toolSize, +toolSize);
+          this.ctx.rect(Math.round(x), Math.round(y), +activeToolSize, +activeToolSize);
           this.ctx.fill();
         });
       }
@@ -71,7 +71,7 @@ class Canvas extends Component {
   };
 
   erase = event => {
-    const { toolSize, activeTool } = this.props;
+    const { activeToolSize, activeTool } = this.props;
     if (event.buttons === 1 && activeTool === toolEraser) {
       const x = Math.round(event.nativeEvent.layerX / this.correctionNumber);
       const y = Math.round(event.nativeEvent.layerY / this.correctionNumber);
@@ -79,7 +79,7 @@ class Canvas extends Component {
       if (this.oldX !== null) {
         this.getLineCoordinates(x, y, this.oldX, this.oldY).forEach(({ x, y }) => {
           this.ctx.beginPath();
-          this.ctx.clearRect(Math.round(x), Math.round(y), +toolSize, +toolSize);
+          this.ctx.clearRect(Math.round(x), Math.round(y), +activeToolSize, +activeToolSize);
           this.ctx.fill();
         });
       }
@@ -113,12 +113,12 @@ class Canvas extends Component {
 }
 
 Canvas.propTypes = {
-  toolSize: PropTypes.string.isRequired,
+  activeToolSize: PropTypes.string.isRequired,
   activeTool: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
-  toolSize: state.tool.toolSize,
+  activeToolSize: state.tool.activeToolSize,
   activeTool: state.tool.activeTool
 });
 

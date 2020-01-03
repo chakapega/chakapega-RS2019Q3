@@ -6,3 +6,6 @@ export const toolPen = 'pen';
 export const toolEraser = 'eraser';
 export const toolColorPicker = 'color-picker';
 export const toolPaintBucket = 'paint-bucket';
+export const canvasSizeThirtyTwo = '32';
+export const canvasSizeSixtyFour = '64';
+export const canvasSizeOneHundredAndTwentyEight = '128';

@@ -9,19 +9,19 @@ import './PenSizeSelector.scss';
 
 class PenSizeSelector extends Component {
   componentDidMount() {
-    const { toolSize } = this.props;
-    document.querySelector(`.pen-size-button_${toolSize}`).classList.add('pen-size-button_active');
+    const { activeToolSize } = this.props;
+    document.querySelector(`.pen-size-button_${activeToolSize}`).classList.add('pen-size-button_active');
   }
 
   changeSize = event => {
-    const { toolSize, changeToolSizeAction } = this.props;
-    const selectedSize = event.target.getAttribute('aria-label');
+    const { activeToolSize, changeToolSize } = this.props;
+    const selectedToolSize = event.target.getAttribute('aria-label');
 
-    if (selectedSize !== toolSize) {
+    if (selectedToolSize !== activeToolSize) {
       document.querySelector('.pen-size-button_active').classList.remove('pen-size-button_active');
-      document.querySelector(`.pen-size-button_${selectedSize}`).classList.add('pen-size-button_active');
+      document.querySelector(`.pen-size-button_${selectedToolSize}`).classList.add('pen-size-button_active');
 
-      changeToolSizeAction(selectedSize);
+      changeToolSize(selectedToolSize);
     }
   };
 
@@ -58,16 +58,16 @@ class PenSizeSelector extends Component {
 }
 
 PenSizeSelector.propTypes = {
-  toolSize: PropTypes.string.isRequired,
-  changeToolSizeAction: PropTypes.func.isRequired
+  activeToolSize: PropTypes.string.isRequired,
+  changeToolSize: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  toolSize: state.tool.toolSize
+  activeToolSize: state.tool.activeToolSize
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeToolSizeAction: toolSize => dispatch(changeToolSize(toolSize))
+  changeToolSize: selectedToolSize => dispatch(changeToolSize(selectedToolSize))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PenSizeSelector);
