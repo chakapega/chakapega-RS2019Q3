@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import toolsReducer from './toolsReducer';
+import leftControlUnitReducer from './leftControlUnit/reducer';
 
 const rootReducer = combineReducers({
-  tool: toolsReducer
+  tool: leftControlUnitReducer
 });
 
 export default rootReducer;

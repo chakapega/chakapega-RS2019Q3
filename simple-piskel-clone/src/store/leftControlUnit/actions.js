@@ -1,4 +1,4 @@
-import { CHANGE_TOOL_SIZE, CHANGE_TOOL } from './tooslActionsTypes';
+import { CHANGE_TOOL_SIZE, CHANGE_TOOL } from './actionsTypes';
 
 export const changeToolSize = toolSize => {
   return {
@@ -7,7 +7,7 @@ export const changeToolSize = toolSize => {
   };
 };
 
-export const changeToolAction = selectedTool => {
+export const changeTool = selectedTool => {
   return {
     type: CHANGE_TOOL,
     payload: selectedTool

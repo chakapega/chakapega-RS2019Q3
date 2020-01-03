@@ -4,38 +4,25 @@ import PropTypes from 'prop-types';
 
 import { toolPen, toolEraser, toolColorPicker, toolPaintBucket } from '../../constants/constants';
 import ToolButton from './ToolButton';
-import { changeToolAction } from '../../actions/toolsActions';
+import { changeTool } from '../../store/leftControlUnit/actions';
 
 import './ToolsContainer.scss';
 
 class ToolsContainer extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      activeTool: toolPen
-    };
-  }
-
   componentDidMount() {
-    const { activeTool } = this.state;
+    const { activeTool } = this.props;
     document.querySelector(`.tool_${activeTool}`).classList.add('tool_active');
   }
 
   changeTool = event => {
     const selectedTool = event.currentTarget.getAttribute('title');
-    const { activeTool } = this.state;
-    const { changeToolAction } = this.props;
+    const { activeTool, changeTool } = this.props;
 
     if (selectedTool !== activeTool) {
       document.querySelector('.tool_active').classList.remove('tool_active');
       document.querySelector(`.tool_${selectedTool}`).classList.add('tool_active');
 
-      this.setState({
-        activeTool: selectedTool
-      });
-
-      changeToolAction(selectedTool);
+      changeTool(selectedTool);
     }
   };
 
@@ -52,13 +39,16 @@ class ToolsContainer extends Component {
 }
 
 ToolsContainer.propTypes = {
-  changeToolAction: PropTypes.func.isRequired
+  changeTool: PropTypes.func.isRequired,
+  activeTool: PropTypes.string.isRequired
 };
 
-const mapDispatchToProps = dispatch => ({
-  changeToolAction: selectedTool => dispatch(changeToolAction(selectedTool))
+const mapStateToProps = state => ({
+  activeTool: state.tool.activeTool
 });
 
-const WrappedToolsContainer = connect(null, mapDispatchToProps)(ToolsContainer);
+const mapDispatchToProps = dispatch => ({
+  changeTool: selectedTool => dispatch(changeTool(selectedTool))
+});
 
-export default WrappedToolsContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(ToolsContainer);

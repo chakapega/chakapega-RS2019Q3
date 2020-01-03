@@ -1,15 +1,15 @@
 import React from 'react';
 
-import WrappedPenSizeSelector from './PenSizeSelector';
-import WrappedToolsContainer from './ToolsContainer';
+import PenSizeSelector from './PenSizeSelector';
+import ToolsContainer from './ToolsContainer';
 
 import './LeftControlUnit.scss';
 
 const LeftControlUnit = () => {
   return (
     <div className='main__left-control-unit'>
-      <WrappedPenSizeSelector />
-      <WrappedToolsContainer />
+      <PenSizeSelector />
+      <ToolsContainer />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { toolSizeOne, toolSizeTwo, toolSizeThree, toolSizeFour } from '../../constants/constants';
-import { changeToolSize } from '../../actions/toolsActions';
+import { changeToolSize } from '../../store/leftControlUnit/actions';
 
 import './PenSizeSelector.scss';
 
@@ -76,6 +76,4 @@ const mapDispatchToProps = dispatch => ({
   changeToolSizeAction: toolSize => dispatch(changeToolSize(toolSize))
 });
 
-const WrappedPenSizeSelector = connect(mapStateToProps, mapDispatchToProps)(PenSizeSelector);
-
-export default WrappedPenSizeSelector;
+export default connect(mapStateToProps, mapDispatchToProps)(PenSizeSelector);

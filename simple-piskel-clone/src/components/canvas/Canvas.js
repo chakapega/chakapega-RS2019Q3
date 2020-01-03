@@ -2,29 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {
-  toolSizeOne,
-  toolSizeTwo,
-  toolSizeThree,
-  toolSizeFour,
-  toolPen,
-  toolEraser,
-  toolColorPicker,
-  toolPaintBucket
-} from '../../constants/constants';
+import { toolPen, toolEraser } from '../../constants/constants';
 
 import './Canvas.scss';
 
 class Canvas extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      toolSize: toolSizeOne,
-      activeTool: toolPen
-    };
-  }
-
   componentDidMount() {
     this.canvas = document.querySelector('#canvas');
     this.ctx = this.canvas.getContext('2d');
@@ -33,15 +15,6 @@ class Canvas extends Component {
     this.correctionNumber = 512 / 32;
     this.oldX = null;
     this.oldY = null;
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.toolSize !== prevProps.toolSize || this.props.activeTool !== prevProps.activeTool) {
-      this.setState({
-        toolSize: this.props.toolSize,
-        activeTool: this.props.activeTool
-      });
-    }
   }
 
   /* eslint-disable */
@@ -76,7 +49,7 @@ class Canvas extends Component {
   };
 
   draw = event => {
-    const { toolSize, activeTool } = this.state;
+    const { toolSize, activeTool } = this.props;
     if (event.buttons === 1 && activeTool === toolPen) {
       const x = Math.round(event.nativeEvent.layerX / this.correctionNumber);
       const y = Math.round(event.nativeEvent.layerY / this.correctionNumber);
@@ -98,7 +71,7 @@ class Canvas extends Component {
   };
 
   erase = event => {
-    const { toolSize, activeTool } = this.state;
+    const { toolSize, activeTool } = this.props;
     if (event.buttons === 1 && activeTool === toolEraser) {
       const x = Math.round(event.nativeEvent.layerX / this.correctionNumber);
       const y = Math.round(event.nativeEvent.layerY / this.correctionNumber);
@@ -121,7 +94,7 @@ class Canvas extends Component {
   /* eslint-enable */
 
   render() {
-    const { activeTool } = this.state;
+    const { activeTool } = this.props;
     let handler;
 
     switch (activeTool) {
@@ -149,6 +122,4 @@ const mapStateToProps = state => ({
   activeTool: state.tool.activeTool
 });
 
-const WrappedCanvas = connect(mapStateToProps)(Canvas);
-
-export default WrappedCanvas;
+export default connect(mapStateToProps)(Canvas);
