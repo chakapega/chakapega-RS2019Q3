@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { toolPen, toolEraser, realCanvasSize, toolColorPicker } from '../../helpers/constants';
+import { toolPen, toolEraser, realCanvasSize, toolColorPicker, toolPaintBucket } from '../../helpers/constants';
 import { rgbToHex, getCorrectionNumber } from '../../helpers/helpers';
 import { changeFirstCanvasColor } from '../../store/leftControlUnit/actions';
 
@@ -27,45 +27,7 @@ class Canvas extends Component {
     }
   }
 
-  setCanvasSize = () => {
-    const { activeCanvasSize } = this.props;
-
-    this.canvas.width = +activeCanvasSize;
-    this.canvas.height = +activeCanvasSize;
-  };
-
   /* eslint-disable */
-  getLineCoordinates = (x, y, prevX, prevY) => {
-    const { activeCanvasSize } = this.props;
-    const correctionNumber = getCorrectionNumber(realCanvasSize, activeCanvasSize);
-    const coordinates = [];
-    const dx = Math.abs(x - prevX);
-    const dy = Math.abs(y - prevY);
-    const sx = x < prevX ? 1 / correctionNumber : -1 / correctionNumber;
-    const sy = y < prevY ? 1 / correctionNumber : -1 / correctionNumber;
-    let error = dx - dy;
-
-    while (true) {
-      const doubleError = error * 2;
-
-      coordinates.push({ x, y });
-
-      if (x === prevX && y === prevY) {
-        break;
-      }
-      if (doubleError > -dy) {
-        error -= dy;
-        x += sx;
-      }
-      if (doubleError < dx) {
-        error += dx;
-        y += sy;
-      }
-    }
-
-    return coordinates;
-  };
-
   draw = event => {
     const { activeCanvasSize, activeToolSize, activeTool, activeFirstCanvasColor } = this.props;
     const correctionNumber = getCorrectionNumber(realCanvasSize, activeCanvasSize);
@@ -114,6 +76,72 @@ class Canvas extends Component {
       this.oldY = null;
     }
   };
+
+  getLineCoordinates = (x, y, prevX, prevY) => {
+    const { activeCanvasSize } = this.props;
+    const correctionNumber = getCorrectionNumber(realCanvasSize, activeCanvasSize);
+    const coordinates = [];
+    const dx = Math.abs(x - prevX);
+    const dy = Math.abs(y - prevY);
+    const sx = x < prevX ? 1 / correctionNumber : -1 / correctionNumber;
+    const sy = y < prevY ? 1 / correctionNumber : -1 / correctionNumber;
+    let error = dx - dy;
+
+    while (true) {
+      const doubleError = error * 2;
+
+      coordinates.push({ x, y });
+
+      if (x === prevX && y === prevY) {
+        break;
+      }
+      if (doubleError > -dy) {
+        error -= dy;
+        x += sx;
+      }
+      if (doubleError < dx) {
+        error += dx;
+        y += sy;
+      }
+    }
+
+    return coordinates;
+  };
+
+  setPixel = (imageData, x, y, color) => {
+    const offset = (y * imageData.width + x) * 4;
+    const [r, g, b, a] = color;
+
+    imageData.data[offset + 0] = r;
+    imageData.data[offset + 1] = g;
+    imageData.data[offset + 2] = b;
+    imageData.data[offset + 3] = a;
+  };
+
+  floodFill = (ctx, x, y, fillColor) => {
+    const imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+    const targetColor = this.getPixel(imageData, x, y);
+
+    if (!this.colorsMatch(targetColor, fillColor)) {
+      const pixelsToCheck = [x, y];
+
+      while (pixelsToCheck.length > 0) {
+        const y = pixelsToCheck.pop();
+        const x = pixelsToCheck.pop();
+        const currentColor = this.getPixel(imageData, x, y);
+
+        if (this.colorsMatch(currentColor, targetColor)) {
+          this.setPixel(imageData, x, y, fillColor);
+          pixelsToCheck.push(x + 1, y);
+          pixelsToCheck.push(x - 1, y);
+          pixelsToCheck.push(x, y + 1);
+          pixelsToCheck.push(x, y - 1);
+        }
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+    }
+  };
   /* eslint-enable */
 
   chooseColor = event => {
@@ -132,23 +160,64 @@ class Canvas extends Component {
     }
   };
 
+  paintBucket = event => {
+    const { activeCanvasSize } = this.props;
+    const correctionNumber = getCorrectionNumber(realCanvasSize, activeCanvasSize);
+    const x = Math.round(event.nativeEvent.layerX / correctionNumber);
+    const y = Math.round(event.nativeEvent.layerY / correctionNumber);
+
+    this.floodFill(this.ctx, x, y, [255, 0, 0, 255]);
+  };
+
+  setCanvasSize = () => {
+    const { activeCanvasSize } = this.props;
+
+    this.canvas.width = +activeCanvasSize;
+    this.canvas.height = +activeCanvasSize;
+  };
+
+  getPixel = (imageData, x, y) => {
+    if (x < 0 || y < 0 || x >= imageData.width || y >= imageData.height) {
+      return [-1, -1, -1, -1];
+    }
+    const offset = (y * imageData.width + x) * 4;
+
+    return imageData.data.slice(offset, offset + 4);
+  };
+
+  colorsMatch = (a, b) => {
+    return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3];
+  };
+
   render() {
     const { activeTool } = this.props;
-    let handler;
+    let onMouseMoveHandler;
+    let onClickHandler;
 
     switch (activeTool) {
       case toolPen:
-        handler = this.draw;
+        onMouseMoveHandler = this.draw;
         break;
       case toolEraser:
-        handler = this.erase;
+        onMouseMoveHandler = this.erase;
+        break;
+      case toolColorPicker:
+        onClickHandler = this.chooseColor;
+        break;
+      case toolPaintBucket:
+        onClickHandler = this.paintBucket;
         break;
       default:
         break;
     }
 
     return (
-      <canvas id='canvas' className={`active-tool_${activeTool}`} onMouseMove={handler} onClick={this.chooseColor} />
+      <canvas
+        id='canvas'
+        className={`active-tool_${activeTool}`}
+        onMouseMove={onMouseMoveHandler}
+        onClick={onClickHandler}
+      />
     );
   }
 }
