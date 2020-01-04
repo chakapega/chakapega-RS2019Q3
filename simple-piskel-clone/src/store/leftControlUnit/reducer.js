@@ -1,11 +1,11 @@
+import { toolSizeOne, toolPen, canvasSizeThirtyTwo, blackCanvasColor, whiteCanvasColor } from '../../helpers/constants';
 import {
-  toolSizeOne,
-  toolPen,
-  canvasSizeThirtyTwo,
-  blackCanvasColor,
-  whiteCanvasColor
-} from '../../constants/constants';
-import { CHANGE_TOOL_SIZE, CHANGE_TOOL, CHANGE_CANVAS_SIZE, CHANGE_FIRST_CANVAS_COLOR } from './actionsTypes';
+  CHANGE_TOOL_SIZE,
+  CHANGE_TOOL,
+  CHANGE_CANVAS_SIZE,
+  CHANGE_FIRST_CANVAS_COLOR,
+  CHANGE_SECOND_CANVAS_COLOR
+} from './actionsTypes';
 
 const initialState = {
   activeToolSize: toolSizeOne,
@@ -25,6 +25,8 @@ const leftControlUnitReducer = (state = initialState, action) => {
       return { ...state, activeCanvasSize: action.payload };
     case CHANGE_FIRST_CANVAS_COLOR:
       return { ...state, activeFirstCanvasColor: action.payload };
+    case CHANGE_SECOND_CANVAS_COLOR:
+      return { ...state, activeSecondCanvasColor: action.payload };
     default:
       return state;
   }

@@ -11,3 +11,4 @@ export const canvasSizeSixtyFour = '64';
 export const canvasSizeOneHundredAndTwentyEight = '128';
 export const blackCanvasColor = '#000000';
 export const whiteCanvasColor = '#ffffff';
+export const realCanvasSize = 512;

@@ -1,4 +1,10 @@
-import { CHANGE_TOOL_SIZE, CHANGE_TOOL, CHANGE_CANVAS_SIZE, CHANGE_FIRST_CANVAS_COLOR } from './actionsTypes';
+import {
+  CHANGE_TOOL_SIZE,
+  CHANGE_TOOL,
+  CHANGE_CANVAS_SIZE,
+  CHANGE_FIRST_CANVAS_COLOR,
+  CHANGE_SECOND_CANVAS_COLOR
+} from './actionsTypes';
 
 export const changeToolSize = selectedToolSize => {
   return {
@@ -25,5 +31,12 @@ export const changeFirstCanvasColor = selectedFirstCanvasColor => {
   return {
     type: CHANGE_FIRST_CANVAS_COLOR,
     payload: selectedFirstCanvasColor
+  };
+};
+
+export const changeSecondCanvasColor = selectedSecondCanvasColor => {
+  return {
+    type: CHANGE_SECOND_CANVAS_COLOR,
+    payload: selectedSecondCanvasColor
   };
 };

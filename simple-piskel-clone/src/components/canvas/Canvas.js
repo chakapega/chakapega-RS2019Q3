@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { toolPen, toolEraser } from '../../constants/constants';
+import { toolPen, toolEraser, realCanvasSize, toolColorPicker } from '../../helpers/constants';
+import { rgbToHex, getCorrectionNumber } from '../../helpers/helpers';
+import { changeFirstCanvasColor } from '../../store/leftControlUnit/actions';
 
 import './Canvas.scss';
 
@@ -25,12 +27,6 @@ class Canvas extends Component {
     }
   }
 
-  getCorrectionNumber = () => {
-    const { activeCanvasSize } = this.props;
-
-    return 512 / +activeCanvasSize;
-  };
-
   setCanvasSize = () => {
     const { activeCanvasSize } = this.props;
 
@@ -40,7 +36,8 @@ class Canvas extends Component {
 
   /* eslint-disable */
   getLineCoordinates = (x, y, prevX, prevY) => {
-    const correctionNumber = this.getCorrectionNumber();
+    const { activeCanvasSize } = this.props;
+    const correctionNumber = getCorrectionNumber(realCanvasSize, activeCanvasSize);
     const coordinates = [];
     const dx = Math.abs(x - prevX);
     const dy = Math.abs(y - prevY);
@@ -70,8 +67,8 @@ class Canvas extends Component {
   };
 
   draw = event => {
-    const { activeToolSize, activeTool, activeFirstCanvasColor } = this.props;
-    const correctionNumber = this.getCorrectionNumber();
+    const { activeCanvasSize, activeToolSize, activeTool, activeFirstCanvasColor } = this.props;
+    const correctionNumber = getCorrectionNumber(realCanvasSize, activeCanvasSize);
 
     if (event.buttons === 1 && activeTool === toolPen) {
       const x = Math.round(event.nativeEvent.layerX / correctionNumber);
@@ -95,8 +92,8 @@ class Canvas extends Component {
   };
 
   erase = event => {
-    const { activeToolSize, activeTool } = this.props;
-    const correctionNumber = this.getCorrectionNumber();
+    const { activeCanvasSize, activeToolSize, activeTool } = this.props;
+    const correctionNumber = getCorrectionNumber(realCanvasSize, activeCanvasSize);
 
     if (event.buttons === 1 && activeTool === toolEraser) {
       const x = Math.round(event.nativeEvent.layerX / correctionNumber);
@@ -119,6 +116,22 @@ class Canvas extends Component {
   };
   /* eslint-enable */
 
+  chooseColor = event => {
+    const { activeCanvasSize, activeTool, changeFirstCanvasColorAction } = this.props;
+    const correctionNumber = getCorrectionNumber(realCanvasSize, activeCanvasSize);
+
+    if (activeTool === toolColorPicker) {
+      const x = Math.round(event.nativeEvent.layerX / correctionNumber);
+      const y = Math.round(event.nativeEvent.layerY / correctionNumber);
+      const imageData = this.ctx.getImageData(x, y, 1, 1).data;
+      const [r, g, b, a] = imageData;
+
+      if (a !== 0) {
+        changeFirstCanvasColorAction(rgbToHex(r, g, b));
+      }
+    }
+  };
+
   render() {
     const { activeTool } = this.props;
     let handler;
@@ -134,7 +147,9 @@ class Canvas extends Component {
         break;
     }
 
-    return <canvas id='canvas' className={`active-tool_${activeTool}`} onMouseMove={handler} />;
+    return (
+      <canvas id='canvas' className={`active-tool_${activeTool}`} onMouseMove={handler} onClick={this.chooseColor} />
+    );
   }
 }
 
@@ -142,7 +157,8 @@ Canvas.propTypes = {
   activeToolSize: PropTypes.string.isRequired,
   activeTool: PropTypes.string.isRequired,
   activeCanvasSize: PropTypes.string.isRequired,
-  activeFirstCanvasColor: PropTypes.string.isRequired
+  activeFirstCanvasColor: PropTypes.string.isRequired,
+  changeFirstCanvasColorAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -152,4 +168,8 @@ const mapStateToProps = state => ({
   activeFirstCanvasColor: state.tool.activeFirstCanvasColor
 });
 
-export default connect(mapStateToProps)(Canvas);
+const mapDispatchToProps = dispatch => ({
+  changeFirstCanvasColorAction: selectedFirstCanvasColor => dispatch(changeFirstCanvasColor(selectedFirstCanvasColor))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Canvas);

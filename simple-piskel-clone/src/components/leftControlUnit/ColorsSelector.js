@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { changeFirstCanvasColor } from '../../store/leftControlUnit/actions';
+import { changeFirstCanvasColor, changeSecondCanvasColor } from '../../store/leftControlUnit/actions';
 
 import './ColorsSelector.scss';
 
@@ -13,14 +13,12 @@ class ColorsSelector extends Component {
   }
 
   swapColors = () => {
-    const { changeFirstCanvasColorAction } = this.props;
+    const { changeFirstCanvasColorAction, changeSecondCanvasColorAction } = this.props;
     const futureFirstColor = this.secondColorInput.value;
     const futureSecondColor = this.firstColorInput.value;
 
-    this.firstColorInput.value = futureFirstColor;
-    this.secondColorInput.value = futureSecondColor;
-
     changeFirstCanvasColorAction(futureFirstColor);
+    changeSecondCanvasColorAction(futureSecondColor);
   };
 
   changeColor = event => {
@@ -39,14 +37,14 @@ class ColorsSelector extends Component {
           type='color'
           id='first-color-input'
           name='first-color'
-          defaultValue={activeFirstCanvasColor}
+          value={activeFirstCanvasColor}
           onChange={this.changeColor}
         />
         <input
           type='color'
           id='second-color-input'
           name='second-color'
-          defaultValue={activeSecondCanvasColor}
+          value={activeSecondCanvasColor}
           onChange={this.changeColor}
         />
         <button type='button' className='colors-change-button' onClick={this.swapColors}>
@@ -60,7 +58,8 @@ class ColorsSelector extends Component {
 ColorsSelector.propTypes = {
   activeFirstCanvasColor: PropTypes.string.isRequired,
   activeSecondCanvasColor: PropTypes.string.isRequired,
-  changeFirstCanvasColorAction: PropTypes.func.isRequired
+  changeFirstCanvasColorAction: PropTypes.func.isRequired,
+  changeSecondCanvasColorAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -69,7 +68,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeFirstCanvasColorAction: selectedFirstCanvasColor => dispatch(changeFirstCanvasColor(selectedFirstCanvasColor))
+  changeFirstCanvasColorAction: selectedFirstCanvasColor => dispatch(changeFirstCanvasColor(selectedFirstCanvasColor)),
+  changeSecondCanvasColorAction: selectedSecondCanvasColor =>
+    dispatch(changeSecondCanvasColor(selectedSecondCanvasColor))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ColorsSelector);

@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {
-  canvasSizeThirtyTwo,
-  canvasSizeSixtyFour,
-  canvasSizeOneHundredAndTwentyEight
-} from '../../constants/constants';
+import { canvasSizeThirtyTwo, canvasSizeSixtyFour, canvasSizeOneHundredAndTwentyEight } from '../../helpers/constants';
 import { changeCanvasSize } from '../../store/leftControlUnit/actions';
 
 import './CanvasSizeSelector.scss';
