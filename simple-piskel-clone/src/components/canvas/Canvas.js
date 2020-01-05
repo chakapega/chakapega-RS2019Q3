@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { toolPen, toolEraser, realCanvasSize, toolColorPicker, toolPaintBucket } from '../../constants/constants';
+import {
+  toolPen,
+  toolEraser,
+  realCanvasSize,
+  toolColorPicker,
+  toolPaintBucket,
+  hoverColorOverExtraCanvas
+} from '../../constants/constants';
 import { rgbToHex, customHexToRgb } from '../../helpers/helpers';
 import { changeFirstCanvasColor } from '../../store/leftControlUnit/actions';
 
@@ -13,9 +20,13 @@ class Canvas extends Component {
     const { activeCanvasSize } = this.props;
 
     this.canvas = document.querySelector('#canvas');
+    this.extraCanvas = document.querySelector('#extra-canvas');
     this.ctx = this.canvas.getContext('2d');
+    this.extraCtx = this.extraCanvas.getContext('2d');
     this.canvas.width = +activeCanvasSize;
     this.canvas.height = +activeCanvasSize;
+    this.extraCanvas.width = +activeCanvasSize;
+    this.extraCanvas.height = +activeCanvasSize;
     this.oldX = null;
     this.oldY = null;
   }
@@ -165,13 +176,16 @@ class Canvas extends Component {
   };
 
   paintBucket = event => {
-    const { activeCanvasSize, activeFirstCanvasColor } = this.props;
-    const correctionNumber = this.getCorrectionNumber(activeCanvasSize);
-    const x = Math.round(event.nativeEvent.layerX / correctionNumber);
-    const y = Math.round(event.nativeEvent.layerY / correctionNumber);
-    const { r, g, b } = customHexToRgb(activeFirstCanvasColor);
+    const { activeTool, activeCanvasSize, activeFirstCanvasColor } = this.props;
 
-    this.floodFill(this.ctx, x, y, [r, g, b, 255]);
+    if (activeTool === toolPaintBucket) {
+      const correctionNumber = this.getCorrectionNumber(activeCanvasSize);
+      const x = Math.round(event.nativeEvent.layerX / correctionNumber);
+      const y = Math.round(event.nativeEvent.layerY / correctionNumber);
+      const { r, g, b } = customHexToRgb(activeFirstCanvasColor);
+
+      this.floodFill(this.ctx, x, y, [r, g, b, 255]);
+    }
   };
 
   setCanvasSize = () => {
@@ -179,6 +193,8 @@ class Canvas extends Component {
 
     this.canvas.width = +activeCanvasSize;
     this.canvas.height = +activeCanvasSize;
+    this.extraCanvas.width = +activeCanvasSize;
+    this.extraCanvas.height = +activeCanvasSize;
   };
 
   getPixel = (imageData, x, y) => {
@@ -192,6 +208,37 @@ class Canvas extends Component {
 
   colorsMatch = (a, b) => {
     return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3];
+  };
+
+  hoverOnExtraCanvas = event => {
+    const { activeCanvasSize, activeToolSize } = this.props;
+    const correctionNumber = this.getCorrectionNumber(activeCanvasSize);
+    const { width, height } = this.extraCanvas;
+    const x = Math.round(event.nativeEvent.layerX / correctionNumber);
+    const y = Math.round(event.nativeEvent.layerY / correctionNumber);
+
+    this.extraCtx.beginPath();
+    this.extraCtx.clearRect(0, 0, width, height);
+    this.extraCtx.rect(x, y, +activeToolSize, +activeToolSize);
+    this.extraCtx.fillStyle = hoverColorOverExtraCanvas;
+    this.extraCtx.fill();
+  };
+
+  clearExtraCanvas = () => {
+    const { width, height } = this.extraCanvas;
+
+    this.extraCtx.beginPath();
+    this.extraCtx.clearRect(0, 0, width, height);
+  };
+
+  hideExtraCanvas = () => {
+    this.extraCanvas.classList.add('extra-canvas_hidden');
+  };
+
+  showExtraCanvas = () => {
+    this.extraCanvas.classList.remove('extra-canvas_hidden');
+    this.oldX = null;
+    this.oldY = null;
   };
 
   render() {
@@ -216,13 +263,26 @@ class Canvas extends Component {
         break;
     }
 
+    const func = event => {
+      this.hideExtraCanvas();
+
+      if (onClickHandler) onClickHandler(event);
+    };
+
     return (
       <div className='canvas-container'>
         <canvas
           id='canvas'
           className={`active-tool_${activeTool}`}
           onMouseMove={onMouseMoveHandler}
-          onClick={onClickHandler}
+          onMouseUp={this.showExtraCanvas}
+        />
+        <canvas
+          id='extra-canvas'
+          className={`extra-canvas active-tool_${activeTool}`}
+          onMouseMove={this.hoverOnExtraCanvas}
+          onMouseDown={func}
+          onMouseLeave={this.clearExtraCanvas}
         />
       </div>
     );
