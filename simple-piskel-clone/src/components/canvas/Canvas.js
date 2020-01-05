@@ -217,12 +217,14 @@ class Canvas extends Component {
     }
 
     return (
-      <canvas
-        id='canvas'
-        className={`active-tool_${activeTool}`}
-        onMouseMove={onMouseMoveHandler}
-        onClick={onClickHandler}
-      />
+      <div className='canvas-container'>
+        <canvas
+          id='canvas'
+          className={`active-tool_${activeTool}`}
+          onMouseMove={onMouseMoveHandler}
+          onClick={onClickHandler}
+        />
+      </div>
     );
   }
 }

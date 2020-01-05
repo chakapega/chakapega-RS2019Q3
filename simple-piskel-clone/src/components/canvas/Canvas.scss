@@ -1,18 +1,23 @@
-#canvas {
+.canvas-container {
   width: 512px;
   height: 512px;
-  border: 3px solid #63807d;
-  image-rendering: pixelated;
-}
-.active-tool_pen {
-  cursor: url('../../assets/images/cursor-pen.png'), auto;
-}
-.active-tool_eraser {
-  cursor: url('../../assets/images/cursor-eraser.png'), auto;
-}
-.active-tool_color-picker {
-  cursor: url('../../assets/images/cursor-color-picker.png'), auto;
-}
-.active-tool_paint-bucket {
-  cursor: url('../../assets/images/cursor-paint-bucket.png'), auto;
+  background-image: url(../../assets/images/canvas-background.png);
+
+  #canvas {
+    width: 512px;
+    height: 512px;
+    image-rendering: pixelated;
+  }
+  .active-tool_pen {
+    cursor: url('../../assets/images/cursor-pen.png'), auto;
+  }
+  .active-tool_eraser {
+    cursor: url('../../assets/images/cursor-eraser.png'), auto;
+  }
+  .active-tool_color-picker {
+    cursor: url('../../assets/images/cursor-color-picker.png'), auto;
+  }
+  .active-tool_paint-bucket {
+    cursor: url('../../assets/images/cursor-paint-bucket.png'), auto;
+  }
 }
