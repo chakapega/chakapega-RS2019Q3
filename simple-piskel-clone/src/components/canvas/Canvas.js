@@ -76,7 +76,6 @@ class Canvas extends Component {
         this.getLineCoordinates(x, y, this.oldX, this.oldY).forEach(({ x, y }) => {
           this.ctx.beginPath();
           this.ctx.clearRect(Math.round(x), Math.round(y), +activeToolSize, +activeToolSize);
-          this.ctx.fill();
         });
       }
 
@@ -154,6 +153,30 @@ class Canvas extends Component {
     }
   };
   /* eslint-enable */
+
+  fillPixel = event => {
+    const { activeCanvasSize, activeToolSize, activeFirstCanvasColor } = this.props;
+
+    const correctionNumber = this.getCorrectionNumber(activeCanvasSize);
+    const x = Math.round(event.nativeEvent.layerX / correctionNumber);
+    const y = Math.round(event.nativeEvent.layerY / correctionNumber);
+
+    this.ctx.beginPath();
+    this.ctx.rect(x, y, +activeToolSize, +activeToolSize);
+    this.ctx.fillStyle = activeFirstCanvasColor;
+    this.ctx.fill();
+  };
+
+  erasePixel = event => {
+    const { activeCanvasSize, activeToolSize } = this.props;
+
+    const correctionNumber = this.getCorrectionNumber(activeCanvasSize);
+    const x = Math.round(event.nativeEvent.layerX / correctionNumber);
+    const y = Math.round(event.nativeEvent.layerY / correctionNumber);
+
+    this.ctx.beginPath();
+    this.ctx.clearRect(x, y, +activeToolSize, +activeToolSize);
+  };
 
   getCorrectionNumber = activeCanvasSize => {
     return realCanvasSize / +activeCanvasSize;
@@ -266,6 +289,8 @@ class Canvas extends Component {
     const func = event => {
       this.hideExtraCanvas();
 
+      if (activeTool === toolPen) this.fillPixel(event);
+      if (activeTool === toolEraser) this.erasePixel(event);
       if (onClickHandler) onClickHandler(event);
     };
 
