@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import leftControlUnitReducer from './leftControlUnit/reducer';
+import leftControlUnitReducer from './leftControlUnit/tools/reducer';
 import canvasFramesReducer from './leftControlUnit/canvasFrames/reducer';
 
 const rootReducer = combineReducers({

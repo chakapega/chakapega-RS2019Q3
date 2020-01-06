@@ -11,7 +11,7 @@ import {
   hoverColorOverExtraCanvas
 } from '../../constants/constants';
 import { rgbToHex, customHexToRgb } from '../../helpers/helpers';
-import { changeFirstCanvasColor } from '../../store/leftControlUnit/actions';
+import { changeFirstCanvasColor } from '../../store/leftControlUnit/tools/actions';
 import { mapImageDataToState } from '../../store/leftControlUnit/canvasFrames/actions';
 
 import './Canvas.scss';
@@ -300,9 +300,13 @@ class Canvas extends Component {
       if (activeTool === toolEraser) this.erasePixel(event);
       if (onClickHandler) onClickHandler(event);
     };
-
     const onMouseUpCanvas = () => {
       this.showExtraCanvas();
+      this.getImageData();
+      this.oldX = null;
+      this.oldY = null;
+    };
+    const onMouseLeaveCanvas = () => {
       this.getImageData();
       this.oldX = null;
       this.oldY = null;
@@ -315,6 +319,7 @@ class Canvas extends Component {
           className={`active-tool_${activeTool}`}
           onMouseMove={onMouseMoveHandler}
           onMouseUp={onMouseUpCanvas}
+          onMouseLeave={onMouseLeaveCanvas}
         />
         <canvas
           id='extra-canvas'
