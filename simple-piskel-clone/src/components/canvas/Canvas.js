@@ -219,6 +219,8 @@ class Canvas extends Component {
     this.canvas.height = +activeCanvasSize;
     this.extraCanvas.width = +activeCanvasSize;
     this.extraCanvas.height = +activeCanvasSize;
+
+    this.getImageData();
   };
 
   getPixel = (imageData, x, y) => {
