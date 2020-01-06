@@ -1,0 +1,18 @@
+.canvas-frame {
+  width: 132px;
+  height: 132px;
+
+  .preview-list-canvas-container {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #63807d;
+    box-sizing: border-box;
+    background-image: url(../../../assets/images/canvas-background.png);
+
+    .preview-list-canvas {
+      width: 128px;
+      height: 128px;
+      image-rendering: pixelated;
+    }
+  }
+}

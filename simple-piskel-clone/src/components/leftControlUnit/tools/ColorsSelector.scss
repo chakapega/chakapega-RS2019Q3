@@ -1,7 +1,6 @@
 .colors-selector {
   position: relative;
-  display: block;
-  margin-left: 10px;
+  height: 80px;
 
   #first-color-input {
     position: absolute;
@@ -43,7 +42,7 @@
       display: block;
       width: 100%;
       height: 100%;
-      background-image: url(../../assets/images/change-colors-arrow.svg);
+      background-image: url(../../../assets/images/change-colors-arrow.svg);
       background-size: cover;
     }
   }

@@ -12,6 +12,7 @@ import {
 } from '../../constants/constants';
 import { rgbToHex, customHexToRgb } from '../../helpers/helpers';
 import { changeFirstCanvasColor } from '../../store/leftControlUnit/actions';
+import { mapImageDataToState } from '../../store/leftControlUnit/canvasFrames/actions';
 
 import './Canvas.scss';
 
@@ -260,8 +261,14 @@ class Canvas extends Component {
 
   showExtraCanvas = () => {
     this.extraCanvas.classList.remove('extra-canvas_hidden');
-    this.oldX = null;
-    this.oldY = null;
+  };
+
+  getImageData = () => {
+    const { mapImageDataToStateAction } = this.props;
+    const { width, height } = this.canvas;
+    const imageData = this.ctx.getImageData(0, 0, width, height);
+
+    mapImageDataToStateAction(imageData);
   };
 
   render() {
@@ -286,12 +293,19 @@ class Canvas extends Component {
         break;
     }
 
-    const func = event => {
+    const onMouseDownExtraCanvas = event => {
       this.hideExtraCanvas();
 
       if (activeTool === toolPen) this.fillPixel(event);
       if (activeTool === toolEraser) this.erasePixel(event);
       if (onClickHandler) onClickHandler(event);
+    };
+
+    const onMouseUpCanvas = () => {
+      this.showExtraCanvas();
+      this.getImageData();
+      this.oldX = null;
+      this.oldY = null;
     };
 
     return (
@@ -300,13 +314,13 @@ class Canvas extends Component {
           id='canvas'
           className={`active-tool_${activeTool}`}
           onMouseMove={onMouseMoveHandler}
-          onMouseUp={this.showExtraCanvas}
+          onMouseUp={onMouseUpCanvas}
         />
         <canvas
           id='extra-canvas'
           className={`extra-canvas active-tool_${activeTool}`}
           onMouseMove={this.hoverOnExtraCanvas}
-          onMouseDown={func}
+          onMouseDown={onMouseDownExtraCanvas}
           onMouseLeave={this.clearExtraCanvas}
         />
       </div>
@@ -319,7 +333,8 @@ Canvas.propTypes = {
   activeTool: PropTypes.string.isRequired,
   activeCanvasSize: PropTypes.string.isRequired,
   activeFirstCanvasColor: PropTypes.string.isRequired,
-  changeFirstCanvasColorAction: PropTypes.func.isRequired
+  changeFirstCanvasColorAction: PropTypes.func.isRequired,
+  mapImageDataToStateAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -330,7 +345,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeFirstCanvasColorAction: selectedFirstCanvasColor => dispatch(changeFirstCanvasColor(selectedFirstCanvasColor))
+  changeFirstCanvasColorAction: selectedFirstCanvasColor => dispatch(changeFirstCanvasColor(selectedFirstCanvasColor)),
+  mapImageDataToStateAction: imageData => dispatch(mapImageDataToState(imageData))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Canvas);
