@@ -1,8 +1,26 @@
-.preview-list {
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  margin-left: 15px;
+.preview-list-container {
+  .preview-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    margin-left: 15px;
+  }
+  .add-new-frame-button {
+    width: 132px;
+    height: 40px;
+    border: 2px solid #63807d;
+    margin-left: 15px;
+    background-color: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s linear;
+    outline: none;
+
+    &:hover {
+      border: 2px solid #ffffff;
+      box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+    }
+  }
 }

@@ -308,10 +308,12 @@ class Canvas extends Component {
       this.oldX = null;
       this.oldY = null;
     };
-    const onMouseLeaveCanvas = () => {
-      this.getImageData();
-      this.oldX = null;
-      this.oldY = null;
+    const onMouseLeaveCanvas = event => {
+      if (event.buttons === 1) {
+        this.getImageData();
+        this.oldX = null;
+        this.oldY = null;
+      }
     };
 
     return (
@@ -350,7 +352,6 @@ const mapStateToProps = state => ({
   activeCanvasSize: state.tool.activeCanvasSize,
   activeFirstCanvasColor: state.tool.activeFirstCanvasColor
 });
-
 const mapDispatchToProps = dispatch => ({
   changeFirstCanvasColorAction: selectedFirstCanvasColor => dispatch(changeFirstCanvasColor(selectedFirstCanvasColor)),
   mapImageDataToStateAction: imageData => dispatch(mapImageDataToState(imageData))
