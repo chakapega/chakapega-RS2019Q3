@@ -9,6 +9,8 @@ const initialState = {
   arrayOfCanvasFrames: [{ id: 1, isActive: true, imageData: {} }]
 };
 const createNewArrayOfCanvasFramesWithAddedElement = state => {
+  if (state.arrayOfCanvasFrames.length === 5) return [...state.arrayOfCanvasFrames];
+  
   const newCanvasFrame = { id: 0, isActive: true, imageData: {} };
 
   state.arrayOfCanvasFrames.forEach(canvasFrame => {
