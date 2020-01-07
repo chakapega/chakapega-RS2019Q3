@@ -1,4 +1,4 @@
-import { MAP_IMAGE_DATA_TO_STATE, ADD_NEW_CANVAS_FRAME } from './actionsTypes';
+import { MAP_IMAGE_DATA_TO_STATE, ADD_NEW_CANVAS_FRAME, CHANGE_ACTIVE_CANVAS_FRAME } from './actionsTypes';
 
 const initialState = {
   arrayOfCanvasFrames: [{ id: 1, isActive: true, imageData: {} }]
@@ -32,6 +32,16 @@ const canvasFramesReducer = (state = initialState, action) => {
       return {
         ...state,
         arrayOfCanvasFrames: createNewArrayOfCanvasFramesWithAddedElement(state)
+      };
+    case CHANGE_ACTIVE_CANVAS_FRAME:
+      return {
+        ...state,
+        arrayOfCanvasFrames: state.arrayOfCanvasFrames.map(canvasFrame => {
+          if (canvasFrame.id === action.payload) {
+            return { ...canvasFrame, isActive: true };
+          }
+          return { ...canvasFrame, isActive: false };
+        })
       };
     default:
       return state;

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes, { object } from 'prop-types';
 
 import CanvasFrame from './CanvasFrame';
-import { addNewCanvasFrame } from '../../../store/leftControlUnit/canvasFrames/actions';
+import { addNewCanvasFrame, changeActiveCanvasFrame } from '../../../store/leftControlUnit/canvasFrames/actions';
 
 import './PreviewList.scss';
 
@@ -34,6 +34,13 @@ class PreviewList extends Component {
     addNewCanvasFrameAction();
   };
 
+  changeActiveCanvasFrame = event => {
+    const { changeActiveCanvasFrameAction } = this.props;
+    const { id } = event.currentTarget;
+
+    changeActiveCanvasFrameAction(+id);
+  };
+
   render() {
     const { arrayOfCanvasFrames } = this.props;
 
@@ -46,6 +53,7 @@ class PreviewList extends Component {
               id={canvasFrame.id}
               isActive={canvasFrame.isActive}
               imageData={canvasFrame.imageData}
+              changeActiveCanvasFrame={this.changeActiveCanvasFrame}
             />
           ))}
         </ul>
@@ -59,14 +67,16 @@ class PreviewList extends Component {
 
 PreviewList.propTypes = {
   arrayOfCanvasFrames: PropTypes.arrayOf(object).isRequired,
-  addNewCanvasFrameAction: PropTypes.func.isRequired
+  addNewCanvasFrameAction: PropTypes.func.isRequired,
+  changeActiveCanvasFrameAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   arrayOfCanvasFrames: state.canvasFrame.arrayOfCanvasFrames
 });
 const mapDispatchToProps = dispatch => ({
-  addNewCanvasFrameAction: () => dispatch(addNewCanvasFrame())
+  addNewCanvasFrameAction: () => dispatch(addNewCanvasFrame()),
+  changeActiveCanvasFrameAction: id => dispatch(changeActiveCanvasFrame(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PreviewList);
