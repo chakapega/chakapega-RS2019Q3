@@ -2,21 +2,19 @@ import {
   MAP_IMAGE_DATA_TO_STATE,
   ADD_NEW_CANVAS_FRAME,
   CHANGE_ACTIVE_CANVAS_FRAME,
-  DELETE_ALL_ADDED_CANVAS_FRAMES
+  DELETE_ALL_ADDED_CANVAS_FRAMES,
+  DELETE_CANVAS_FRAME
 } from './actionsTypes';
 
 const initialState = {
-  arrayOfCanvasFrames: [{ id: 1, isActive: true, imageData: {} }]
+  arrayOfCanvasFrames: [{ id: new Date().getTime(), isActive: true, imageData: {} }]
 };
 const createNewArrayOfCanvasFramesWithAddedElement = state => {
   if (state.arrayOfCanvasFrames.length === 5) return [...state.arrayOfCanvasFrames];
-  
-  const newCanvasFrame = { id: 0, isActive: true, imageData: {} };
+
+  const newCanvasFrame = { id: new Date().getTime(), isActive: true, imageData: {} };
 
   state.arrayOfCanvasFrames.forEach(canvasFrame => {
-    if (canvasFrame.id === state.arrayOfCanvasFrames.length) {
-      newCanvasFrame.id = canvasFrame.id + 1;
-    }
     if (canvasFrame.isActive === true) canvasFrame.isActive = false;
   });
 
@@ -52,6 +50,11 @@ const canvasFramesReducer = (state = initialState, action) => {
       };
     case DELETE_ALL_ADDED_CANVAS_FRAMES:
       return { ...state, arrayOfCanvasFrames: [{ id: 1, isActive: true, imageData: {} }] };
+    case DELETE_CANVAS_FRAME:
+      return {
+        ...state,
+        arrayOfCanvasFrames: state.arrayOfCanvasFrames.filter(canvasFrame => canvasFrame.id !== action.payload)
+      };
     default:
       return state;
   }

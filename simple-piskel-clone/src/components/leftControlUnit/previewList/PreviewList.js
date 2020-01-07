@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes, { object } from 'prop-types';
 
 import CanvasFrame from './CanvasFrame';
-import { addNewCanvasFrame, changeActiveCanvasFrame } from '../../../store/leftControlUnit/canvasFrames/actions';
+import {
+  addNewCanvasFrame,
+  changeActiveCanvasFrame,
+  deleteCanvasFrame
+} from '../../../store/leftControlUnit/canvasFrames/actions';
 
 import './PreviewList.scss';
 
@@ -34,9 +38,23 @@ class PreviewList extends Component {
     addNewCanvasFrameAction();
   };
 
-  changeActiveCanvasFrame = event => {
+  deleteCanvasFrame = id => {
+    const { arrayOfCanvasFrames, deleteCanvasFrameAction } = this.props;
+
+    if (arrayOfCanvasFrames.length > 1) {
+      deleteCanvasFrameAction(id);
+
+      arrayOfCanvasFrames.forEach((canvasFrame, index) => {
+        if (canvasFrame.id === id && canvasFrame.isActive) {
+          if (index !== 0) this.changeActiveCanvasFrame(arrayOfCanvasFrames[0].id);
+          if (index === 0) this.changeActiveCanvasFrame(arrayOfCanvasFrames[1].id);
+        }
+      });
+    }
+  };
+
+  changeActiveCanvasFrame = id => {
     const { arrayOfCanvasFrames, changeActiveCanvasFrameAction } = this.props;
-    const { id } = event.currentTarget;
 
     arrayOfCanvasFrames.forEach(canvasFrame => {
       if (canvasFrame.isActive && canvasFrame.id !== +id) changeActiveCanvasFrameAction(+id);
@@ -56,6 +74,7 @@ class PreviewList extends Component {
               isActive={canvasFrame.isActive}
               imageData={canvasFrame.imageData}
               changeActiveCanvasFrame={this.changeActiveCanvasFrame}
+              deleteCanvasFrame={this.deleteCanvasFrame}
             />
           ))}
         </ul>
@@ -70,7 +89,8 @@ class PreviewList extends Component {
 PreviewList.propTypes = {
   arrayOfCanvasFrames: PropTypes.arrayOf(object).isRequired,
   addNewCanvasFrameAction: PropTypes.func.isRequired,
-  changeActiveCanvasFrameAction: PropTypes.func.isRequired
+  changeActiveCanvasFrameAction: PropTypes.func.isRequired,
+  deleteCanvasFrameAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -78,7 +98,8 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   addNewCanvasFrameAction: () => dispatch(addNewCanvasFrame()),
-  changeActiveCanvasFrameAction: id => dispatch(changeActiveCanvasFrame(id))
+  changeActiveCanvasFrameAction: id => dispatch(changeActiveCanvasFrame(id)),
+  deleteCanvasFrameAction: id => dispatch(deleteCanvasFrame(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PreviewList);
