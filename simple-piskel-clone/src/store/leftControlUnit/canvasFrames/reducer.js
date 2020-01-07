@@ -1,4 +1,9 @@
-import { MAP_IMAGE_DATA_TO_STATE, ADD_NEW_CANVAS_FRAME, CHANGE_ACTIVE_CANVAS_FRAME } from './actionsTypes';
+import {
+  MAP_IMAGE_DATA_TO_STATE,
+  ADD_NEW_CANVAS_FRAME,
+  CHANGE_ACTIVE_CANVAS_FRAME,
+  DELETE_ALL_ADDED_CANVAS_FRAMES
+} from './actionsTypes';
 
 const initialState = {
   arrayOfCanvasFrames: [{ id: 1, isActive: true, imageData: {} }]
@@ -43,6 +48,8 @@ const canvasFramesReducer = (state = initialState, action) => {
           return { ...canvasFrame, isActive: false };
         })
       };
+    case DELETE_ALL_ADDED_CANVAS_FRAMES:
+      return { ...state, arrayOfCanvasFrames: [{ id: 1, isActive: true, imageData: {} }] };
     default:
       return state;
   }

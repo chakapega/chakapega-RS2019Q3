@@ -35,10 +35,12 @@ class PreviewList extends Component {
   };
 
   changeActiveCanvasFrame = event => {
-    const { changeActiveCanvasFrameAction } = this.props;
+    const { arrayOfCanvasFrames, changeActiveCanvasFrameAction } = this.props;
     const { id } = event.currentTarget;
 
-    changeActiveCanvasFrameAction(+id);
+    arrayOfCanvasFrames.forEach(canvasFrame => {
+      if (canvasFrame.isActive && canvasFrame.id !== +id) changeActiveCanvasFrameAction(+id);
+    });
   };
 
   render() {

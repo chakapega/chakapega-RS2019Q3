@@ -1,4 +1,9 @@
-import { MAP_IMAGE_DATA_TO_STATE, ADD_NEW_CANVAS_FRAME, CHANGE_ACTIVE_CANVAS_FRAME } from './actionsTypes';
+import {
+  MAP_IMAGE_DATA_TO_STATE,
+  ADD_NEW_CANVAS_FRAME,
+  CHANGE_ACTIVE_CANVAS_FRAME,
+  DELETE_ALL_ADDED_CANVAS_FRAMES
+} from './actionsTypes';
 
 export const mapImageDataToState = imageData => {
   return {
@@ -15,5 +20,10 @@ export const changeActiveCanvasFrame = id => {
   return {
     type: CHANGE_ACTIVE_CANVAS_FRAME,
     payload: id
+  };
+};
+export const deleteAllAddedCanvasFrames = () => {
+  return {
+    type: DELETE_ALL_ADDED_CANVAS_FRAMES
   };
 };

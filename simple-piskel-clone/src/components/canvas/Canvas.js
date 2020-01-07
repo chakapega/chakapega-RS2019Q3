@@ -12,7 +12,7 @@ import {
 } from '../../constants/constants';
 import { rgbToHex, customHexToRgb } from '../../helpers/helpers';
 import { changeFirstCanvasColor } from '../../store/leftControlUnit/tools/actions';
-import { mapImageDataToState } from '../../store/leftControlUnit/canvasFrames/actions';
+import { mapImageDataToState, deleteAllAddedCanvasFrames } from '../../store/leftControlUnit/canvasFrames/actions';
 
 import './Canvas.scss';
 
@@ -33,10 +33,14 @@ class Canvas extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { activeCanvasSize, arrayOfCanvasFrames } = this.props;
+    const { activeCanvasSize, arrayOfCanvasFrames, deleteAllAddedCanvasFramesAction } = this.props;
 
-    if (this.canvas.width !== +activeCanvasSize) this.setCanvasSize();
+    if (this.canvas.width !== +activeCanvasSize) {
+      deleteAllAddedCanvasFramesAction();
+      this.setCanvasSize();
+    }
     if (prevProps.arrayOfCanvasFrames.length < arrayOfCanvasFrames.length) this.clearCanvas();
+    this.displayImageOnCanvas();
   }
 
   /* eslint-disable */
@@ -280,6 +284,25 @@ class Canvas extends Component {
     mapImageDataToStateAction(imageData);
   };
 
+  displayImageOnCanvas = () => {
+    const { arrayOfCanvasFrames } = this.props;
+
+    arrayOfCanvasFrames.forEach(canvasFrame => {
+      if (canvasFrame.isActive) {
+        const { width, height } = canvasFrame.imageData;
+        const { imageData } = canvasFrame;
+
+        if (imageData.data) {
+          this.canvas.width = width;
+          this.canvas.height = height;
+          this.ctx.putImageData(imageData, 0, 0);
+        } else {
+          this.clearCanvas();
+        }
+      }
+    });
+  };
+
   render() {
     const { activeTool } = this.props;
     let onMouseMoveHandler;
@@ -351,7 +374,8 @@ Canvas.propTypes = {
   activeFirstCanvasColor: PropTypes.string.isRequired,
   changeFirstCanvasColorAction: PropTypes.func.isRequired,
   mapImageDataToStateAction: PropTypes.func.isRequired,
-  arrayOfCanvasFrames: PropTypes.arrayOf(object).isRequired
+  arrayOfCanvasFrames: PropTypes.arrayOf(object).isRequired,
+  deleteAllAddedCanvasFramesAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -363,7 +387,8 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   changeFirstCanvasColorAction: selectedFirstCanvasColor => dispatch(changeFirstCanvasColor(selectedFirstCanvasColor)),
-  mapImageDataToStateAction: imageData => dispatch(mapImageDataToState(imageData))
+  mapImageDataToStateAction: imageData => dispatch(mapImageDataToState(imageData)),
+  deleteAllAddedCanvasFramesAction: () => dispatch(deleteAllAddedCanvasFrames())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Canvas);
