@@ -24,7 +24,7 @@
       box-shadow: 0px 0px 2px 0px rgba(255, 255, 255, 1);
     }
   }
-  .delete-canvas-frame-icon-container {
+  .delete-canvas-frame-button-container {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -34,6 +34,8 @@
     width: 36px;
     height: 36px;
     background-color: rgba(255, 255, 255, 0.4);
+    transition: all 0.2s linear;
+    opacity: 1;
 
     .delete-canvas-frame-button {
       width: 25px;
@@ -45,6 +47,9 @@
       background-image: url(../../../assets/images/trash-bin.svg);
       background-size: cover;
       cursor: pointer;
+    }
+    &_hidden {
+      opacity: 0;
     }
   }
 }
