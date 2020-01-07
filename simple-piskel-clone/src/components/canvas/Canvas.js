@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import PropTypes, { object } from 'prop-types';
 
 import {
   toolPen,
@@ -32,11 +32,11 @@ class Canvas extends Component {
     this.oldY = null;
   }
 
-  componentDidUpdate() {
-    const { activeCanvasSize } = this.props;
-    if (this.canvas.width !== +activeCanvasSize) {
-      this.setCanvasSize();
-    }
+  componentDidUpdate(prevProps) {
+    const { activeCanvasSize, arrayOfCanvasFrames } = this.props;
+
+    if (this.canvas.width !== +activeCanvasSize) this.setCanvasSize();
+    if (prevProps.arrayOfCanvasFrames.length < arrayOfCanvasFrames.length) this.clearCanvas();
   }
 
   /* eslint-disable */
@@ -257,6 +257,13 @@ class Canvas extends Component {
     this.extraCtx.clearRect(0, 0, width, height);
   };
 
+  clearCanvas = () => {
+    const { width, height } = this.canvas;
+
+    this.ctx.beginPath();
+    this.ctx.clearRect(0, 0, width, height);
+  };
+
   hideExtraCanvas = () => {
     this.extraCanvas.classList.add('extra-canvas_hidden');
   };
@@ -343,14 +350,16 @@ Canvas.propTypes = {
   activeCanvasSize: PropTypes.string.isRequired,
   activeFirstCanvasColor: PropTypes.string.isRequired,
   changeFirstCanvasColorAction: PropTypes.func.isRequired,
-  mapImageDataToStateAction: PropTypes.func.isRequired
+  mapImageDataToStateAction: PropTypes.func.isRequired,
+  arrayOfCanvasFrames: PropTypes.arrayOf(object).isRequired
 };
 
 const mapStateToProps = state => ({
   activeToolSize: state.tool.activeToolSize,
   activeTool: state.tool.activeTool,
   activeCanvasSize: state.tool.activeCanvasSize,
-  activeFirstCanvasColor: state.tool.activeFirstCanvasColor
+  activeFirstCanvasColor: state.tool.activeFirstCanvasColor,
+  arrayOfCanvasFrames: state.canvasFrame.arrayOfCanvasFrames
 });
 const mapDispatchToProps = dispatch => ({
   changeFirstCanvasColorAction: selectedFirstCanvasColor => dispatch(changeFirstCanvasColor(selectedFirstCanvasColor)),

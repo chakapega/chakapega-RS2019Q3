@@ -4,15 +4,16 @@ const initialState = {
   arrayOfCanvasFrames: [{ id: 1, isActive: true, imageData: {} }]
 };
 const createNewArrayOfCanvasFramesWithAddedElement = state => {
-  const newCanvasFrame = { id: 0, isActive: false, imageData: {} };
+  const newCanvasFrame = { id: 0, isActive: true, imageData: {} };
 
   state.arrayOfCanvasFrames.forEach(canvasFrame => {
     if (canvasFrame.id === state.arrayOfCanvasFrames.length) {
       newCanvasFrame.id = canvasFrame.id + 1;
     }
+    if (canvasFrame.isActive === true) canvasFrame.isActive = false;
   });
 
-  return newCanvasFrame;
+  return [...state.arrayOfCanvasFrames, newCanvasFrame];
 };
 
 const canvasFramesReducer = (state = initialState, action) => {
@@ -30,7 +31,7 @@ const canvasFramesReducer = (state = initialState, action) => {
     case ADD_NEW_CANVAS_FRAME:
       return {
         ...state,
-        arrayOfCanvasFrames: [...state.arrayOfCanvasFrames, createNewArrayOfCanvasFramesWithAddedElement(state)]
+        arrayOfCanvasFrames: createNewArrayOfCanvasFramesWithAddedElement(state)
       };
     default:
       return state;

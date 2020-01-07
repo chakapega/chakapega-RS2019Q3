@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import PropTypes, { object } from 'prop-types';
 
 import CanvasFrame from './CanvasFrame';
 import { addNewCanvasFrame } from '../../../store/leftControlUnit/canvasFrames/actions';
@@ -58,7 +58,7 @@ class PreviewList extends Component {
 }
 
 PreviewList.propTypes = {
-  arrayOfCanvasFrames: PropTypes.array.isRequired,
+  arrayOfCanvasFrames: PropTypes.arrayOf(object).isRequired,
   addNewCanvasFrameAction: PropTypes.func.isRequired
 };
 

@@ -26,6 +26,7 @@
     ],
     "rules": {
       "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+      "no-param-reassign": ["error", { "props": false }],
       "no-underscore-dangle": ["error", { "allow": ["__REDUX_DEVTOOLS_EXTENSION__"] }],
       "prettier/prettier": [
         "error",
