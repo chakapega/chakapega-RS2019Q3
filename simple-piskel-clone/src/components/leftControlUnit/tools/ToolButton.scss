@@ -7,7 +7,7 @@
   padding: 0;
   cursor: pointer;
   border: 2px solid #779191;
-  background-color: transparent;
+  background-color: #4e5353;
   transition: all 0.3s linear;
   outline: none;
 
@@ -28,8 +28,14 @@
   &-icon_paint-bucket {
     background-image: url(../../../assets/images/paint-bucket.svg);
   }
+  &:hover {
+    border: 2px solid #ffffff;
+    background-color: #788d8d;
+    box-shadow: 0px 0px 3px 0px #ffffff;
+  }
   &_active {
     border: 2px solid #ffffff;
-    box-shadow: 0px 0px 2px 0px rgba(255,255,255,1);
+    background-color: #788d8d;
+    box-shadow: 0px 0px 3px 0px #ffffff;
   }
 }

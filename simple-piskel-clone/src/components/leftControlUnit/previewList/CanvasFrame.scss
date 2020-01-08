@@ -13,6 +13,7 @@
     padding: 0;
     cursor: pointer;
     background-image: url(../../../assets/images/canvas-background.png);
+    transition: all 0.3s linear;
 
     .preview-list-canvas {
       width: 128px;
@@ -21,7 +22,7 @@
     }
     &_active {
       border: 2px solid #ffffff;
-      box-shadow: 0px 0px 2px 0px rgba(255, 255, 255, 1);
+      box-shadow: 0px 0px 3px 0px #ffffff;
     }
   }
   .delete-canvas-frame-button-container {
@@ -33,13 +34,13 @@
     right: 0;
     width: 36px;
     height: 36px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.5);
     transition: all 0.2s linear;
     opacity: 1;
 
     .delete-canvas-frame-button {
-      width: 25px;
-      height: 25px;
+      width: 28px;
+      height: 28px;
       background-color: transparent;
       border: none;
       padding: 0;
