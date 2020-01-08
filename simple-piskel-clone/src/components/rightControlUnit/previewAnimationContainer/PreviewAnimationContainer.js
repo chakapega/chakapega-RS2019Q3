@@ -15,23 +15,25 @@ class PreviewAnimationContainer extends Component {
     this.canvas.height = +activeCanvasSize;
     this.ctx = this.canvas.getContext('2d');
     this.currentFrame = 0;
-
-    this.initialSetIntervalId = setInterval(() => {
-      requestAnimationFrame(this.cyclicCanvasFrameDisplay);
-    }, 1000 / activePreviewAnimationFps);
+    this.setIntervalId = this.startAnimation(activePreviewAnimationFps);
   }
 
   componentDidUpdate(prevProps) {
     const { activePreviewAnimationFps, activeCanvasSize } = this.props;
-    clearInterval(this.initialSetIntervalId);
+
+    clearInterval(this.setIntervalId);
+
+    this.currentFrame = 0;
 
     if (prevProps.activeCanvasSize !== activeCanvasSize) this.setCanvasSize(activeCanvasSize);
-
-    if (activePreviewAnimationFps > 0)
-      this.initialSetIntervalId = setInterval(() => {
-        requestAnimationFrame(this.cyclicCanvasFrameDisplay);
-      }, 1000 / activePreviewAnimationFps);
+    if (activePreviewAnimationFps > 0) this.setIntervalId = this.startAnimation(activePreviewAnimationFps);
   }
+
+  startAnimation = activePreviewAnimationFps => {
+    return setInterval(() => {
+      requestAnimationFrame(this.cyclicCanvasFrameDisplay);
+    }, 1000 / activePreviewAnimationFps);
+  };
 
   setCanvasSize = activeCanvasSize => {
     this.canvas.width = +activeCanvasSize;
