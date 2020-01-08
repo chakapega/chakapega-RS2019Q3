@@ -67,15 +67,14 @@ class PreviewList extends Component {
     return (
       <div className='preview-list-container'>
         <ul className='preview-list'>
-          {arrayOfCanvasFrames.map((canvasFrame, index) => (
+          {arrayOfCanvasFrames.map(canvasFrame => (
             <CanvasFrame
               key={canvasFrame.id}
               id={canvasFrame.id}
-              index={index}
               isActive={canvasFrame.isActive}
-              imageData={canvasFrame.imageData}
               changeActiveCanvasFrame={this.changeActiveCanvasFrame}
               deleteCanvasFrame={this.deleteCanvasFrame}
+              arrayOfCanvasFrames={arrayOfCanvasFrames}
             />
           ))}
         </ul>

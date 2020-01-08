@@ -1,4 +1,4 @@
-import { CHANGE_FPS_PREVIEW_ANIMATION } from './actionsTypes';
+import CHANGE_FPS_PREVIEW_ANIMATION from './actionsTypes';
 import { previewAnimationFpsTen } from '../../constants/constants';
 
 const initialState = {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes, { object } from 'prop-types';
 
-import { changeFpsPreviewAnimation } from '../../../store/rightControlUnit/actions';
+import changeFpsPreviewAnimation from '../../../store/rightControlUnit/actions';
 
 import './PreviewAnimationContainer.scss';
 
