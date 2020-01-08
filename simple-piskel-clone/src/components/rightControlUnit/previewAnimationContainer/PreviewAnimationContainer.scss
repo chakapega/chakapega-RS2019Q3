@@ -1,0 +1,18 @@
+.preview-animation-container {
+  width: 260px;
+  height: 320px;
+
+  .preview-animation-canvas-container {
+    width: 260px;
+    height: 260px;
+    border: 2px solid #63807d;
+    box-sizing: border-box;
+    background-image: url(../../../assets/images/canvas-background.png);
+
+    #preview-animation-canvas {
+      width: 256px;
+      height: 256px;
+      image-rendering: pixelated;
+    }
+  }
+}
