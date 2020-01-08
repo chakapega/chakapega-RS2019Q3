@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { toolPen, toolEraser, toolColorPicker, toolPaintBucket } from '../../../constants/constants';
+import { toolPen, toolEraser, toolColorPicker, toolPaintBucket } from '../../../shared/constants';
 import ToolButton from './ToolButton';
 import { changeTool } from '../../../store/leftControlUnit/tools/actions';
 

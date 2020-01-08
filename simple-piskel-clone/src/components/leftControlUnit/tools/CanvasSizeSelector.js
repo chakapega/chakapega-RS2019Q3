@@ -6,7 +6,7 @@ import {
   canvasSizeThirtyTwo,
   canvasSizeSixtyFour,
   canvasSizeOneHundredAndTwentyEight
-} from '../../../constants/constants';
+} from '../../../shared/constants';
 import { changeCanvasSize } from '../../../store/leftControlUnit/tools/actions';
 
 import './CanvasSizeSelector.scss';

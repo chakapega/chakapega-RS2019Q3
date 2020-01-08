@@ -4,7 +4,7 @@ import {
   canvasSizeThirtyTwo,
   blackCanvasColor,
   whiteCanvasColor
-} from '../../../constants/constants';
+} from '../../../shared/constants';
 import {
   CHANGE_TOOL_SIZE,
   CHANGE_TOOL,

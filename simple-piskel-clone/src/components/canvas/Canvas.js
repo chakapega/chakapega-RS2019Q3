@@ -9,8 +9,8 @@ import {
   toolColorPicker,
   toolPaintBucket,
   hoverColorOverExtraCanvas
-} from '../../constants/constants';
-import { rgbToHex, customHexToRgb } from '../../helpers/helpers';
+} from '../../shared/constants';
+import { rgbToHex, customHexToRgb } from '../../shared/helpers';
 import { changeFirstCanvasColor } from '../../store/leftControlUnit/tools/actions';
 import { mapImageDataToState, deleteAllAddedCanvasFrames } from '../../store/leftControlUnit/canvasFrames/actions';
 

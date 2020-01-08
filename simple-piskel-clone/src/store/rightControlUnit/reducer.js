@@ -1,5 +1,5 @@
 import CHANGE_FPS_PREVIEW_ANIMATION from './actionsTypes';
-import { previewAnimationFpsTen } from '../../constants/constants';
+import { previewAnimationFpsTen } from '../../shared/constants';
 
 const initialState = {
   activePreviewAnimationFps: previewAnimationFpsTen
