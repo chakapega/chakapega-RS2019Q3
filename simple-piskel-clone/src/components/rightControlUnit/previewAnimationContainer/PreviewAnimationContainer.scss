@@ -1,6 +1,10 @@
 .preview-animation-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   width: 260px;
-  height: 320px;
+  height: 290px;
 
   .preview-animation-canvas-container {
     width: 260px;
@@ -13,6 +17,16 @@
       width: 256px;
       height: 256px;
       image-rendering: pixelated;
+    }
+  }
+  .preview-animation-fps-selector-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+
+    .preview-animation-fps-indicator {
+      color: #ffffff;
     }
   }
 }

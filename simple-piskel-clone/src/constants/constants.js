@@ -13,3 +13,4 @@ export const blackCanvasColor = '#000000';
 export const whiteCanvasColor = '#ffffff';
 export const realCanvasSize = 512;
 export const hoverColorOverExtraCanvas = 'rgba(255, 255, 255, 0.25)';
+export const previewAnimationFpsTen = 10;
