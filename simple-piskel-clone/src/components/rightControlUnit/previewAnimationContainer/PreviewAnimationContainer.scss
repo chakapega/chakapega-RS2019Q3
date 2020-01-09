@@ -25,6 +25,9 @@
     align-items: center;
     width: 200px;
 
+    #preview-animation-fps-selector-input {
+      cursor: pointer;
+    }
     .preview-animation-fps-indicator {
       color: #ffffff;
     }
