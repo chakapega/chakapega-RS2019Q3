@@ -28,7 +28,7 @@ class CanvasFrame extends Component {
   };
 
   render() {
-    const { id, isActive, changeActiveCanvasFrame, deleteCanvasFrame } = this.props;
+    const { id, isActive, changeActiveCanvasFrame, deleteCanvasFrame, addDuplicateFrame } = this.props;
     const className = isActive
       ? 'preview-list-canvas-container preview-list-canvas-container_active'
       : 'preview-list-canvas-container';
@@ -63,6 +63,7 @@ class CanvasFrame extends Component {
             className='duplicate-canvas-frame-button'
             aria-label='duplicate frame'
             title='duplicate frame'
+            onClick={() => addDuplicateFrame(id)}
           />
         </div>
       </li>
@@ -75,7 +76,8 @@ CanvasFrame.propTypes = {
   isActive: PropTypes.bool.isRequired,
   changeActiveCanvasFrame: PropTypes.func.isRequired,
   deleteCanvasFrame: PropTypes.func.isRequired,
-  arrayOfCanvasFrames: PropTypes.arrayOf(object).isRequired
+  arrayOfCanvasFrames: PropTypes.arrayOf(object).isRequired,
+  addDuplicateFrame: PropTypes.func.isRequired
 };
 
 export default CanvasFrame;

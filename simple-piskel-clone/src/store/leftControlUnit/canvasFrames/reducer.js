@@ -3,13 +3,14 @@ import {
   ADD_NEW_CANVAS_FRAME,
   CHANGE_ACTIVE_CANVAS_FRAME,
   DELETE_ALL_ADDED_CANVAS_FRAMES,
-  DELETE_CANVAS_FRAME
+  DELETE_CANVAS_FRAME,
+  ADD_DUPLICATE_CANVAS_FRAME
 } from './actionsTypes';
 
 const initialState = {
   arrayOfCanvasFrames: [{ id: new Date().getTime(), isActive: true, imageData: {} }]
 };
-const createNewArrayOfCanvasFramesWithAddedElement = state => {
+const createNewArrayOfCanvasFramesWithAddedNewFrame = state => {
   if (state.arrayOfCanvasFrames.length === 5) return [...state.arrayOfCanvasFrames];
 
   const newCanvasFrame = { id: new Date().getTime(), isActive: true, imageData: {} };
@@ -19,6 +20,23 @@ const createNewArrayOfCanvasFramesWithAddedElement = state => {
   });
 
   return [...state.arrayOfCanvasFrames, newCanvasFrame];
+};
+const createNewArrayOfCanvasFramesWithAddedDuplicateFrame = (state, id) => {
+  const newArrayOfCanvasFrames = [];
+  const duplicateFrame = { id: new Date().getTime(), isActive: true, imageData: {} };
+
+  state.arrayOfCanvasFrames.forEach(canvasFrame => {
+    if (canvasFrame.isActive === true) canvasFrame.isActive = false;
+
+    newArrayOfCanvasFrames.push(canvasFrame);
+
+    if (canvasFrame.id === id) {
+      duplicateFrame.imageData = canvasFrame.imageData;
+      newArrayOfCanvasFrames.push(duplicateFrame);
+    }
+  });
+
+  return newArrayOfCanvasFrames;
 };
 
 const canvasFramesReducer = (state = initialState, action) => {
@@ -36,7 +54,7 @@ const canvasFramesReducer = (state = initialState, action) => {
     case ADD_NEW_CANVAS_FRAME:
       return {
         ...state,
-        arrayOfCanvasFrames: createNewArrayOfCanvasFramesWithAddedElement(state)
+        arrayOfCanvasFrames: createNewArrayOfCanvasFramesWithAddedNewFrame(state)
       };
     case CHANGE_ACTIVE_CANVAS_FRAME:
       return {
@@ -54,6 +72,11 @@ const canvasFramesReducer = (state = initialState, action) => {
       return {
         ...state,
         arrayOfCanvasFrames: state.arrayOfCanvasFrames.filter(canvasFrame => canvasFrame.id !== action.payload)
+      };
+    case ADD_DUPLICATE_CANVAS_FRAME:
+      return {
+        ...state,
+        arrayOfCanvasFrames: createNewArrayOfCanvasFramesWithAddedDuplicateFrame(state, action.payload)
       };
     default:
       return state;

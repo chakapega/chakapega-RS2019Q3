@@ -6,7 +6,8 @@ import CanvasFrame from './CanvasFrame';
 import {
   addNewCanvasFrame,
   changeActiveCanvasFrame,
-  deleteCanvasFrame
+  deleteCanvasFrame,
+  addDuplicateCanvasFrame
 } from '../../../store/leftControlUnit/canvasFrames/actions';
 
 import './PreviewList.scss';
@@ -61,6 +62,12 @@ class PreviewList extends Component {
     });
   };
 
+  addDuplicateFrame = id => {
+    const { arrayOfCanvasFrames, addDuplicateCanvasFrameAction } = this.props;
+
+    if (arrayOfCanvasFrames.length < 5) addDuplicateCanvasFrameAction(id);
+  };
+
   render() {
     const { arrayOfCanvasFrames } = this.props;
 
@@ -75,6 +82,7 @@ class PreviewList extends Component {
               changeActiveCanvasFrame={this.changeActiveCanvasFrame}
               deleteCanvasFrame={this.deleteCanvasFrame}
               arrayOfCanvasFrames={arrayOfCanvasFrames}
+              addDuplicateFrame={this.addDuplicateFrame}
             />
           ))}
         </ul>
@@ -90,7 +98,8 @@ PreviewList.propTypes = {
   arrayOfCanvasFrames: PropTypes.arrayOf(object).isRequired,
   addNewCanvasFrameAction: PropTypes.func.isRequired,
   changeActiveCanvasFrameAction: PropTypes.func.isRequired,
-  deleteCanvasFrameAction: PropTypes.func.isRequired
+  deleteCanvasFrameAction: PropTypes.func.isRequired,
+  addDuplicateCanvasFrameAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -99,7 +108,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addNewCanvasFrameAction: () => dispatch(addNewCanvasFrame()),
   changeActiveCanvasFrameAction: id => dispatch(changeActiveCanvasFrame(id)),
-  deleteCanvasFrameAction: id => dispatch(deleteCanvasFrame(id))
+  deleteCanvasFrameAction: id => dispatch(deleteCanvasFrame(id)),
+  addDuplicateCanvasFrameAction: id => dispatch(addDuplicateCanvasFrame(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PreviewList);
