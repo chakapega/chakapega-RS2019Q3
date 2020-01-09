@@ -30,12 +30,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 0;
-    right: 0;
+    top: 2px;
+    right: 2px;
     width: 36px;
     height: 36px;
     background-color: rgba(255, 255, 255, 0.5);
-    transition: all 0.2s linear;
+    transition: all 0.3s linear;
     opacity: 1;
 
     .delete-canvas-frame-button {
@@ -46,6 +46,34 @@
       padding: 0;
       outline: none;
       background-image: url(../../../assets/images/trash-bin.svg);
+      background-size: cover;
+      cursor: pointer;
+    }
+    &_hidden {
+      opacity: 0;
+    }
+  }
+  .duplicate-canvas-frame-button-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 2px;
+    right: 2px;
+    width: 36px;
+    height: 36px;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s linear;
+    opacity: 1;
+
+    .duplicate-canvas-frame-button {
+      width: 24px;
+      height: 24px;
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      outline: none;
+      background-image: url(../../../assets/images/duplicate.svg);
       background-size: cover;
       cursor: pointer;
     }
