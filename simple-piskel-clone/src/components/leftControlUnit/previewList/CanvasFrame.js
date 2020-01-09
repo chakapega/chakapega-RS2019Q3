@@ -5,30 +5,40 @@ import './CanvasFrame.scss';
 
 class CanvasFrame extends Component {
   showHiddenButtonsOnCanvasFrame = () => {
-    const { id, arrayOfCanvasFrames } = this.props;
+    const { id } = this.props;
+    const deleteCanvasFrameButtonContainer = document.querySelector(`#delete-canvas-frame-button-container_${id}`);
+    const duplicateCanvasFrameButtonContainer = document.querySelector(
+      `#duplicate-canvas-frame-button-container_${id}`
+    );
 
-    if (arrayOfCanvasFrames.length > 1)
-      document
-        .querySelector(`#delete-canvas-frame-button-container_${id}`)
-        .classList.remove('delete-canvas-frame-button-container_hidden');
-    document
-      .querySelector(`#duplicate-canvas-frame-button-container_${id}`)
-      .classList.remove('duplicate-canvas-frame-button-container_hidden');
+    if (deleteCanvasFrameButtonContainer)
+      deleteCanvasFrameButtonContainer.classList.remove('delete-canvas-frame-button-container_hidden');
+    if (duplicateCanvasFrameButtonContainer)
+      duplicateCanvasFrameButtonContainer.classList.remove('duplicate-canvas-frame-button-container_hidden');
   };
 
   hideButtonsOnCanvasFrame = () => {
     const { id } = this.props;
+    const deleteCanvasFrameButtonContainer = document.querySelector(`#delete-canvas-frame-button-container_${id}`);
+    const duplicateCanvasFrameButtonContainer = document.querySelector(
+      `#duplicate-canvas-frame-button-container_${id}`
+    );
 
-    document
-      .querySelector(`#delete-canvas-frame-button-container_${id}`)
-      .classList.add('delete-canvas-frame-button-container_hidden');
-    document
-      .querySelector(`#duplicate-canvas-frame-button-container_${id}`)
-      .classList.add('duplicate-canvas-frame-button-container_hidden');
+    if (deleteCanvasFrameButtonContainer)
+      deleteCanvasFrameButtonContainer.classList.add('delete-canvas-frame-button-container_hidden');
+    if (duplicateCanvasFrameButtonContainer)
+      duplicateCanvasFrameButtonContainer.classList.add('duplicate-canvas-frame-button-container_hidden');
   };
 
   render() {
-    const { id, isActive, changeActiveCanvasFrame, deleteCanvasFrame, addDuplicateFrame } = this.props;
+    const {
+      id,
+      isActive,
+      changeActiveCanvasFrame,
+      deleteCanvasFrame,
+      addDuplicateFrame,
+      arrayOfCanvasFrames
+    } = this.props;
     const className = isActive
       ? 'preview-list-canvas-container preview-list-canvas-container_active'
       : 'preview-list-canvas-container';
@@ -42,30 +52,35 @@ class CanvasFrame extends Component {
         <button type='button' className={className} onClick={() => changeActiveCanvasFrame(id)}>
           <canvas id={`preview-canvas_${id}`} className='preview-list-canvas' />
         </button>
-        <div
-          id={`delete-canvas-frame-button-container_${id}`}
-          className='delete-canvas-frame-button-container delete-canvas-frame-button-container_hidden'
-        >
-          <button
-            type='button'
-            className='delete-canvas-frame-button'
-            aria-label='delete frame'
-            title='delete frame'
-            onClick={() => deleteCanvasFrame(id)}
-          />
-        </div>
-        <div
-          id={`duplicate-canvas-frame-button-container_${id}`}
-          className='duplicate-canvas-frame-button-container duplicate-canvas-frame-button-container_hidden'
-        >
-          <button
-            type='button'
-            className='duplicate-canvas-frame-button'
-            aria-label='duplicate frame'
-            title='duplicate frame'
-            onClick={() => addDuplicateFrame(id)}
-          />
-        </div>
+        {arrayOfCanvasFrames.length > 1 && (
+          <div
+            id={`delete-canvas-frame-button-container_${id}`}
+            className='delete-canvas-frame-button-container delete-canvas-frame-button-container_hidden'
+          >
+            <button
+              type='button'
+              className='delete-canvas-frame-button'
+              aria-label='delete frame'
+              title='delete frame'
+              onClick={() => deleteCanvasFrame(id)}
+            />
+          </div>
+        )}
+
+        {arrayOfCanvasFrames.length < 5 && (
+          <div
+            id={`duplicate-canvas-frame-button-container_${id}`}
+            className='duplicate-canvas-frame-button-container duplicate-canvas-frame-button-container_hidden'
+          >
+            <button
+              type='button'
+              className='duplicate-canvas-frame-button'
+              aria-label='duplicate frame'
+              title='duplicate frame'
+              onClick={() => addDuplicateFrame(id)}
+            />
+          </div>
+        )}
       </li>
     );
   }

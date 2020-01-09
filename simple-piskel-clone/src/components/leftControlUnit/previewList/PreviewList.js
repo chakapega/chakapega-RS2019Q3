@@ -63,9 +63,9 @@ class PreviewList extends Component {
   };
 
   addDuplicateFrame = id => {
-    const { arrayOfCanvasFrames, addDuplicateCanvasFrameAction } = this.props;
+    const { addDuplicateCanvasFrameAction } = this.props;
 
-    if (arrayOfCanvasFrames.length < 5) addDuplicateCanvasFrameAction(id);
+    addDuplicateCanvasFrameAction(id);
   };
 
   render() {
@@ -86,9 +86,11 @@ class PreviewList extends Component {
             />
           ))}
         </ul>
-        <button type='button' className='add-new-frame-button' onClick={this.addNewCanvasFrame}>
-          Add new frame
-        </button>
+        {arrayOfCanvasFrames.length < 5 && (
+          <button type='button' className='add-new-frame-button' onClick={this.addNewCanvasFrame}>
+            Add new frame
+          </button>
+        )}
       </div>
     );
   }

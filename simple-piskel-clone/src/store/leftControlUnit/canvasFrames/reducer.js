@@ -11,8 +11,6 @@ const initialState = {
   arrayOfCanvasFrames: [{ id: new Date().getTime(), isActive: true, imageData: {} }]
 };
 const createNewArrayOfCanvasFramesWithAddedNewFrame = state => {
-  if (state.arrayOfCanvasFrames.length === 5) return [...state.arrayOfCanvasFrames];
-
   const newCanvasFrame = { id: new Date().getTime(), isActive: true, imageData: {} };
 
   state.arrayOfCanvasFrames.forEach(canvasFrame => {
