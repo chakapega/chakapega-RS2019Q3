@@ -7,6 +7,7 @@
   height: 290px;
 
   .preview-animation-canvas-container {
+    position: relative;
     width: 260px;
     height: 260px;
     border: 2px solid #63807d;
@@ -17,6 +18,34 @@
       width: 256px;
       height: 256px;
       image-rendering: pixelated;
+    }
+    .full-screen-button-container {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      right: 0;
+      width: 44px;
+      height: 44px;
+      background-color: rgba(255, 255, 255, 0.5);
+      transition: all 0.3s linear;
+      opacity: 1;
+
+      .full-screen-button {
+        width: 34px;
+        height: 34px;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        outline: none;
+        background-image: url(../../../assets/images/full-screen.svg);
+        background-size: cover;
+        cursor: pointer;
+      }
+      &_hidden {
+        opacity: 0;
+      }
     }
   }
   .preview-animation-fps-selector-container {

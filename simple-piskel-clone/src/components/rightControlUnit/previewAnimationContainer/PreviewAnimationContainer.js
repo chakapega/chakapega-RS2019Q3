@@ -11,6 +11,7 @@ class PreviewAnimationContainer extends Component {
     const { activeCanvasSize, activePreviewAnimationFps } = this.props;
 
     this.canvas = document.querySelector('#preview-animation-canvas');
+    this.fullScreenButtonContainer = document.querySelector('.full-screen-button-container');
     this.canvas.width = +activeCanvasSize;
     this.canvas.height = +activeCanvasSize;
     this.ctx = this.canvas.getContext('2d');
@@ -60,12 +61,63 @@ class PreviewAnimationContainer extends Component {
     changeFpsPreviewAnimationAction(selectedFps);
   };
 
+  showFullScreenButtonContainer = () => {
+    if (this.fullScreenButtonContainer)
+      this.fullScreenButtonContainer.classList.remove('full-screen-button-container_hidden');
+  };
+
+  hideFullScreenButtonContainer = () => {
+    if (this.fullScreenButtonContainer)
+      this.fullScreenButtonContainer.classList.add('full-screen-button-container_hidden');
+  };
+
+  fullScreenAnimationPreview = () => {
+    if (
+      'fullscreenEnabled' in document ||
+      'webkitFullscreenEnabled' in document ||
+      'mozFullScreenEnabled' in document ||
+      'msFullscreenEnabled' in document
+    ) {
+      if (
+        document.fullscreenEnabled ||
+        document.webkitFullscreenEnabled ||
+        document.mozFullScreenEnabled ||
+        document.msFullscreenEnabled
+      ) {
+        const previewAnimationCanvas = document.querySelector('#preview-animation-canvas');
+
+        if ('requestFullscreen' in previewAnimationCanvas) {
+          previewAnimationCanvas.requestFullscreen();
+        } else if ('webkitRequestFullscreen' in previewAnimationCanvas) {
+          previewAnimationCanvas.webkitRequestFullscreen();
+        } else if ('mozRequestFullScreen' in previewAnimationCanvas) {
+          previewAnimationCanvas.mozRequestFullScreen();
+        } else if ('msRequestFullscreen' in previewAnimationCanvas) {
+          previewAnimationCanvas.msRequestFullscreen();
+        }
+      }
+    }
+  };
+
   render() {
     const { activePreviewAnimationFps } = this.props;
     return (
       <div className='preview-animation-container'>
-        <div className='preview-animation-canvas-container'>
+        <div
+          className='preview-animation-canvas-container'
+          onMouseEnter={this.showFullScreenButtonContainer}
+          onMouseLeave={this.hideFullScreenButtonContainer}
+        >
           <canvas id='preview-animation-canvas' />
+          <div className='full-screen-button-container full-screen-button-container_hidden'>
+            <button
+              type='button'
+              className='full-screen-button'
+              aria-label='full-screen-button'
+              title='full screen'
+              onClick={this.fullScreenAnimationPreview}
+            />
+          </div>
         </div>
         <div className='preview-animation-fps-selector-container'>
           <span className='preview-animation-fps-indicator'>{`${activePreviewAnimationFps} FPS`}</span>
