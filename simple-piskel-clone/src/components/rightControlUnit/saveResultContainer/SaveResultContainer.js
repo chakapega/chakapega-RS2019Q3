@@ -5,6 +5,7 @@ import PropTypes, { object } from 'prop-types';
 import './SaveResultContainer.scss';
 
 const UPNG = require('upng-js');
+const GIF = require('gif.js-upgrade');
 const download = require('downloadjs');
 
 class SaveResultContainer extends Component {
@@ -24,11 +25,32 @@ class SaveResultContainer extends Component {
     download(result, 'animation.apng', 'apng');
   };
 
+  saveResultToGif = () => {
+    const { activePreviewAnimationFps, activeCanvasSize } = this.props;
+    const delay = 1000 / activePreviewAnimationFps;
+    const arrayOfPreviewCanvases = Array.from(document.querySelectorAll('.preview-list-canvas'));
+    const gif = new GIF({
+      width: +activeCanvasSize,
+      height: +activeCanvasSize
+    });
+
+    arrayOfPreviewCanvases.forEach(previewCanvas => {
+      gif.addFrame(previewCanvas, { delay });
+    });
+    gif.on('finished', resultGif => {
+      download(resultGif, 'animation.gif', 'gif');
+    });
+    gif.render();
+  };
+
   render() {
     return (
       <div className='save-result-container'>
         <button type='button' className='save-result-button_apng' onClick={this.saveResultToApng}>
           Save result to APNG
+        </button>
+        <button type='button' className='save-result-button_gif' onClick={this.saveResultToGif}>
+          Save result to GIF
         </button>
       </div>
     );
