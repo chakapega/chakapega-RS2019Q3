@@ -5,7 +5,7 @@ import PropTypes, { object } from 'prop-types';
 import './SaveResultContainer.scss';
 
 const UPNG = require('upng-js');
-const GIF = require('gif.js-upgrade');
+const GIF = require('gif.js');
 const download = require('downloadjs');
 
 class SaveResultContainer extends Component {
