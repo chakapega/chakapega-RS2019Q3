@@ -27,7 +27,7 @@ class PreviewAnimationContainer extends Component {
     this.currentFrame = 0;
 
     if (prevProps.activeCanvasSize !== activeCanvasSize) this.setCanvasSize(activeCanvasSize);
-    if (activePreviewAnimationFps > 0) this.setIntervalId = this.startAnimation(activePreviewAnimationFps);
+    this.setIntervalId = this.startAnimation(activePreviewAnimationFps);
   }
 
   startAnimation = activePreviewAnimationFps => {
@@ -124,7 +124,7 @@ class PreviewAnimationContainer extends Component {
           <input
             type='range'
             id='preview-animation-fps-selector-input'
-            min='0'
+            min='1'
             max='24'
             defaultValue={activePreviewAnimationFps}
             onChange={this.changeFps}
