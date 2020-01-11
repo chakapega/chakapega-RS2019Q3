@@ -16,13 +16,15 @@ class SaveResultContainer extends Component {
     const arrayOfDelays = [];
 
     arrayOfCanvasFrames.forEach(canvasFrame => {
-      arrayOfFrames.push(canvasFrame.imageData.data.buffer);
+      if (canvasFrame.imageData.data) arrayOfFrames.push(canvasFrame.imageData.data.buffer);
       arrayOfDelays.push(delay);
     });
 
-    const result = UPNG.encode(arrayOfFrames, +activeCanvasSize, +activeCanvasSize, 0, arrayOfDelays);
+    if (arrayOfFrames.length) {
+      const result = UPNG.encode(arrayOfFrames, +activeCanvasSize, +activeCanvasSize, 0, arrayOfDelays);
 
-    download(result, 'animation.apng', 'apng');
+      download(result, 'animation.apng', 'apng');
+    }
   };
 
   saveResultToGif = () => {
