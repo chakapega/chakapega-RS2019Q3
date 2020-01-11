@@ -1,0 +1,3 @@
+const CHANGE_USER_UID = 'CHANGE_USER_UID';
+
+export default CHANGE_USER_UID;

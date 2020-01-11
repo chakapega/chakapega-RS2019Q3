@@ -1,0 +1,20 @@
+.auth-container {
+  margin-right: 100px;
+
+  .auth-button {
+    width: 130px;
+    height: 30px;
+    color: #ffffff;
+    background-color: #4e5353;
+    border: 2px solid #779191;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s linear;
+
+    &:hover {
+      background-color: #788d8d;
+      border: 2px solid #ffffff;
+      box-shadow: 0px 0px 3px 0px #ffffff;
+    }
+  }
+}

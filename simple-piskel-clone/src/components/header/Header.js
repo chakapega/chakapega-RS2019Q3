@@ -1,4 +1,5 @@
 import React from 'react';
+import Auth from '../auth/Auth';
 
 import './Header.scss';
 
@@ -7,6 +8,7 @@ const Header = () => (
     <a className='header-link' href='/'>
       Simple Piskel Clone
     </a>
+    <Auth />
   </header>
 );
 
