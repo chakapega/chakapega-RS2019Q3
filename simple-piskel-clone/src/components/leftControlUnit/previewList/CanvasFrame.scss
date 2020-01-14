@@ -1,0 +1,102 @@
+.canvas-frame {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  margin-bottom: 10px;
+
+  .preview-list-canvas-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #63807d;
+    box-sizing: border-box;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+    background-image: url(../../../assets/images/canvas-background.png);
+    transition: all 0.3s linear;
+
+    .preview-list-canvas {
+      width: 128px;
+      height: 128px;
+      image-rendering: pixelated;
+    }
+    &::after {
+      position: absolute;
+      top: 21px;
+      right: -11px;
+      display: block;
+      content: '';
+      width: 2px;
+      height: 90px;
+      background-color: #ffffff;
+      box-shadow: 0px 0px 3px 0px #ffffff;
+      transition: all 0.3s linear;
+      opacity: 0;
+    }
+    &_active {
+      border: 2px solid #ffffff;
+      box-shadow: 0px 0px 3px 0px #ffffff;
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+  .delete-canvas-frame-button-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 2px;
+    right: 2px;
+    width: 36px;
+    height: 36px;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s linear;
+    opacity: 1;
+
+    .delete-canvas-frame-button {
+      width: 28px;
+      height: 28px;
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      outline: none;
+      background-image: url(../../../assets/images/trash-bin.svg);
+      background-size: cover;
+      cursor: pointer;
+    }
+    &_hidden {
+      opacity: 0;
+    }
+  }
+  .duplicate-canvas-frame-button-container {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 2px;
+    right: 2px;
+    width: 36px;
+    height: 36px;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s linear;
+    opacity: 1;
+
+    .duplicate-canvas-frame-button {
+      width: 22px;
+      height: 22px;
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      outline: none;
+      background-image: url(../../../assets/images/duplicate.svg);
+      background-size: cover;
+      cursor: pointer;
+    }
+    &_hidden {
+      opacity: 0;
+    }
+  }
+}

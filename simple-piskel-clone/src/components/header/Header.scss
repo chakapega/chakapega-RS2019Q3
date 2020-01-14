@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 45px;
+  width: 100%;
+  min-width: 1160px;
+  background-color: #4d5857;
+}
+.header-link {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 25px;
+  margin-left: 50px;
+}

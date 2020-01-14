@@ -1,0 +1,41 @@
+.tool {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  cursor: pointer;
+  border: 2px solid #779191;
+  background-color: #4e5353;
+  transition: all 0.3s linear;
+  outline: none;
+
+  &-icon {
+    width: 34px;
+    height: 34px;
+    background-size: cover;
+  }
+  &-icon_pen {
+    background-image: url(../../../assets/images/pen.svg);
+  }
+  &-icon_eraser {
+    background-image: url(../../../assets/images/eraser.svg);
+  }
+  &-icon_color-picker {
+    background-image: url(../../../assets/images/color-picker.svg);
+  }
+  &-icon_paint-bucket {
+    background-image: url(../../../assets/images/paint-bucket.svg);
+  }
+  &:hover {
+    border: 2px solid #ffffff;
+    background-color: #788d8d;
+    box-shadow: 0px 0px 3px 0px #ffffff;
+  }
+  &_active {
+    border: 2px solid #ffffff;
+    background-color: #788d8d;
+    box-shadow: 0px 0px 3px 0px #ffffff;
+  }
+}
